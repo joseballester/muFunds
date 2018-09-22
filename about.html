@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  </head>
+  <body>
+    <div style="padding:10px;">
+      <h1>µFunds</h1>
+      <p><b>Author:</b> José Ballester</p>
+      <p><b>Last version:</b> v1.3 (19 November 2017)</p>
+      <p>µFunds lets you import your mutual fund NAVs and other attributes from Morningstar to your spreadsheet by using a simple formula.</p>
+      
+      <h2>Usage</h2>
+      <p>Insert this formula in a cell:</p>
+      <code>=muFunds(option, isin)</code>
+      <p>where <code>isin</code> is your mutual fund ISIN (for European funds) or ticker (for American funds) and <code>option</code> is one of the following options:</p>
+      
+      <h3>Options</h3>
+      <p><code>nav</code>: Net Asset Value (NAV) of your mutual fund, i.e. last price of the fund's shares.</p>
+      <p><code>change</code>: NAV variation between last price and the previous one, in percentage (%).</p>
+      <p><code>date</code>: Date for last NAV.</p>
+      <p><code>currency</code>: Currency for displayed NAV.</p>
+      <p><code>expenses</code>: Expense ratio from Morningstar.</p>
+      <p><code>category</code>: Fund category from Morningstar.</p>
+      <p><code>style</code>: Fund investment style from Morningstar.</p>
+      
+      <h3>Examples</h3>
+      <h4>European funds</h4>
+      <p>Checking last NAV for <a href="http://www.morningstar.es/es/funds/snapshot/snapshot.aspx?id=F0GBR04PSV" target="_blank">Bestinfond</a> (ES0114673033) Spanish mutual fund:</p>
+      <p><code>=muFunds("nav", "ES0114673033")</code></p>
+      <h4>American funds</h4>
+      <p>Checking last NAV for <a href="http://www.morningstar.com/funds/XNAS/VTSMX/quote.html" target="_blank">Vanguard Total Stock Market Index Fund</a> (VTSMX) mutual fund:</p>
+      <p><code>=muFunds("nav", "VTSMX")</code></p>
+      
+      <h3>Considerations</h3>
+      <p>In specific cases, outputs from µFunds may be considered as strings rather than numbers. To avoid problems (e.g. for conditional formatting), you can call the µFunds function combined with the <code>value</code> function:</p>
+      <code>=value(muFunds("change", "VTSMX"))</code>
+    </div>
+  </body>
+</html>
+
+
+
