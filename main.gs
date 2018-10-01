@@ -65,7 +65,7 @@ function loadFromQuote(option, id, country) {
   var category = getCategoryFromQuote(doc);
 
   // Check that all data is correct
-  if(!isNaN(parseFloat(nav)) && isFinite(nav) && date.length > 2 && change.length > 2 && currency.length == 3 && category.length > 2) {
+  if(!isNaN(parseFloat(nav)) && isFinite(nav) && date.length > 2 && currency.length == 3) {
     if(option == "nav")
       return parseFloat(nav);
     if(option == "date")
