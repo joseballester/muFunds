@@ -73,10 +73,11 @@ function isISIN(id) {
 }
 
 function processNav(nav) {
+  nav = nav.replace(',', '.');
   if(!isNaN(parseFloat(nav)) && isFinite(nav))
     return parseFloat(nav);
   else
-    throw new Error("NAV is not available for this asset and source");
+    throw new Error("NAV is not available for this asset and source. Please try another data source");
 }
 
 function processDate(date) {
@@ -84,10 +85,11 @@ function processDate(date) {
 }
 
 function processChange(change) {
+  change = change.replace(',', '.').replace('%', '');
   if(!isNaN(parseFloat(change)) && isFinite(change))
     return parseFloat(change)/100;
   else
-    throw new Error("Last change is not available for this asset and source");
+    throw new Error("Last change is not available for this asset and source. Please try another data source");
 }
 
 function processCurrency(currency) {
@@ -95,10 +97,11 @@ function processCurrency(currency) {
 }
 
 function processExpenses(expenses) {
+  expenses = expenses.replace(',', '.').replace('%', '');
   if(!isNaN(parseFloat(expenses)) && isFinite(expenses))
     return parseFloat(expenses)/100;
   else
-    throw new Error("Expenses ratio is not available for this asset and source");
+    throw new Error("Expenses ratio is not available for this asset and source. Please try another data source");
 }
 
 function processCategory(category) {
