@@ -22,18 +22,8 @@ function muFunds(option, id, source) {
   }
 
   // Auto mode (no explicit source defined)
-  if(!source) {
-    var result;
-    // First we try with Morningstar generic mode (quote)
-    try {
-      result = loadFromMorningstar(option, id);
-    }
-    catch(error) {
-      var country = getMorningstarCountryFromAsset(id, country);
-      result = loadFromMorningstarCountry(option, id, country);
-    }
-    return result;
-  }
+  if(!source)
+    return loadFromMorningstar(option, id);
 
   // Manual mode (explicit source defined)
   if(source == "morningstar")
