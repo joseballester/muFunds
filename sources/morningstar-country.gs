@@ -142,7 +142,7 @@ function getMSIDFromMorningstarSearch(doc, links, country) {
 
 function getNavFromMorningstarCountry(doc, country) {
   if(country == "au")
-    return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[5].getValue();
+    return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[5].getValue().replace(",", ".");
   else
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[0].getValue().substr(4).replace(',', '.');
 }
@@ -158,10 +158,11 @@ function getChangeFromMorningstarCountry(doc, country) {
   if(country == "au") {
     var nav = getNavFromMorningstarCountry(doc, country);
     var change = getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[6].getValue();
-    if(!isNaN(parseFloat(nav)) && isFinite(nav) && !isNaN(parseFloat(change)) && isFinite(change) && nav > 0)
-      return change/nav*100;
-    else
-      return "--";
+    if(!isNaN(parseFloat(nav)) && isFinite(nav) && !isNaN(parseFloat(change)) && isFinite(change) && nav > 0) {
+      change = parseFloat(change)/parseFloat(nav)*100;
+      return change.toString();
+    } else
+      throw new Error("Last change is not available for this asset and source. Please try another data source");
   } else
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[1].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '').replace(',', '.');
 }
