@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122336045-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-122336045-2');
+		</script>
+		<meta charset="utf-8">
+		<title>
+			Usage and examples | µFunds
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta name="description" content="Check µFunds basics here to start importing your assets data to Google Sheets in a minute.">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	</head>
+	<body>
+	  <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-0 bg-white border-bottom box-shadow">
+	    <h5 class="my-0 mr-md-auto font-weight-normal">
+				<a href="index.html">
+					<img src="img/logo.png" class="logo" alt=""> µFunds
+				</a>
+			</h5>
+			<a class="btn btn-outline-secondary mr-2" href="https://github.com/joseballester/muFunds">View on GitHub</a>
+	    <a class="btn btn-outline-success" href="https://chrome.google.com/webstore/detail/µfunds/adjnddecjgjonhbloaflpoijndefpndm">Try in Google Sheets</a>
+	  </header>
+
+		<div class="border-bottom bg-light">
+			<div class="container">
+				<div class="row text-left py-4">
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3 active"><a href="usage.html">Usage and examples</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="behavior.html">How µFunds works</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="troubleshooting.html">Troubleshooting</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="privacy.html">Privacy policy</a></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="px-3 pt-5 pb-4 mx-auto text-left">
+				<div class="row text-left mb-3 mb-sm-4">
+					<div class="col-12">
+			    	<h2 class="mb-5">Usage and examples</h2>
+					</div>
+			    <div class="col-12 mb-1 mb-md-0">
+						<h5 class="mb-4">Function call</h5>
+			      <p>µFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
+			      <p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code></p>
+						<p>where <code>option</code> is a valid <a href="#options">returned data option</a>, <code>id</code> is an <a href="#ids">asset identifier</a> (e.g. ISIN, ticker or Morningstar ID) and <code>source</code> is an identifier for the <a href="#sources">data source</a> where you want to get the data from.</p>
+					</div>
+					<div class="col-12" id="options">
+						<hr class="mt-4 mb-5"/>
+			    	<h5 class="mb-4">Returned data options (<code>option</code>)</h5>
+					</div>
+					<div class="col-sm-6 mb-1 mb-md-0">
+						<p><code>nav</code>: Net Asset Value (NAV) or price.</p>
+						<p><code>change</code>: Last NAV/price change.</p>
+						<p><code>currency</code>: Asset currency, in 3-letter code.</p>
+					</div>
+					<div class="col-sm-6 mb-1 mb-md-0">
+						<p><code>date</code>: Last NAV/price date.</p>
+						<p><code>expenses</code>: Total Expenses Ratio (TER).</p>
+						<p><code>category</code>: Fund category according to the source.</p>
+					</div>
+					<div class="col-12" id="ids">
+						<hr class="mt-4 mb-5"/>
+						<h5 class="mb-4">Asset identifiers (<code>id</code>)</h5>
+						<p>µFunds can track several types of assets, including mutual funds, stocks, pension plans, bonds, ETFs... that can be identified by different names or tickers at the same time, depending on the context or source.</p>
+						<p>An asset identifier can be used directly, without defining it anyway. However, it is important to use a proper identifier for an asset, but especially for a given information source. For that reason, we recommend checking the <a href="compatibility.html">Compatibility list</a> of assets, sources and identifiers.</p>
+						<ul>
+							<li>
+								<p><b>ISIN</b> (International Securities Identification Number)</p>
+								<p>The ISIN is a 12-character alphanumeric code used for unique identification of a security, as a result of normalizing its assigned national identifier. Its first two characters represent the issuing country, followed by nine alpha-numeric characters (the National Securities Identifying Number or NSIN) and one numerical check digit.</p>
+								<p>Most securities (equities, debt, entitlements, derivatives...) are identified by a ISIN, which makes a standard asset identifier and the most used for identifying assets in µFunds.</p>
+							</li>
+
+							<li>
+								<p><b>Morningstar ID</b> (non-official name)</p>
+								<p>Apart from standard codes that identify certain assets, in most countries Morningstar uses an internal code to identify each tracked asset, which we will call Morningstar ID. This information can be really useful for certain assets that cannot be found in Morningstar by any other code (e.g. pension plans).</p>
+								<p>In this case, you can obtain this ID by searching an asset in Morningstar (preferably European versions) and extracting it as the id query parameter of the asset's page URL. For example, the Morningstar ID for the Vanguard Total Stock ETF (American ETF) is 0P00002DAJ, or for the azValor Global Value PP (Spanish pension plan) is F00000XL5T.</p>
+								<p>When using a Morningstar country-specific source, an automatic translation from ISIN or other standard identifier to Morningstar ID is performed, since Morningstar country pages only work with Morningstar IDs.</p>
+							</li>
+
+							<li>
+								<p><b>Country or market ticker</b></p>
+								<p>Certain assets can be identified through a ticker in their market. To avoid coincidences between tickers from different markets, some sources use prefixes for every market (see the <a href="compatibility.html">Compatibility list</a>). However, other sources (e.g. Morningstar) don't, making preferrable to identify assets via another identifier (ISIN or Morningstar ID) in these cases.</p>
+							</li>
+
+							<li>
+								<p><b>APIR</b> (for Australia and New Zealand)</p>
+								<p>The APIR code is universal across the Australian wealth management industry, being used by all the distribution platforms, custodians and fund administrators.</p>
+							</li>
+
+							<li>
+								<p><b>DGS code</b> (for Spain)</p>
+								<p>The DGS code is a specific identifier for pension plans and unit-linked assets in Spain, given by the Directorate General for Insurance and Pensions Funds (Dirección General de Seguros y Fondos de Pensiones).</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12" id="sources">
+						<hr class="mt-4 mb-5"/>
+						<h5 class="mb-4">Data sources (<code>source</code>)</h5>
+						<p>Although µFunds was originally designed to import data from Morningstar, now it is compatible with other information sources that potentially offer more updated or reliable data in certain cases. This is performed, as of now, via HTML parsing.</p>
+						<p>If no source is defined, then the asked information will be loaded from Morningstar in generic mode.</p>
+						<ul>
+							<li>
+								<p><b>Morningstar generic mode</b> (<code>morningstar</code>)</p>
+								<p>This source relies on Morningstar quote pages, that happen to be the easiest way to get information from an asset, regardless of the used identifier, as they work with ISINs, mutual fund tickers, ETF tickers, Morningstar IDs, etc.</p>
+								<p>Morningstar quotes are not a user-friendly interface and therefore loading times are faster. Furthermore, no country needs to be chosen and no translation from standard identifiers to Morningstar IDs is required. On the other hand, expenses data is usually not available and sometimes data is provided in a different currency of the asset's, is provided incorrectly or is not provided at all. In these cases, Morningstar country-specific mode should be used.</p>
+							</li>
+							<li>
+								<p><b>Morningstar country-specific mode</b> (<code>morningstar-**</code>)</p>
+								<p>In contrast to Morningstar quotes, Morningstar snapshot pages expect to simulate the human behavior when checking for the data manually in a Morningstar website for a certain country.</p>
+								<p>In this case, all attributes are up-to-date and reliable, including expense ratios, as the information is the one provided directly to Morningstar's visitors. However, a country where the asset is available for sale has to be chosen, and not always matches with the ISIN's country (e.g. Luxembourg doesn't have a Morningstar website). Standard identifiers such as ISINs or tickers have to be translated to Morningstar IDs. </p>
+								<p><u>Compatible countries and country codes:</u> Australia (<code>au</code>), Austria (<code>at</code>), Belgium (<code>be</code>), Denmark (<code>dk</code>), Finland (<code>fi</code>), France (<code>fr</code>), Germany (<code>de</code>), Iceland (<code>is</code>), Ireland (<code>ie</code>), Italy (<code>it</code>), Norway (<code>no</code>), Netherlands (<code>nl</code>), Portugal (<code>pt</code>), South Africa (<code>za</code>), Spain (<code>es</code>), Switzerland (<code>ch</code>), United Kingdom (<code>uk</code>/<code>gb</code>).</p>
+								<p><u>Note:</u> The previous country codes should be preceeded by <code>morningstar-</code> when using them as a source identifier.</p>
+							</li>
+							<li>QueFondos.com (<code>quefondos</code>)</li>
+						</ul>
+					</div>
+	  		</div>
+
+				<hr class="mb-5"/>
+
+		  	<div class="row text-left mb-3 mb-sm-4">
+					<div class="col-12">
+		  			<h5 class="mb-4">Examples: see µFunds in action</h5>
+		  			<p>Check out our Google Sheets spreadsheet samples that use µFunds in different scenarios: a single asset, multiple mutual funds or a combination of funds and stocks with info from Google Finance.</p>
+		  		</div>
+					<div class="col-12">
+				  	<div class="card-deck mt-4 text-center">
+				  		<div class="card mb-4 box-shadow">
+				  			<div class="card-header">
+				  				<h5 class="my-0 font-weight-normal">Single mutual fund</h5>
+				  			</div>
+				  			<div class="card-body">
+				  				<ul class="list-unstyled mb-4">
+				  					<li>One single mutual fund</li>
+				            <li>List of purchases</li>
+				            <li>Evolution of each purchase</li>
+				            <li>All data via µFunds</li>
+				  				</ul>
+				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-danger">See example</a>
+				  			</div>
+				  		</div>
+				  		<div class="card mb-4 box-shadow">
+				  			<div class="card-header">
+				  				<h5 class="my-0 font-weight-normal">Multiple mutual funds</h5>
+				  			</div>
+				  			<div class="card-body">
+				  				<ul class="list-unstyled mb-4">
+				  					<li>Multiple mutual funds</li>
+				  					<li>Sheet of positions</li>
+				  					<li>Sheet of operations</li>
+				            <li>All data via µFunds</li>
+				  				</ul>
+				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-primary disabled">Coming soon!</a>
+				  			</div>
+				  		</div>
+				  		<div class="card mb-4 box-shadow">
+				  			<div class="card-header">
+				  				<h5 class="my-0 font-weight-normal">Complete portfolio</h5>
+				  			</div>
+				  			<div class="card-body">
+				  				<ul class="list-unstyled mb-4">
+				  					<li>Mutual funds and equities</li>
+				  					<li>Positions per asset and totals</li>
+				  					<li>Operations per asset</li>
+				  					<li>Data via µFunds and GFinance</li>
+				  				</ul>
+				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-success disabled">Coming soon!</a>
+				  			</div>
+				  		</div>
+				  	</div>
+					</div>
+				</div>
+	  	</div>
+		</div>
+
+	  <footer class="pt-4 pb-3 text-center border-top bg-light">
+			<div class="container">
+	      <div class="row">
+	        <div class="col-12">
+	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2018 µFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">µFunds community at GitHub</a>.</small></p>
+	          <p><small class="d-block mb-2 text-muted"><a href="https://github.com/joseballester/muFunds">GitHub add-on repo</a> | <a href="privacy.html">Privacy policy</a></small>
+	        </div>
+	      </div>
+			</div>
+	  </footer>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </body>
+</html>

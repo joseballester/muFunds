@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122336045-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-122336045-2');
+		</script>
+		<meta charset="utf-8">
+		<title>
+			Troubleshooting | µFunds
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta name="description" content="Having issues with µFunds? Find the most usual problems and their solutions here.">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/dataTables-bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
+	</head>
+	<body>
+	  <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-0 bg-white border-bottom box-shadow">
+	    <h5 class="my-0 mr-md-auto font-weight-normal">
+				<a href="index.html">
+					<img src="img/logo.png" class="logo" alt=""> µFunds
+				</a>
+			</h5>
+			<a class="btn btn-outline-secondary mr-2" href="https://github.com/joseballester/muFunds">View on GitHub</a>
+	    <a class="btn btn-outline-success" href="https://chrome.google.com/webstore/detail/µfunds/adjnddecjgjonhbloaflpoijndefpndm">Try in Google Sheets</a>
+	  </header>
+
+		<div class="border-bottom bg-light">
+			<div class="container">
+				<div class="row text-left py-4">
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="usage.html">Usage and examples</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="behavior.html">How µFunds works</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3 active"><a href="troubleshooting.html">Troubleshooting</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="privacy.html">Privacy policy</a></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="px-3 pt-5 pb-4 mx-auto text-left">
+				<div class="row text-left mb-3 mb-sm-4">
+					<div class="col-12 mb-3">
+	    			<h2 class="mb-5">Troubleshooting</h2>
+						<p>This page aims to consider, comment and solve errors that µFunds users can face. If you find an unexpected issue, please <a href="https://github.com/joseballester/muFunds/issues">log them at GitHub</a> or contact us to the e-mail address available at <i>Add-ons > µFunds > About µFunds</i>.</p>
+						<ul>
+							<li>
+								<p><b>Error: You have selected an invalid option.</b></p>
+								<p>Please check that you introduced a valid option (check them at <a href="usage.html">Usage and examples</a>) as the first argument of the <code>muFunds</code> function.</p>
+							</li>
+							<li>
+								<p><b>Error: Asset identifier is empty.</b></p>
+								<p>Please check that you introduced an asset identifier (string) as the second argument of the <code>muFunds</code> function.</p>
+							</li>
+							<li>
+								<p><b>Error: Source is not compatible. Please check the documentation for the compatibility list.</b></p>
+								<p>Please check the <a href="usage.html">Usage and examples</a> and <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the data source is compatible with µFunds. Remember that, if you want to obtain data from Google Finance, you should use the <a href="https://support.google.com/docs/answer/3093281">Google Finance function included in Google Sheets</a> instead.</p>
+							</li>
+							<li>
+								<p><b>Error: Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.</b></p>
+								<p>Please check the <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the asset is compatible with the data source you have chosen. This error is due to an exception when fetching the data page, for example a <i>Not Found</i> (404) code.</p>
+								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
+							</li>
+							<li>
+								<p><b>Error: (A certain option) is not available for this asset and source. Please try another data source.</b></p>
+								<p>Some data sources do not offer all the data options that are possible to call via µFunds. In this case, consider using an alternative data source for your same asset, as sometimes more than one source is compatible at the same time.</p>
+								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
+							</li>
+							<li>
+								<p><b>Error: Morningstar ID search failed. Try using the asset's Morningstar ID or another compatible data source.</b></p>
+								<p>If you are using a Morningstar country-specific page (<code>morningstar-**</code>) but introduced a standard asset identifier (e.g. ISIN) as <code>id</code>, an automatic search of the asset's Morningstar ID has to be done. The error means this search has failed.</p>
+								<p>To solve it, try to manually find the asset's Morningstar ID by searching the asset at Morningstar and extracting the ID from the URL (parameter <code>id</code> or <code>key</code>) and using it as the <code>id</code> argument for the <code>muFunds</code> function.</p>
+								<p>Another possiblility is that the asset is not available in that Morningstar country. In that case, try another country-specific Morningstar page or another data source.</p>
+							</li>
+							<li>
+								<p><b>Error: This asset is not compatible with this Morningstar country. Try another country or data source.</b></p>
+								<p>If you are using a Morningstar country-specific page (<code>morningstar-**</code>), please double check that the introduced asset is available for sale in that country. Otherwise, try calling another Morningstar country page or another data source different than Morningstar.</p>
+							</li>
+						</ul>
+					</div>
+	    	</div>
+	  	</div>
+		</div>
+
+		<footer class="pt-4 pb-3 text-center border-top bg-light">
+			<div class="container">
+	      <div class="row">
+	        <div class="col-12">
+	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2018 µFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">µFunds community at GitHub</a>.</small></p>
+	          <p><small class="d-block mb-2 text-muted"><a href="https://github.com/joseballester/muFunds">GitHub add-on repo</a> | <a href="privacy.html">Privacy policy</a></small>
+	        </div>
+	      </div>
+			</div>
+	  </footer>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/dataTables.min.js"></script>
+		<script type="text/javascript" src="js/dataTables-bootstrap4.min.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+	</body>
+</html>
