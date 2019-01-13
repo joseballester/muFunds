@@ -96,8 +96,10 @@ function searchForMSID(id, country) {
       var fetch = UrlFetchApp.fetch(getMorningstarCountryBase(country) + getMorningstarCountrySearchLink(country) + id);
       if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
         var doc = Xml.parse(fetch, true);
-        var bodyHtml = doc.html.body.toXmlString();
-        doc = XmlService.parse(bodyHtml).getRootElement();
+        var bodyHtml = doc.html.body;
+        if(country == "uk" || country == "gb") bodyHtml = bodyHtml[2];
+        bodyHtml = bodyHtml.toXmlString();
+        doc = XmlService.parse(bodyHtml) .getRootElement();
         var links = getElementsByClassName(doc, getMorningstarCountrySearchResultClass(country));
         if(links.length > 0) {
           var msid = getMSIDFromMorningstarSearch(doc, links, country);
@@ -177,7 +179,10 @@ function getExpensesFromMorningstarCountry(doc, country) {
     return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[10], "YMWpadright")[3].getValue();
   else if(country == "de")
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[9].getValue().replace(',', '.');
-  else if(country == "nl" || country == "dk")
+  else if(country == "uk" || country == "gb") {
+    var rows = getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text");
+    return rows[rows.length-1].getValue().replace(',', '.');
+  } else if(country == "nl" || country == "dk" || country == "ch" || country == "it")
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[8].getValue().replace(',', '.');
   else
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[7].getValue().replace(',', '.');
@@ -195,7 +200,13 @@ function getCategoryFromMorningstarCountry(doc, country) {
 }
 
 function fetchMorningstarCountry(id, country) {
-  return fetchURL(getMorningstarCountryBase(country) + getMorningstarCountryLink(country) + id, "morningstar-" + country + "-" + id);
+  var url = getMorningstarCountryBase(country) + getMorningstarCountryLink(country) + id;
+  var doc;
+  if(country == "gb" || country == "uk")
+    doc = fetchURL(url, "morningstar-" + country + "-" + id, 2);
+  else
+    doc = fetchURL(url, "morningstar-" + country + "-" + id);
+  return doc;
 }
 
 function loadFromMorningstarCountry(option, id, country) {
