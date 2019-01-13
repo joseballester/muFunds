@@ -143,15 +143,16 @@ function getMSIDFromMorningstarSearch(doc, links, country) {
 }
 
 function getNavFromMorningstarCountry(doc, country) {
-  if(country == "au")
-    return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[5].getValue().replace(",", ".");
-  else
+  if(country == "au") {
+    var row = getElementsByTagName(getElementsByTagName(doc, "table")[9], "td")[7].getValue();
+    return row.substr(row.indexOf('$')+1);
+  } else
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[0].getValue().substr(4).replace(',', '.');
 }
 
 function getDateFromMorningstarCountry(doc, country) {
   if(country == "au")
-    return getElementsByTagName(getElementsByClassName(doc, "YMWTableSmall")[8], "td")[1].getValue().substr(6);
+    return getElementsByTagName(getElementsByTagName(doc, "table")[9], "td")[1].getValue().substr(6);
   else
     return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "heading")[0], "heading")[0].getValue();
 }
@@ -159,7 +160,8 @@ function getDateFromMorningstarCountry(doc, country) {
 function getChangeFromMorningstarCountry(doc, country) {
   if(country == "au") {
     var nav = getNavFromMorningstarCountry(doc, country);
-    var change = getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[6].getValue();
+    var row = getElementsByTagName(getElementsByTagName(doc, "table")[9], "td")[8].getValue();
+    var change = row.substr(row.indexOf('$')+1);
     if(!isNaN(parseFloat(nav)) && isFinite(nav) && !isNaN(parseFloat(change)) && isFinite(change) && nav > 0) {
       change = parseFloat(change)/parseFloat(nav)*100;
       return change.toString();
@@ -176,7 +178,7 @@ function getCurrencyFromMorningstarCountry(doc, country) {
 
 function getExpensesFromMorningstarCountry(doc, country) {
   if(country == "au")
-    return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[10], "YMWpadright")[3].getValue();
+    return getElementsByTagName(getElementsByTagName(doc, "table")[11], "td")[12].getValue();
   else if(country == "de")
     return getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[9].getValue().replace(',', '.');
   else if(country == "uk" || country == "gb") {
@@ -189,9 +191,10 @@ function getExpensesFromMorningstarCountry(doc, country) {
 }
 
 function getCategoryFromMorningstarCountry(doc, country) {
-  if(country == "au")
-    return getElementsByClassName(getElementsByClassName(doc, "YMWTableSmall")[8], "YMWpadright")[3].getValue();
-  else if(country == "de")
+  if(country == "au") {
+    var row = getElementsByTagName(getElementsByTagName(doc, "table")[9], "td")[5].getValue();
+    return row.slice(row.indexOf('Category')+9, -21);
+  } else if(country == "de")
     return getElementsByTagName(getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[3], "a")[0].getValue();
   else if(country == "dk")
     return getElementsByTagName(getElementsByClassName(getElementsByClassName(doc, "overviewKeyStatsTable")[0], "text")[4], "a")[0].getValue();
