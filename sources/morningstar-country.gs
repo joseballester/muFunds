@@ -70,12 +70,12 @@ function searchForMSID(id, country) {
   // Checks if there is a cached version
   var cache = CacheService.getScriptCache();
   var cached = cache.get("mf-msid-" + id);
-  if (cached != null) {
+  if (cached != null) { 
     if (cached != -1)
       return cached;
     else {
       // Asset not found previously
-      throw new Error("This asset is not compatible with Morningstar. Try another compatible data source");
+      throw new Error("Morningstar ID search failed. Try using the asset's Morningstar ID or another compatible country or data source");
     }
   } else {
     if(country == "au") {
@@ -90,7 +90,7 @@ function searchForMSID(id, country) {
       }
       catch(error) {
         cache.put("mf-msid-" + id, -1, 999999999);
-        throw new Error("This asset is not compatible with Morningstar. Try another compatible data source");
+        throw new Error("This asset is not compatible with this Morningstar country. Try another country or data source");
       }
     } else {
       var fetch = UrlFetchApp.fetch(getMorningstarCountryBase(country) + getMorningstarCountrySearchLink(country) + id);
