@@ -88,7 +88,7 @@ function processChange(change) {
   change = change.replace(',', '.').replace('%', '');
   if(!isNaN(parseFloat(change)) && isFinite(change))
     return parseFloat(change)/100;
-  else
+  else 
     throw new Error("Last change is not available for this asset and source. Please try another data source");
 }
 
@@ -113,7 +113,8 @@ function processSource(source) {
 }
 
 /* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url, cacheid) {
+function fetchURL(url, cacheid, bodypos) {
+  if(bodypos == undefined) bodypos = 1;
   var cache = CacheService.getScriptCache();
   var cached = cache.get(cacheid);
   if(cached != null) {
@@ -126,7 +127,7 @@ function fetchURL(url, cacheid) {
                         .replace(" </script>", "//]]></script>");
       var doc = Xml.parse(xmlstr, true);
       var body = doc.html.body;
-      var bodyHtml = (body.length > 1 ? body[1].toXmlString() : body.toXmlString());
+      var bodyHtml = (body.length > bodypos ? body[bodypos].toXmlString() : body.toXmlString());
       cache.put(cacheid, bodyHtml, 7200);
       return XmlService.parse(bodyHtml).getRootElement();
     } else {
