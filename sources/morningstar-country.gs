@@ -107,7 +107,7 @@ function searchForMSID(id, country) {
           return msid;
         } else {
           cache.put("mf-msid-" + id, -1, 999999999);
-          throw new Error("This asset is not compatible with Morningstar. Please try another compatible data source");
+          throw new Error("This asset is not compatible with this Morningstar country. Try another country or data source");
         }
       }
     }
