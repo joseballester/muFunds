@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122336045-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-122336045-2');
+		</script>
+		<meta charset="utf-8">
+		<title>
+			Saving a history of mutual fund data | µFunds
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta name="description" content="Automatize the saving of daily fund values and avoid losing them after an update, using a time-triggered Google Apps Script function.">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	</head>
+	<body>
+	  <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-0 bg-white border-bottom box-shadow">
+	    <h5 class="my-0 mr-md-auto font-weight-normal">
+				<a href="index.html">
+					<img src="img/logo.png" class="logo" alt=""> µFunds
+				</a>
+			</h5>
+			<a class="btn btn-outline-secondary mr-2" href="https://github.com/joseballester/muFunds">View on GitHub</a>
+	    <a class="btn btn-outline-success" href="https://chrome.google.com/webstore/detail/µfunds/adjnddecjgjonhbloaflpoijndefpndm">Try in Google Sheets</a>
+	  </header>
+
+		<div class="border-bottom bg-light">
+			<div class="container">
+				<div class="row text-left py-4">
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="usage.html">Usage and examples</a></h5>
+					</div>
+					<div class="col-sm-4 my-2">
+						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="behavior.html">How µFunds works</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="troubleshooting.html">Troubleshooting</a></h5>
+					</div>
+					<div class="col-sm-4">
+						<h5 class="mb-3"><a href="index.html#guides">List of guides</a></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="px-3 pt-5 pb-4 mx-auto text-left">
+				<div class="row text-left mb-3 mb-sm-4">
+					<div class="col-12">
+			    	<h2 class="mb-4">Guide: Saving a history of µFunds data automatically</h2>
+						<p class="lead mb-4">Automatize the saving of daily values for your fund or pension plan and avoid losing them after an update, using a time-triggered Google Apps Script function.</p>
+						<p><b>Note:</b> This guide uses µFunds, a free Google Sheets addon that imports your asset data from Morningstar and other sources. We will assume that you've already <a href="install.html">installed µFunds</a> and <a href="usage.html">started using it</a> in your spreadsheet.</p>
+					</div>
+			    <div class="col-12 mb-4">
+						<hr class="mt-4 mb-5"/>
+						<p>The aim of this guide is to create a Google Apps Script function that will save the Net Asset Value (NAV) of our funds or pension plans, so we can have a history of these values for comparison or backtesting purposes in our own spreadsheet. Then, we will create a time-driven trigger of this function so it will be executed with a certain periodicity (e.g. every day).</p>
+						<p>To this extent, we will consider a Google Sheets spreadsheet with two sheets and a single fund: one sheet called <i>Investments</i> with our fund and its data (including the NAV provided by µFunds) and another one called <i>History</i> where we'll save the past NAVs of our fund. Of course, this can be easily extended to several funds as we'll explain later.</p>
+					</div>
+					<div class="col-sm-9 text-center mb-4">
+		        <img src="img/history1.png" class="rounded shadow mb-4" style="width: auto; height: 72px;">
+		        <p>Example of fund position data in the <i>Investments</i> sheet, including current NAV (cell <code>F2</code>) and its date (cell <code>H2</code>), which...</p>
+		      </div>
+		      <div class="col-sm-3 text-center mb-4">
+		        <img src="img/history2.png" class="rounded shadow mb-4" style="width: auto; height: 72px;">
+		        <p>...we want to save here, in the <i>History</i> sheet.</p>
+		      </div>
+					<div class="col-12 mb-4">
+						<h5 class="mb-4">Saving function</h5>
+						<p>First we will implement the Google Apps Script function to save the NAV and its date from the <i>Investments</i> sheet to the <i>History</i> sheet. To do it, open the script editor from the upper menu (Tools &gt; Script editor).</p>
+						<p>This could be a good starting point, which gathers data from a single fund (NAV from cell <code>F2</code> and date from cell <code>H2</code>) and appends a new road in <i>History</i> with this date (parsed), the fund's ISIN and its NAV. Feel free to personalize it and test it manually as much as you want, by running it through the upper menu (<b>Run &gt; Run function &gt; <code>saveNavHistory</code></b>):</p>
+						<pre class="px-2">
+function saveNavHistory() {
+  // Name of origin sheet (where current NAVs are)
+  var sheet1 = "Investments";
+
+  // Name of destination sheet (where historical NAVs will be saved)
+  var sheet2 = "History";
+
+  // Array of objects for each asset:
+  // - id: asset ISIN or ID
+  // - navCell: cell with NAV
+  // - dateCell: cell with date
+  var funds = [
+    { isin: "LU0996182563", navCell: "F2", dateCell: "H2" },
+    // ...
+  ];
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var s1 = ss.getSheetByName(sheet1);
+  var s2 = ss.getSheetByName(sheet2);
+
+  funds.forEach(function(fund) {
+    var date = s1.getRange(fund.dateCell).getValue();
+    var parsedDate = new Date(Date.parse(date));
+    var lastDate = s2.getRange(s2.getLastRow(), 1).getValue();
+    // Avoid inserting a NAV if we already have it
+    if(!(lastDate instanceof Date) || lastDate.getTime() !== parsedDate.getTime()) {
+      var nav = s1.getRange(fund.navCell).getValue();
+      s2.appendRow([ parsedDate, fund.isin, nav ]);
+    }
+  });
+}</pre>
+				</div>
+				<div class="col-12 mb-2">
+					<h5 class="mb-4">Setting up the time-driven trigger</h5>
+					<p>Once we have our function ready and tested, we will set up a time-based trigger to automatically execute our function with a certain periodicity. To do so, navigate via the upper menu to <b>Edit &gt; Current project's triggers</b>. A new tab will open.</p>
+					<p>Then, create a new trigger by clicking <b>Add Trigger</b> at the lower right corner of the page. Choose the function you created (<code>saveNavHistory</code>) and select <b>Time-driven</b> as event source. As all funds and pension plans have a NAV which changes at most once a day, usually selecting a <b>Day timer</b> will be enough. Choose the time of the day in which you want the function to run if you have any preference. This would result in a configuration like this:</p>
+					<p class="text-center">
+						<img src="img/history3.png" class="w-50 rounded shadow mb-4">
+					</p>
+					<p>Just press <b>Save</b> and you're done! Your function will be triggered and will save your NAVs every day.</p>
+				</div>
+	  	</div>
+		</div>
+	</div>
+
+	  <footer class="pt-4 pb-3 text-center border-top bg-light">
+			<div class="container">
+	      <div class="row">
+	        <div class="col-12">
+	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2019 µFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">µFunds community at GitHub</a>.</small></p>
+	          <p><small class="d-block mb-2 text-muted"><a href="https://github.com/joseballester/muFunds">GitHub add-on repo</a> | <a href="privacy.html">Privacy policy</a></small>
+	        </div>
+	      </div>
+			</div>
+	  </footer>
+  </body>
+</html>

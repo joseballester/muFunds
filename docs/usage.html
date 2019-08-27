@@ -30,14 +30,14 @@
 
 		<div class="border-bottom bg-light">
 			<div class="container">
-				<div class="row text-left py-4">
-					<div class="col-sm-4 my-2">
+				<div class="row text-left py-4 mt-2">
+					<div class="col-sm-4 mb-2">
 						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
 					</div>
-					<div class="col-sm-4 my-2">
+					<div class="col-sm-4 mb-2">
 						<h5 class="mb-3 active"><a href="usage.html">Usage and examples</a></h5>
 					</div>
-					<div class="col-sm-4 my-2">
+					<div class="col-sm-4 mb-2">
 						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
 					</div>
 					<div class="col-sm-4">
@@ -47,7 +47,7 @@
 						<h5 class="mb-3"><a href="troubleshooting.html">Troubleshooting</a></h5>
 					</div>
 					<div class="col-sm-4">
-						<h5 class="mb-3"><a href="privacy.html">Privacy policy</a></h5>
+						<h5 class="mb-3"><a href="index.html#guides">List of guides</a></h5>
 					</div>
 				</div>
 			</div>
@@ -62,8 +62,10 @@
 			    <div class="col-12 mb-1 mb-md-0">
 						<h5 class="mb-4">Function call</h5>
 			      <p>µFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
-			      <p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code></p>
+			      <p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
+						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option; id; source)</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
 						<p>where <code>option</code> is a valid <a href="#options">returned data option</a>, <code>id</code> is an <a href="#ids">asset identifier</a> (e.g. ISIN, ticker or Morningstar ID) and <code>source</code> is an identifier for the <a href="#sources">data source</a> where you want to get the data from.</p>
+						<p>This function call will return the latest information available from the chosen source. Most of these sources don't offer historical values, which makes comparisons and backtesting difficult. If interested, you can consider <a href="history.html">saving a history of daily data to your own spreadsheet using a Google Apps Script function and a time-driven trigger</a> (link to guide).</p>
 					</div>
 					<div class="col-12" id="options">
 						<hr class="mt-4 mb-5"/>
