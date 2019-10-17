@@ -124,7 +124,8 @@ function fetchURL(url, cacheid, bodypos) {
     if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
       var xmlstr = fetch.getContentText()
                         .replace(/<script.*>/, "<script>//<![CDATA[")
-                        .replace(" </script>", "//]]></script>");
+                        .replace(" </script>", "//]]></script>")
+                        .replace("xml:space", "space");
       var doc = Xml.parse(xmlstr, true);
       var body = doc.html.body;
       var bodyHtml = (body.length > bodypos ? body[bodypos].toXmlString() : body.toXmlString());
