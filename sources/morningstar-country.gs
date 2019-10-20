@@ -95,7 +95,11 @@ function searchForMSID(id, country) {
     } else {
       var fetch = UrlFetchApp.fetch(getMorningstarCountryBase(country) + getMorningstarCountrySearchLink(country) + id);
       if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
-        var doc = Xml.parse(fetch, true);
+        var xmlstr = fetch.getContentText()
+                        .replace(/<script.*>/, "<script>//<![CDATA[")
+                        .replace(" </script>", "//]]></script>")
+                        .replace("xml:space", "space");
+        var doc = Xml.parse(xmlstr, true);
         var bodyHtml = doc.html.body;
         if(country == "uk" || country == "gb") bodyHtml = bodyHtml[2];
         bodyHtml = bodyHtml.toXmlString();
