@@ -123,8 +123,8 @@ function fetchURL(url, cacheid, bodypos) {
     var fetch = UrlFetchApp.fetch(url);
     if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
       var xmlstr = fetch.getContentText()
-                        .replace(/<script.*>/, "<script>//<![CDATA[")
-                        .replace(" </script>", "//]]></script>")
+                        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+                        .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
                         .replace("xml:space", "space");
       var doc = Xml.parse(xmlstr, true);
       var body = doc.html.body;

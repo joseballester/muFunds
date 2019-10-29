@@ -96,8 +96,8 @@ function searchForMSID(id, country) {
       var fetch = UrlFetchApp.fetch(getMorningstarCountryBase(country) + getMorningstarCountrySearchLink(country) + id);
       if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
         var xmlstr = fetch.getContentText()
-                        .replace(/<script.*>/, "<script>//<![CDATA[")
-                        .replace(" </script>", "//]]></script>")
+                        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+                        .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
                         .replace("xml:space", "space");
         var doc = Xml.parse(xmlstr, true);
         var bodyHtml = doc.html.body;
