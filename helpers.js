@@ -125,7 +125,10 @@ function fetchURL(url, cacheid, bodypos) {
       var xmlstr = fetch.getContentText()
                         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
                         .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-                        .replace("xml:space", "space");
+                        .replace("xml:space", "space")
+                        .replace("xmlns:", "")
+                        .replace("ns0:", "")
+                        .replace(/<svg(.*)<\/svg>/gm, '');
       var doc = Xml.parse(xmlstr, true);
       var body = doc.html.body;
       var bodyHtml = (body.length > bodypos ? body[bodypos].toXmlString() : body.toXmlString());

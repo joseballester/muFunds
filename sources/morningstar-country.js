@@ -98,12 +98,15 @@ function searchForMSID(id, country) {
         var xmlstr = fetch.getContentText()
                         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
                         .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-                        .replace("xml:space", "space");
+                        .replace("xml:space", "space")
+                        .replace("xmlns:", "")
+                        .replace("ns0:", "")
+                        .replace(/<svg(.*)<\/svg>/gm, '');
         var doc = Xml.parse(xmlstr, true);
         var bodyHtml = doc.html.body;
         if(country == "uk" || country == "gb") bodyHtml = bodyHtml[2];
         bodyHtml = bodyHtml.toXmlString();
-        doc = XmlService.parse(bodyHtml) .getRootElement();
+        doc = XmlService.parse(bodyHtml).getRootElement();
         var links = getElementsByClassName(doc, getMorningstarCountrySearchResultClass(country));
         if(links.length > 0) {
           var msid = getMSIDFromMorningstarSearch(doc, links, country);
