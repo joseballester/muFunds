@@ -35,18 +35,18 @@ function loadFromQuefondos(option, id) {
   // Quefondos only reports for mutual funds and pension plans
   var doc = (isISIN(id) ? fetchQuefondos(id) : fetchQuefondosPP(id));
 
-  if(option == "nav")
+  if (option == "nav")
     return processNav(getNavFromQuefondos(doc));
-  if(option == "date")
+  if (option == "date")
     return processDate(getDateFromQuefondos(doc));
-  if(option == "change")
+  if (option == "change")
     return processChange(getChangeFromQuefondos(doc));
-  if(option == "currency")
+  if (option == "currency")
     return processCurrency(getCurrencyFromQuefondos(doc));
-  if(option == "expenses")
+  if (option == "expenses")
     return processExpenses(getExpensesFromQuefondos(doc));
-  if(option == "category")
+  if (option == "category")
     return processCategory(getCategoryFromQuefondos(doc));
-  if(option == "source")
+  if (option == "source")
     return processSource("quefondos");
 }

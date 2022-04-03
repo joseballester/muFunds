@@ -65,7 +65,7 @@ function isMSID(id) {
 // Given an asset's identifier and a Morningstar version, searches for the asset's Morningstar ID
 function searchForMSID(id, country) {
   // If the identifier is actually a Morningstar ID, then return it
-  if(isMSID(id)) return id;
+  if (isMSID(id)) return id;
 
   // Checks if there is a cached version
   var cache = CacheService.getScriptCache();
@@ -219,18 +219,18 @@ function loadFromMorningstarCountry(option, id, country) {
   var msid = searchForMSID(id, country);
   var doc = fetchMorningstarCountry(msid, country);
 
-  if(option == "nav")
+  if (option == "nav")
     return processNav(getNavFromMorningstarCountry(doc, country));
-  if(option == "date")
+  if (option == "date")
     return processDate(getDateFromMorningstarCountry(doc, country));
-  if(option == "change")
+  if (option == "change")
     return processChange(getChangeFromMorningstarCountry(doc, country));
-  if(option == "currency")
+  if (option == "currency")
     return processCurrency(getCurrencyFromMorningstarCountry(doc, country));
-  if(option == "expenses")
+  if (option == "expenses")
     return processExpenses(getExpensesFromMorningstarCountry(doc, country));
-  if(option == "category")
+  if (option == "category")
     return processCategory(getCategoryFromMorningstarCountry(doc, country));
-  if(option == "source")
+  if (option == "source")
     return processSource("morningstar-" + country);
 }

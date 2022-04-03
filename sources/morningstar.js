@@ -29,18 +29,18 @@ function getCategoryFromMorningstar(doc) {
 function loadFromMorningstar(option, id) {
   var doc = fetchMorningstar(id);
 
-  if(option == "nav")
+  if (option == "nav")
     return processNav(getNavFromMorningstar(doc));
-  if(option == "date")
+  if (option == "date")
     return processDate(getDateFromMorningstar(doc));
-  if(option == "change")
+  if (option == "change")
     return processChange(getChangeFromMorningstar(doc));
-  if(option == "currency")
+  if (option == "currency")
     return processCurrency(getCurrencyFromMorningstar(doc));
-  if(option == "expenses")
+  if (option == "expenses")
     return processExpenses(getExpensesFromMorningstar(doc));
-  if(option == "category")
+  if (option == "category")
     return processCategory(getCategoryFromMorningstar(doc));
-  if(option == "source")
+  if (option == "source")
     return processSource("morningstar");
 }
