@@ -3,37 +3,37 @@ function getMorningstarCountryBase(country) {
   if(country == "au")
     return "https://www.morningstar.com.au";
   if(country == "es")
-    return "http://www.morningstar.es/es";
+    return "https://www.morningstar.es/es";
   if(country == "de")
-    return "http://www.morningstar.de/de";
+    return "https://www.morningstar.de/de";
   if(country == "ie")
-    return "http://www.morningstarfunds.ie/ie";
+    return "https://www.morningstarfunds.ie/ie";
   if(country == "fr")
-    return "http://www.morningstar.fr/fr";
+    return "https://www.morningstar.fr/fr";
   if(country == "za")
-    return "http://www.morningstar.co.za/za";
+    return "https://www.morningstar.co.za/za";
   if(country == "at")
-    return "http://www.morningstar.at/at";
+    return "https://www.morningstar.at/at";
   if(country == "be")
-    return "http://www.morningstar.be/be";
+    return "https://www.morningstar.be/be";
   if(country == "dk")
-    return "http://www.morningstar.dk/dk";
+    return "https://www.morningstar.dk/dk";
   if(country == "fi")
-    return "http://www.morningstar.fi/fi";
+    return "https://www.morningstar.fi/fi";
   if(country == "gb" || country == "uk")
-    return "http://www.morningstar.co.uk/uk";
+    return "https://www.morningstar.co.uk/uk";
   if(country == "ch")
-    return "http://www.morningstar.ch/ch";
+    return "https://www.morningstar.ch/ch";
   if(country == "is")
-    return "http://www.morningstar.is/is";
+    return "https://www.morningstar.is/is";
   if(country == "it")
-    return "http://www.morningstar.it/it";
+    return "https://www.morningstar.it/it";
   if(country == "pt")
-    return "http://www.morningstar.pt/pt";
+    return "https://www.morningstar.pt/pt";
   if(country == "no")
-    return "http://www.morningstar.no/no";
+    return "https://www.morningstar.no/no";
   if(country == "nl")
-    return "http://www.morningstar.nl/nl";
+    return "https://www.morningstar.nl/nl";
   // As a previous filter has been done, if a user arrives here it is because
   // it comes from failed generic Morningstar and asset country has been searched
   else
