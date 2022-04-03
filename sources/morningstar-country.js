@@ -215,9 +215,8 @@ function fetchMorningstarCountry(id, country) {
 }
 
 function loadFromMorningstarCountry(option, id, country) {
-  var base = getMorningstarCountryBase(country);
-  var msid = searchForMSID(id, country);
-  var doc = fetchMorningstarCountry(msid, country);
+  const msid = searchForMSID(id, country);
+  const doc = fetchMorningstarCountry(msid, country);
 
   if (option == "nav")
     return processNav(getNavFromMorningstarCountry(doc, country));
