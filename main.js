@@ -14,11 +14,9 @@ function muFunds(option, id, source) {
   // First, check if option is valid
   if (!(option == "nav" || option == "date" || option == "change" || option == "currency" || option == "expenses" || option == "category" || option == "source")) {
     throw new Error( "You have selected an invalid option." );
-    return;
   }
   if (!id) {
     throw new Error( "Asset identifier is empty." );
-    return;
   }
 
   // Auto mode (no explicit source defined)
@@ -42,7 +40,6 @@ function muFunds(option, id, source) {
 
   // If no compatible source is chosen, return error
   throw new Error( "Source is not compatible. Please check the documentation for the compatibility list" );
-  return;
 }
 
 /* ----------- Google Sheets add-on functions ----------- */
