@@ -7,12 +7,14 @@ function fetchQuefondosPP(id) {
 }
 
 function getNavFromQuefondos(doc) {
-  var nav = getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[0].getValue();
-  return nav.substr(0, nav.length-4).replace(",", ".");
+  const $ = Cheerio.load(doc);
+  const nav = $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(0)").text();
+  return nav.substr(0, nav.length-4);
 }
 
 function getDateFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[2].getValue();
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(2)").text();
 }
 
 function getChangeFromQuefondos(doc) {
@@ -20,7 +22,8 @@ function getChangeFromQuefondos(doc) {
 }
 
 function getCurrencyFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[0].getValue().substr(-3);
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(0)").text().substr(-3);
 }
 
 function getExpensesFromQuefondos(doc) {
@@ -28,7 +31,8 @@ function getExpensesFromQuefondos(doc) {
 }
 
 function getCategoryFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "common")[0], "floatright")[1].getValue();
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".common:eq(0)").find(".floatright:eq(1)").text();
 }
 
 function loadFromQuefondos(option, id) {

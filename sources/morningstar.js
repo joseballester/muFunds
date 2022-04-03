@@ -3,27 +3,33 @@ function fetchMorningstar(id) {
 }
 
 function getNavFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "NAV")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='NAV']:eq(0)").text();
 }
 
 function getDateFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "LastDate")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='LastDate']:eq(0)").text();
 }
 
 function getChangeFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "DayChange")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='DayChange']:eq(0)").text();
 }
 
 function getCurrencyFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "PriceCurrency")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='PriceCurrency']:eq(0)").text();
 }
 
 function getExpensesFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "ExpenseRatio")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='ExpenseRatio']:eq(0)").text();
 }
 
 function getCategoryFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "MorningstarCategory")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='MorningstarCategory']:eq(0)").text();
 }
 
 function loadFromMorningstar(option, id) {

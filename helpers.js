@@ -124,29 +124,21 @@ function processSource(source) {
 }
 
 /* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url, cacheid, bodypos) {
-  if(bodypos == undefined) bodypos = 1;
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(cacheid);
-  if(cached != null) {
-    return XmlService.parse(cached).getRootElement();
+function fetchURL(url, cacheid) {
+  const cache = CacheService.getScriptCache();
+  const cached = cache.get(cacheid);
+  if (cached != null) {
+    return cached;
+  }
+
+  const fetch = UrlFetchApp.fetch(url);
+  if (fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
+    const body = fetch.getContentText();
+    const $ = Cheerio.load(body);
+    const trimmed = $("body").html();
+    cache.put(cacheid, trimmed, 7200);
+    return trimmed;
   } else {
-    var fetch = UrlFetchApp.fetch(url);
-    if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
-      var xmlstr = fetch.getContentText()
-                        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-                        .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-                        .replace("xml:space", "space")
-                        .replace("xmlns:", "")
-                        .replace("ns0:", "")
-                        .replace(/<svg(.*)<\/svg>/gm, '');
-      var doc = Xml.parse(xmlstr, true);
-      var body = doc.html.body;
-      var bodyHtml = (body.length > bodypos ? body[bodypos].toXmlString() : body.toXmlString());
-      cache.put(cacheid, bodyHtml, 7200);
-      return XmlService.parse(bodyHtml).getRootElement();
-    } else {
-      throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation");
-    }
+    throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.");
   }
 }
