@@ -1,0 +1,371 @@
+<style type="text/css">
+.ms-gl-load-list-hidden{
+background-color:#EEEEEE;
+font-family:Verdana;
+font-size:10px;
+left:453px;
+opacity:0.8;
+position:absolute;
+top:74px;
+z-index:1000;
+}
+</style>
+    <div class="gr_colm_a2a">
+        <div class="gr_colm_d1c">
+            <h3 gkey="NAV" class="ms-gl-font10">
+                 NAV    
+            </h3>
+            <span class="gr_text_bigprice">
+                <span vkey="PriceCurSymbol" id="cursymbol" class="gr_text_price">
+                    $
+                </span>
+                <span vkey="NAV">
+                 19.51
+                </span>
+            </span>
+        </div>
+        <div class="gr_colm_d1c">
+            <div>
+                <h3 gkey="NavChange" class="ms-gl-font10">
+                    1-Day Total Return  
+                </h3>
+            </div>
+            <div vkey="DayChange" class="gr_text_bigprice">
+                <span class="gr_arrowup1" style="color: #008000">   
+                </span>
+                <span style="color:#008000">
+                    0.77
+                </span>
+            </div>
+            <div gkey="Percent" class="gr_text_price" style="color:#008000;">
+                %
+            </div>
+        </div>
+        <div class="gr_row_a2">
+            <span class="gr_text2">
+            	<span vkey="PriceCurrency">
+                   USD
+                </span>
+                <span>
+                    |
+                </span>
+                <span gkey="AsOf" class="ms-gl-font10">
+                   NAV as of
+                </span>
+                <span ckey="isSDate" vkey="LastDate" id="asOfDate" >
+                    04 Apr 2022
+                </span>
+                <span>
+                    |
+                </span>
+                <span gkey="OneDayReturnAsOf" class="ms-gl-font10">
+                   1-Day Return as of   
+                </span>
+                <span ckey="isSDate" vkey="LastDate" id="oneDayReturnAsOfDate" >
+                    04 Apr 2022
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="gr_colm_a2b">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="gr_table_b1">
+            <tbody>
+                <tr>
+                    <td valign="top" class="gr_table_colm21">
+                        <h3 gkey="ttmYield" style="white-space:nowrap;" class="ms-gl-font10">
+                             TTM Yield     
+                        </h3>
+                        <span vkey="ttmYield" class="gr_text1">
+                          3.10%
+                        </span>
+                      
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm6b">
+                        <h3 gkey="Load" class="ms-gl-font10">
+                           Load 
+                        </h3>
+                        <span vkey="Load" id="Loadstyle" class="gr_text1"  onmouseover="jsFunction();">
+                             None 
+                        </span>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm16b">
+                        <div style="display:none" id="gr_market_value_wrap">
+                            <h3 gkey="PortfolioMktValue" class="ms-gl-font10">
+                                Total Mkt Val
+                            </h3>
+                            <span class="gr_text1">
+                                <span ckey="isCur" vkey="PortfolioMarketValue">
+                                    16.8 bil
+                                </span>
+                                &nbsp;
+                                <label vkey="PortfolioCurrency">
+                                    USD
+                                </label>
+                            </span>
+                        </div>
+                        <div style="" id="gr_total_asset_wrap">
+                            <h3 gkey="TotalAssets" class="ms-gl-font10">
+                                Total Assets  
+                            </h3>
+                            <span class="gr_text1">
+                                <label id="cursymboloftotal" vkey="CurSymbol">
+                                    $
+                                </label>
+                                <span ckey="isCur" vkey="TotalAssets">
+                                   52.8  bil  
+                                </span>
+                            </span>
+                        </div>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm2b">
+                        <h3>
+                            <a gkey="ExpenseRatio" target="_blank" href="//www.morningstar.com/InvGlossary/expense_ratio.aspx"
+                            class="ms-gl-font10">
+                                Expenses     
+                            </a>
+                        </h3>
+                        <span vkey="ExpenseRatio" class="gr_text1">
+                             0.17%
+                        </span>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm23">
+                        <h3>
+                            <a gkey="FeeLevel" target="_blank" href="//www.morningstar.com/InvGlossary/morningstar-fee-level-for-funds.aspx"
+                            class="ms-gl-font10">
+                                  Fee Level    
+                            </a>
+                        </h3>
+                        <span vkey="FeeLevel" class="gr_text1">
+                           Low
+                        </span>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm2b">
+                        <h3 gkey="Turnover" class="ms-gl-font10">
+                               Turnover   
+                        </h3>
+                        <span vkey="Turnover" class="gr_text1">
+                             8%
+                        </span>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm27">
+                        <h3 gkey="Status" class="ms-gl-font10">
+                              Status    
+                        </h3>
+                        <span vkey="Status" class="gr_text1">
+                            Limited
+                        </span>
+                    </td>
+                    <td class="gr_table_colm4b">
+                    </td>
+                    <td valign="top" class="gr_table_colm21">
+                        <h3 gkey="MinInvestment" style="white-space:nowrap;" class="ms-gl-font10">
+                            Min. Inv.     
+                        </h3>
+                        <span class="gr_text1" style="white-space:nowrap;">
+                             
+		                            <span style="" id="gr_min_initial_inv_cur" vkey="CurSymbol">
+		                                $
+		                            </span>
+		                            <span ckey="isCur" vkey="MinInvestment">
+		                                --   
+		                            </span>
+		                            <span id="gr_min_initial_inv_unit">
+		                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="15" class="gr_table_row8">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="15" class="gr_table_row3">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="15" class="gr_table_row8">
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" colspan="4" class="gr_table_colm2b">
+                        <h3 gkey="Yield" class="ms-gl-font10">
+                         30-Day SEC Yield  
+                        </h3>
+                        <span vkey="Yield" class="gr_text1">
+                            --
+                        </span>
+                       
+                    </td>
+                    <td valign="top" colspan="4">
+                        <h3 style="white-space:nowrap;" gkey="MorningstarCategory" class="ms-gl-font10">
+                            Category  
+                        </h3>
+                        <span vkey="MorningstarCategory" class="gr_text1">
+                             Foreign Large Blend
+                        </span>
+                    </td>
+                    <td valign="top">
+                        <h3 style="white-space:nowrap;" gkey="InvestmentStyle"  class="ms-gl-font10">
+                             Investment Style     
+                        </h3>
+                        <span vkey="InvestmentStyle" class="gr_text1">
+                            <div class="gr_blend_bllg">
+                            </div>
+                            Large Blend    
+                        </span>
+                    </td>
+                    <td>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>     
+  <div id="ms_rt_gl_msglLoadDetail" class="ms-gl-load-list-hidden" style="position: absolute; z-index: 99999; top: 503px; left: 598px; display:none;">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <span gkey="FrontLoad" class="ms-gl-font10">
+                      Front Load
+                    </span>
+                    :
+                </td>
+                <td vkey="FrontLoad">
+                   None
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span gkey="DeferredLoad" class="ms-gl-font10">
+                          Deferred Load  
+                    </span>
+                    :
+                </td>
+                <td vkey="DeferredLoad">
+                     None
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> 
+   <div id="ms_rt_gl_msglLoadDetailCAN" style="position: absolute;z-index: 99999;top: 156px;left: 462.717px;display: none;" class="gr_tooltip_wrap1 gr_tooltip">
+ <table cellspacing="0" cellpadding="0" class="gr_tooltip_table">	
+ <tbody>	
+ <tr class="gr_tooltip_row1">	
+ <th gkey="LoadType" class="gr_table_colm10 ms-gl-font10">Load Type</th>	
+ <th class="gr_table_colm9">&nbsp;</th>	
+ <th gkey="FundCode" class="gr_table_colm5b ms-gl-font10">Code</th>	
+ <th class="gr_table_colm9">&nbsp;</th>	
+ <th gkey="Currency" class="gr_table_colm5b ms-gl-font10">Currency</th> 
+ </tr>
+ </tbody>	
+ </table> 
+ <div vkey="LoadDetail"> 
+ </div> 
+ </div> 
+<script language="javascript">
+
+function jsFunction(){
+var odiv=document.getElementById('Loadstyle');
+ $("#Loadstyle").mouseover(function(){
+var leftx=  $("#Loadstyle").offset().left+"px";
+var topy= $("#Loadstyle").offset().top+20+"px";
+var pp="absolute; z-index: 99999; top:"+ topy+"; left:"+ leftx+"; display:black;";
+    $("#ms_rt_gl_msglLoadDetail").attr("style",pp);
+     });
+ $("#Loadstyle").mouseleave(function(){
+ $("#ms_rt_gl_msglLoadDetail").attr("style"," display:none;");
+       	 });
+
+}
+   
+//var weekDay = new Array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+function getWeekDay(){
+	var tradeDate = new Date("04/04/2022");
+	if(tradeDate==null || typeof(tradeDate)=="undifined"){
+		 $("#asOfDate").html("-")+" "+"data not available";
+	}else{
+		//$("#asOfDate").html( weekDay[tradeDate.getDay()]+" "+formatDateByCul(tradeDate));
+		$("#asOfDate").html(formatDateByCul(tradeDate));
+	}
+	
+	var tradeDate2 = new Date("04/04/2022");
+	if(tradeDate2==null || typeof(tradeDate2)=="undifined"){
+		 $("#oneDayReturnAsOfDate").html("-")+" "+"data not available";
+	}else{
+		//$("#oneDayReturnAsOfDate").html( weekDay[tradeDate2.getDay()]+" "+formatDateByCul(tradeDate2));
+		$("#oneDayReturnAsOfDate").html(formatDateByCul(tradeDate2));
+	}
+}
+function formatDateByCul (date){
+var culture="en-US";
+	if(culture==null || typeof(culture)=="undifined"){
+				return this.formatDate(date,"MM/DD/yyyy");
+			}
+			if(culture.toLowerCase().replace("-","_").indexOf("fr_ca") >=0){
+				return this.formatDate(date,"DD-MM-yyyy");
+			}else if(culture.toLowerCase().replace("-","_").indexOf("fr_fr") >=0){
+				return this.formatDate(date,"DD/MM/yyyy");
+			}else if(culture.toLowerCase().replace("-","_").indexOf("en_ca") >=0){
+				return this.formatDate(date,"DD/MM/yyyy");
+			}else{
+				return this.formatDate(date,"MM/DD/yyyy");
+			}
+	
+	
+}
+function formatDate(date,formatter){
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	var year = date.getUTCFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	day=(day<10)?"0"+day:day;
+	month=(month<10)?"0"+month:month;
+	var timeValue = "" +((hour >= 12) ? "PM" : "AM");
+	hour = ((hour >12) ? hour -12 :hour);
+	minute = (minute<10) ? "0"+minute:minute;
+	return formatter.replace("MM",month).replace("yyyy",year).replace("DD",day);
+}
+function getCurSymbol(){
+	var currency="USD";
+			switch(currency.toUpperCase()){
+			case "USD":
+				return "$";
+			case "GBX":
+				return "￡";
+			case "GBP":
+				return "￡";
+			case "EUR":
+				return "€";
+			case "THB":
+			   return "฿";
+			case "CHF":
+			   return "SFr.";
+			case "KRW":
+			   return "₩";
+			default: return "&nbsp;";
+			}
+		}
+
+
+
+var curSymbol=getCurSymbol();
+$("#cursymbol").html(curSymbol);
+$("#cursymboloftotal").html(curSymbol);
+//getWeekDay();
+   </script>
+    
