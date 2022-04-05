@@ -90,3 +90,52 @@ describe('muFunds morningstar', () => {
     });
   });
 });
+
+describe('muFunds morningstar UK', () => {
+  const id = "IE00B505V954";
+  const source = "morningstar-uk";
+
+  describe('functions', () => {
+    it('should fetch NAV correctly', () => {
+      const option = "nav";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "193.45");
+    });
+
+    it('should fetch date correctly', () => {
+      const option = "date";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "04/04/2022");
+    });
+
+    it('should fetch change correctly', () => {
+      const option = "change";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "0.0085");
+    });
+
+    it('should fetch currency correctly', () => {
+      const option = "currency";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "USD");
+    });
+
+    it('should fetch expenses correctly', () => {
+      const option = "expenses";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "0.002");
+    });
+
+    it('should fetch category correctly', () => {
+      const option = "category";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "Global Large-Cap Blend Equity");
+    });
+
+    it('should fetch source correctly', () => {
+      const option = "source";
+      const value = muFunds.muFunds(option, id, source);
+      assert.equal(value, "morningstar-uk");
+    });
+  });
+});
