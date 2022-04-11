@@ -3,44 +3,50 @@ function fetchMorningstar(id) {
 }
 
 function getNavFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "NAV")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='NAV']:eq(0)").text();
 }
 
 function getDateFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "LastDate")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='LastDate']:eq(0)").text();
 }
 
 function getChangeFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "DayChange")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='DayChange']:eq(0)").text();
 }
 
 function getCurrencyFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "PriceCurrency")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='PriceCurrency']:eq(0)").text();
 }
 
 function getExpensesFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "ExpenseRatio")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='ExpenseRatio']:eq(0)").text();
 }
 
 function getCategoryFromMorningstar(doc) {
-  return getElementsByAttribute(doc, 'vkey', "MorningstarCategory")[0].getValue().replace(/\s(\s+)/g, '').replace(/\n/g, '').replace(/\t/g, '');
+  const $ = Cheerio.load(doc);
+  return $("[vkey='MorningstarCategory']:eq(0)").text();
 }
 
 function loadFromMorningstar(option, id) {
   var doc = fetchMorningstar(id);
 
-  if(option == "nav")
+  if (option == "nav")
     return processNav(getNavFromMorningstar(doc));
-  if(option == "date")
+  if (option == "date")
     return processDate(getDateFromMorningstar(doc));
-  if(option == "change")
+  if (option == "change")
     return processChange(getChangeFromMorningstar(doc));
-  if(option == "currency")
+  if (option == "currency")
     return processCurrency(getCurrencyFromMorningstar(doc));
-  if(option == "expenses")
+  if (option == "expenses")
     return processExpenses(getExpensesFromMorningstar(doc));
-  if(option == "category")
+  if (option == "category")
     return processCategory(getCategoryFromMorningstar(doc));
-  if(option == "source")
+  if (option == "source")
     return processSource("morningstar");
 }

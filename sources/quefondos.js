@@ -7,12 +7,14 @@ function fetchQuefondosPP(id) {
 }
 
 function getNavFromQuefondos(doc) {
-  var nav = getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[0].getValue();
-  return nav.substr(0, nav.length-4).replace(",", ".");
+  const $ = Cheerio.load(doc);
+  const nav = $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(0)").text();
+  return nav.substr(0, nav.length-4);
 }
 
 function getDateFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[2].getValue();
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(2)").text();
 }
 
 function getChangeFromQuefondos(doc) {
@@ -20,7 +22,8 @@ function getChangeFromQuefondos(doc) {
 }
 
 function getCurrencyFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "w100")[1], "floatright")[0].getValue().substr(-3);
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(0)").text().substr(-3);
 }
 
 function getExpensesFromQuefondos(doc) {
@@ -28,25 +31,26 @@ function getExpensesFromQuefondos(doc) {
 }
 
 function getCategoryFromQuefondos(doc) {
-  return getElementsByClassName(getElementsByClassName(getElementsByClassName(doc, "informe")[0], "common")[0], "floatright")[1].getValue();
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".common:eq(0)").find(".floatright:eq(1)").text();
 }
 
 function loadFromQuefondos(option, id) {
   // Quefondos only reports for mutual funds and pension plans
   var doc = (isISIN(id) ? fetchQuefondos(id) : fetchQuefondosPP(id));
 
-  if(option == "nav")
+  if (option == "nav")
     return processNav(getNavFromQuefondos(doc));
-  if(option == "date")
+  if (option == "date")
     return processDate(getDateFromQuefondos(doc));
-  if(option == "change")
+  if (option == "change")
     return processChange(getChangeFromQuefondos(doc));
-  if(option == "currency")
+  if (option == "currency")
     return processCurrency(getCurrencyFromQuefondos(doc));
-  if(option == "expenses")
+  if (option == "expenses")
     return processExpenses(getExpensesFromQuefondos(doc));
-  if(option == "category")
+  if (option == "category")
     return processCategory(getCategoryFromQuefondos(doc));
-  if(option == "source")
+  if (option == "source")
     return processSource("quefondos");
 }

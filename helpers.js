@@ -1,70 +1,3 @@
-/* ----------- HTML Parsing functions ----------- */
-
-// Returns elements with a certain attribute
-function getElementsByAttribute(element, attribute, classToFind) {
-  var data = [];
-  var descendants = element.getDescendants();
-  descendants.push(element);
-  for(i in descendants) {
-    var elt = descendants[i].asElement();
-    if(elt != null) {
-      var classes = elt.getAttribute(attribute);
-      if(classes != null) {
-        classes = classes.getValue();
-        if(classes == classToFind) data.push(elt);
-        else {
-          classes = classes.split(' ');
-          for(j in classes) {
-            if(classes[j] == classToFind) {
-              data.push(elt);
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-  return data;
-}
-
-// Returns elements with a certain class
-function getElementsByClassName(element, classToFind) {
-  var data = [];
-  var descendants = element.getDescendants();
-  descendants.push(element);
-  for(i in descendants) {
-    var elt = descendants[i].asElement();
-    if(elt != null) {
-      var classes = elt.getAttribute('class');
-      if(classes != null) {
-        classes = classes.getValue();
-        if(classes == classToFind) data.push(elt);
-        else {
-          classes = classes.split(' ');
-          for(j in classes) {
-            if(classes[j] == classToFind) {
-              data.push(elt);
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-  return data;
-}
-
-// Returns elements with a certain tag name
-function getElementsByTagName(element, tagName) {
-  var data = [];
-  var descendants = element.getDescendants();
-  for(i in descendants) {
-    var elt = descendants[i].asElement();
-    if( elt !=null && elt.getName()== tagName) data.push(elt);
-  }
-  return data;
-}
-
 /* ----------- Data processing functions ----------- */
 function isISIN(id) {
   // ISIN have 12 characters
@@ -72,70 +5,73 @@ function isISIN(id) {
   return id.length == 12;
 }
 
+function stripCharacters_(text) {
+  return text.trim().replace(/\n/g, '').replace(/\t/g, '');
+}
+
 function processNav(nav) {
+  nav = stripCharacters_(nav);
   nav = nav.replace(',', '.');
-  if(!isNaN(parseFloat(nav)) && isFinite(nav))
+  if (!isNaN(parseFloat(nav)) && isFinite(nav))
     return parseFloat(nav);
   else
-    throw new Error("NAV is not available for this asset and source. Please try another data source");
+    throw new Error("NAV is not available for this asset and source. Please try another data source.");
 }
 
 function processDate(date) {
+  date = stripCharacters_(date);
   return date;
 }
 
 function processChange(change) {
+  change = stripCharacters_(change);
   change = change.replace(',', '.').replace('%', '');
-  if(!isNaN(parseFloat(change)) && isFinite(change))
+  if (!isNaN(parseFloat(change)) && isFinite(change))
     return parseFloat(change)/100;
   else 
-    throw new Error("Last change is not available for this asset and source. Please try another data source");
+    throw new Error("Last change is not available for this asset and source. Please try another data source.");
 }
 
 function processCurrency(currency) {
+  currency = stripCharacters_(currency);
   return currency;
 }
 
 function processExpenses(expenses) {
+  expenses = stripCharacters_(expenses);
   expenses = expenses.replace(',', '.').replace('%', '');
-  if(!isNaN(parseFloat(expenses)) && isFinite(expenses))
+  if (!isNaN(parseFloat(expenses)) && isFinite(expenses))
     return parseFloat(expenses)/100;
   else
-    throw new Error("Expenses ratio is not available for this asset and source. Please try another data source");
+    throw new Error("Expenses ratio is not available for this asset and source. Please try another data source.");
 }
 
 function processCategory(category) {
+  category = stripCharacters_(category);
   return category;
 }
 
 function processSource(source) {
+  source = stripCharacters_(source);
   return source;
 }
 
 /* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url, cacheid, bodypos) {
-  if(bodypos == undefined) bodypos = 1;
-  var cache = CacheService.getScriptCache();
-  var cached = cache.get(cacheid);
-  if(cached != null) {
-    return XmlService.parse(cached).getRootElement();
+function fetchURL(url, cacheid) {
+  const cache = CacheService.getScriptCache();
+  const cached = cache.get(cacheid);
+  if (cached != null) {
+    return cached;
+  }
+
+  const fetch = UrlFetchApp.fetch(url);
+  if (fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
+    const body = fetch.getContentText();
+    const $ = Cheerio.load(body);
+    const trimmed = $("body").html();
+    cache.put(cacheid, trimmed, 7200);
+    return trimmed;
   } else {
-    var fetch = UrlFetchApp.fetch(url);
-    if(fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
-      var xmlstr = fetch.getContentText()
-                        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-                        .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-                        .replace("xml:space", "space")
-                        .replace("xmlns:", "")
-                        .replace("ns0:", "")
-                        .replace(/<svg(.*)<\/svg>/gm, '');
-      var doc = Xml.parse(xmlstr, true);
-      var body = doc.html.body;
-      var bodyHtml = (body.length > bodypos ? body[bodypos].toXmlString() : body.toXmlString());
-      cache.put(cacheid, bodyHtml, 7200);
-      return XmlService.parse(bodyHtml).getRootElement();
-    } else {
-      throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation");
-    }
+    throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.");
   }
 }
