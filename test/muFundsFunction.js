@@ -1,3 +1,4 @@
+// Change this to `true` to record HTTP responses
 const record = false;
 
 const assert = require('assert');
@@ -139,3 +140,9 @@ describe('muFunds morningstar UK', () => {
     });
   });
 });
+
+describe('Record mode', () => {
+  it('should be false', () => {
+    assert.equal(record, false);
+  })
+})
