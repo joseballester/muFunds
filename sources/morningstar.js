@@ -1,5 +1,5 @@
 // Given a 2-letter country code, returns the base URL for a Morningstar website
-function getMorningstarCountryBase(country) {
+function getMorningstarBase(country) {
   if(country == "au")
     return "https://www.morningstar.com.au";
   if(country == "es")
@@ -41,19 +41,19 @@ function getMorningstarCountryBase(country) {
 }
 
 // Given a 2-letter country code, returns the location for a given fund MSID
-function getMorningstarCountryLink(country, id) {
+function getMorningstarLink(country, id) {
   if (country == "au") {
-    return getMorningstarCountryBase(country) + "/Funds/FundReportPrint/" + id;
+    return getMorningstarBase(country) + "/Funds/FundReportPrint/" + id;
   } else {
-    return getMorningstarCountryBase(country) + "/funds/snapshot/snapshot.aspx?id=" + id;
+    return getMorningstarBase(country) + "/funds/snapshot/snapshot.aspx?id=" + id;
   }
 }
 
-function getMorningstarCountrySearchLink(country, id) {
+function getMorningstarSearchLink(country, id) {
   if (country == "au") {
-    return  getMorningstarCountryBase(country) + "/Ausearch/SecurityCodeAutoLookup?rows=20000&fq=SecurityTypeId:(1+OR+2+OR+3+OR+4+OR+5)&sort=UniverseSort+asc&q=" + id;
+    return  getMorningstarBase(country) + "/Ausearch/SecurityCodeAutoLookup?rows=20000&fq=SecurityTypeId:(1+OR+2+OR+3+OR+4+OR+5)&sort=UniverseSort+asc&q=" + id;
   } else {
-    return  getMorningstarCountryBase(country) + "/funds/SecuritySearchResults.aspx?search=" + id;
+    return  getMorningstarBase(country) + "/funds/SecuritySearchResults.aspx?search=" + id;
   }
 }
 
@@ -78,7 +78,7 @@ function searchForMSID(id, country) {
 
   if (country == "au") {
     try {
-      const url = getMorningstarCountrySearchLink(country, id);
+      const url = getMorningstarSearchLink(country, id);
       const fetch = UrlFetchApp.fetch(url, {'muteHttpExceptions': true});
       const json = fetch.getContentText();
       const data = JSON.parse(json);
@@ -89,7 +89,7 @@ function searchForMSID(id, country) {
       throw new Error("This asset is not compatible with this Morningstar country. Try another country or data source.");
     }
   } else {
-    const url = getMorningstarCountrySearchLink(country, id);
+    const url = getMorningstarSearchLink(country, id);
     const fetch = UrlFetchApp.fetch(url, {'muteHttpExceptions': true});
     if (fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
       const pageBody = fetch.getContentText();
@@ -105,7 +105,7 @@ function searchForMSID(id, country) {
   }
 }
 
-function getNavFromMorningstarCountry(doc, country) {
+function getNavFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     const text = $("table:eq(9)").find("td:eq(7)").text();
@@ -118,7 +118,7 @@ function getNavFromMorningstarCountry(doc, country) {
   }
 }
 
-function getDateFromMorningstarCountry(doc, country) {
+function getDateFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     const text = $("table:eq(9)").find("td:eq(1)").text();
@@ -131,10 +131,10 @@ function getDateFromMorningstarCountry(doc, country) {
   }
 }
 
-function getChangeFromMorningstarCountry(doc, country) {
+function getChangeFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
-    const nav = getNavFromMorningstarCountry(doc, country);
+    const nav = getNavFromMorningstar(doc, country);
 
     const text = $("table:eq(9)").find("td:eq(8)").text();
     var change = text.substr(text.indexOf('$')+1);
@@ -151,7 +151,7 @@ function getChangeFromMorningstarCountry(doc, country) {
   }
 }
 
-function getCurrencyFromMorningstarCountry(doc, country) {
+function getCurrencyFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     return "AUD";
@@ -162,7 +162,7 @@ function getCurrencyFromMorningstarCountry(doc, country) {
   }
 }
 
-function getExpensesFromMorningstarCountry(doc, country) {
+function getExpensesFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     return $("table:eq(11)").find("td:eq(12)").text();
@@ -177,7 +177,7 @@ function getExpensesFromMorningstarCountry(doc, country) {
   }
 }
 
-function getCategoryFromMorningstarCountry(doc, country) {
+function getCategoryFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     const row = $("table:eq(9)").find("td:eq(5)").text();
@@ -191,28 +191,28 @@ function getCategoryFromMorningstarCountry(doc, country) {
   }
 }
 
-function fetchMorningstarCountry(id, country) {
-  const url = getMorningstarCountryLink(country, id);
+function fetchMorningstar(id, country) {
+  const url = getMorningstarLink(country, id);
   const doc = fetchURL(url, "morningstar-" + country + "-" + id);
   return doc;
 }
 
-function loadFromMorningstarCountry(option, id, country) {
+function loadFromMorningstar(option, id, country) {
   const msid = searchForMSID(id, country);
-  const doc = fetchMorningstarCountry(msid, country);
+  const doc = fetchMorningstar(msid, country);
 
   if (option == "nav")
-    return processNav(getNavFromMorningstarCountry(doc, country));
+    return processNav(getNavFromMorningstar(doc, country));
   if (option == "date")
-    return processDate(getDateFromMorningstarCountry(doc, country));
+    return processDate(getDateFromMorningstar(doc, country));
   if (option == "change")
-    return processChange(getChangeFromMorningstarCountry(doc, country));
+    return processChange(getChangeFromMorningstar(doc, country));
   if (option == "currency")
-    return processCurrency(getCurrencyFromMorningstarCountry(doc, country));
+    return processCurrency(getCurrencyFromMorningstar(doc, country));
   if (option == "expenses")
-    return processExpenses(getExpensesFromMorningstarCountry(doc, country));
+    return processExpenses(getExpensesFromMorningstar(doc, country));
   if (option == "category")
-    return processCategory(getCategoryFromMorningstarCountry(doc, country));
+    return processCategory(getCategoryFromMorningstar(doc, country));
   if (option == "source")
     return processSource("morningstar-" + country);
 }
