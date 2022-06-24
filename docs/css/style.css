@@ -56,11 +56,15 @@ header h5 img.logo {
   weight: 100%;
 }
 
-#ids ul li, #sources ul li {
+#ids ul li, #sources > ul > li {
   margin-bottom:18px;
 }
 
-#ids ul li p, #sources ul li p {
+#sources > ul > li > ul > li {
+  margin-bottom:10px;
+}
+
+#ids ul li p, #sources > ul > li p {
   margin-bottom:10px;
 }
 

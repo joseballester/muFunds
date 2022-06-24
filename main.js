@@ -15,23 +15,19 @@ function muFunds(option, id, source) {
   if (!(option == "nav" || option == "date" || option == "change" || option == "currency" || option == "expenses" || option == "category" || option == "source")) {
     throw new Error( "You have selected an invalid option." );
   }
+
   if (!id) {
     throw new Error( "Asset identifier is empty." );
   }
 
-  // Auto mode (no explicit source defined)
   if (!source) {
-    return loadFromMorningstar(option, id);
+    throw new Error( "Data source is required as third argument. Please see www.mufunds.com/usage.html" );
   }
 
-  // Manual mode (explicit source defined)
-  if (source == "morningstar") {
-    return loadFromMorningstar(option, id);
-  }
-
+  // Input already validated
   if (source == "morningstar-au" || source == "morningstar-es" || source == "morningstar-de" || source == "morningstar-ie" || source == "morningstar-fr" || source == "morningstar-za" || source == "morningstar-at" || source == "morningstar-be" || source == "morningstar-dk" || source == "morningstar-fi" || source == "morningstar-gb" || source == "morningstar-uk" || source == "morningstar-ch" || source == "morningstar-is" || source == "morningstar-it" || source == "morningstar-pt" || source == "morningstar-no" || source == "morningstar-nl") {
     var country = source.substr(12, 2).toLowerCase();
-    return loadFromMorningstarCountry(option, id, country);
+    return loadFromMorningstar(option, id, country);
   }
 
   if (source == "quefondos") {
