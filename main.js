@@ -15,13 +15,13 @@ function muFunds(option, id, source) {
   if (!(option == "nav" || option == "date" || option == "change" || option == "currency" || option == "expenses" || option == "category" || option == "source")) {
     throw new Error( "You have selected an invalid option." );
   }
+
   if (!id) {
     throw new Error( "Asset identifier is empty." );
   }
 
-  // Auto mode (no explicit source defined)
   if (!source) {
-    return loadFromMorningstar(option, id);
+    throw new Error( "Data source is required as third argument. Please see www.mufunds.com/usage.html" );
   }
 
   // Manual mode (explicit source defined)
