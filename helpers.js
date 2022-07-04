@@ -57,11 +57,14 @@ function processSource(source) {
 }
 
 /* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url, cacheid) {
+function fetchURL(url, cacheid = null) {
   const cache = CacheService.getScriptCache();
-  const cached = cache.get(cacheid);
-  if (cached != null) {
-    return cached;
+
+  if (cacheid != null) {
+    const cached = cache.get(cacheid);
+    if (cached != null) {
+      return cached;
+    }
   }
 
   const fetch = UrlFetchApp.fetch(url);
@@ -69,7 +72,11 @@ function fetchURL(url, cacheid) {
     const body = fetch.getContentText();
     const $ = Cheerio.load(body);
     const trimmed = $("body").html();
-    cache.put(cacheid, trimmed, 7200);
+
+    if (cacheid != null) {
+      cache.put(cacheid, trimmed, 7200);
+    }
+    
     return trimmed;
   } else {
     throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.");
