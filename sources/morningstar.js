@@ -193,7 +193,13 @@ function getCategoryFromMorningstar(doc, country) {
 
 function fetchMorningstar(id, country) {
   const url = getMorningstarLink(country, id);
-  const doc = fetchURL(url, "morningstar-" + country + "-" + id);
+
+  const cacheid = !['gb', 'uk'].includes(country)
+    ? "morningstar-" + country + "-" + id
+    : null;
+
+  const doc = fetchURL(url, cacheid);
+  
   return doc;
 }
 
