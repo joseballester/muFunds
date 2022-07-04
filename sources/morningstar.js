@@ -25,7 +25,7 @@ function getMorningstarBase(country) {
   if(country == "ch")
     return "https://www.morningstar.ch/ch";
   if(country == "is")
-    return "https://www.morningstar.is/is";
+    return "http://www.morningstar.is/is";
   if(country == "it")
     return "https://www.morningstar.it/it";
   if(country == "pt")
