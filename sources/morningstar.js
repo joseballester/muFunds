@@ -166,11 +166,11 @@ function getExpensesFromMorningstar(doc, country) {
   const $ = Cheerio.load(doc);
   if (country == "au") {
     return $("table:eq(11)").find("td:eq(12)").text();
-  } else if (country == "de") {
+  } else if (country == "de" || country == "dk") {
     return $(".overviewKeyStatsTable:eq(0)").find(".text:eq(9)").text();
   } else if (country == "uk" || country == "gb") {
     return $(".overviewKeyStatsTable:eq(0)").find(".text:last").text();
-  } else if (country == "nl" || country == "dk" || country == "ch" || country == "it") {
+  } else if (country == "nl" || country == "ch" || country == "it") {
     return $(".overviewKeyStatsTable:eq(0)").find(".text:eq(8)").text();
   } else {
     return $(".overviewKeyStatsTable:eq(0)").find(".text:eq(7)").text();
