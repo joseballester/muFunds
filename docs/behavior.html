@@ -62,6 +62,7 @@
 						<p>In a few words, µFunds works by fetching an HTML page from the chosen data source, parsing the asked data in it and just returning it back to you. More concretely, the performed steps are the following:</p>
 						<ol>
 							<li>The user calls the muFunds function from a Google Sheets spreadsheet for a certain <code>option</code> (asset attribute), <code>id</code> (asset identifier) and <code>source</code> (website where fetch data from).</li>
+							<li>If <code>source</code> is explicitly given by the user, then µFunds plans to fetch a the asset detail page for that <code>id</code>. Otherwise, µFunds plans to fetch a Morningstar page in generic mode (<code>morningstar</code>).</li>
 							<li>If the page is cached by Google Apps Script's cache from the last 2 hours, then no external call is performed. Otherwise, the page is fetched and saved in Google Apps Script's cache for the next 2 hours.</li>
 							<li>The asked attribute is parsed from the Morningstar page's HTML and returned.</li>
 						</ol>

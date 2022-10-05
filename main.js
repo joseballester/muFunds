@@ -20,8 +20,8 @@ function muFunds(option, id, source) {
     throw new Error( "Asset identifier is empty." );
   }
 
-  if (!source) {
-    throw new Error( "Data source is required as third argument. Please see www.mufunds.com/usage.html" );
+  if (!source || source === 'morningstar') {
+    return loadFromMorningstarScreener(option, id);
   }
 
   // Input already validated

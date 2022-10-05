@@ -60,18 +60,9 @@
 			    	<h2 class="mb-5">Usage and examples</h2>
 					</div>
 			    <div class="col-12 mb-1 mb-md-0">
-					<div class="alert alert-warning mb-5">
-						<p>
-							<b>Important:</b> Country-agnostic Morningstar reports from <code>quotes.morningstar.com</code> stopped working on June 23, 2022. Therefore, from June 24, 2022, µFunds requires a data source as the third argument of the function call.
-						</p>
-						
-						<p class="mb-0">
-							You should now call µFunds with <code>=muFunds(option, id, "morningstar-**")</code>, where <code>**</code> represents the 2-letter code of a country where your asset is available for sale. In most cases, you can just use the country where you live. Please check the list of available countries and codes in the <a href="#sources">Data sources</a> section below.
-						</p>
-					</div>
 					<h5 class="mb-4">Function call</h5>
-			      <p>µFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
-			      <p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
+					<p>µFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
+					<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
 						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option; id; source)</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
 						<p>where <code>option</code> is a valid <a href="#options">returned data option</a>, <code>id</code> is an <a href="#ids">asset identifier</a> (e.g. ISIN, ticker or Morningstar ID) and <code>source</code> is an identifier for the <a href="#sources">data source</a> where you want to get the data from.</p>
 						<p>This function call will return the latest information available from the chosen source. Most of these sources don't offer historical values, which makes comparisons and backtesting difficult. If interested, you can consider <a href="history.html">saving a history of daily data to your own spreadsheet using a Google Apps Script function and a time-driven trigger</a> (link to guide).</p>
@@ -129,7 +120,13 @@
 						<hr class="mt-4 mb-5"/>
 						<h5 class="mb-4">Data sources (<code>source</code>)</h5>
 						<p>Although µFunds was originally designed to import data from Morningstar, now it is compatible with other information sources that potentially offer more updated or reliable data in certain cases. This is performed, as of now, via HTML parsing.</p>
+						<p>If no source is defined, then the asked information will be loaded from Morningstar in generic mode.</p>
 						<ul>
+							<li>
+								<p><b>Morningstar generic mode</b> (<code>morningstar</code>)</p>
+								<p>This source relies on Morningstar screener pages, that happen to be the easiest way to get information from an asset, regardless of the used identifier, as they work with ISINs, mutual fund tickers, ETF tickers, Morningstar IDs, etc.</p>
+								<p>Morningstar screener info is not a user-friendly interface and therefore loading times are faster. Furthermore, no country needs to be chosen and no translation from standard identifiers to Morningstar IDs is required. On the other hand, expenses data is usually not available and sometimes data is provided in a different currency of the asset's, is provided incorrectly or is not provided at all. In these cases, Morningstar country-specific mode should be used.</p>
+							</li>
 							<li>
 								<p><b>Morningstar country pages</b> (<code>morningstar-**</code>)</p>
 								<p>µFunds visits Morningstar snapshot pages and simulates the human behavior when checking for the data manually in a Morningstar website for a certain country. All attributes are up-to-date and reliable, including expense ratios, as the information is the one provided directly to Morningstar's visitors.</p>

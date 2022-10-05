@@ -70,21 +70,18 @@
 								<p>Please check that you introduced an asset identifier (string) as the second argument of the <code>muFunds</code> function.</p>
 							</li>
 							<li>
-								<p><b>Data source is required as third argument. Please see www.mufunds.com/usage.html</b></p>
-								<p>Please check that you introduced a valid data source as the third argument of the <code>muFunds</code> function. Check the <a href="usage.html">Usage and examples</a> documentation page to learn about the available options.</p>
-								<p>Note: The data source argument is required from June 24, 2022, since country-agnostic Morningstar reports from <code>quotes.morningstar.com</code> (used when no source was explicitly defined) stopped working on June 23, 2022.</p>
-							</li>
-							<li>
 								<p><b>Error: Source is not compatible. Please check the documentation for the compatibility list.</b></p>
 								<p>Please check the <a href="usage.html">Usage and examples</a> and <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the data source is compatible with µFunds. Remember that, if you want to obtain data from Google Finance, you should use the <a href="https://support.google.com/docs/answer/3093281">Google Finance function included in Google Sheets</a> instead.</p>
 							</li>
 							<li>
 								<p><b>Error: Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.</b></p>
 								<p>Please check the <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the asset is compatible with the data source you have chosen. This error is due to an exception when fetching the data page, for example a <i>Not Found</i> (404) code.</p>
+								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
 							</li>
 							<li>
 								<p><b>Error: (A certain option) is not available for this asset and source. Please try another data source.</b></p>
 								<p>Some data sources do not offer all the data options that are possible to call via µFunds. In this case, consider using an alternative data source for your same asset, as sometimes more than one source is compatible at the same time.</p>
+								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
 							</li>
 							<li>
 								<p><b>Error: Morningstar ID search failed. Try using the asset's Morningstar ID or another compatible data source.</b></p>
