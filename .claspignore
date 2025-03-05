@@ -1,2 +1,6 @@
 docs/**
 package.json
+globals.d.ts
+package-lock.json
+jsconfig.json
+node_modules/**
