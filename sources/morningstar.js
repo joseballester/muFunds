@@ -191,21 +191,10 @@ function getCategoryFromMorningstar(doc, country) {
   }
 }
 
-function fetchMorningstar(id, country) {
-  const url = getMorningstarLink(country, id);
-
-  const cacheid = !['gb', 'uk'].includes(country)
-    ? "morningstar-" + country + "-" + id
-    : null;
-
-  const doc = fetchURL(url, cacheid);
-  
-  return doc;
-}
-
 function loadFromMorningstar(option, id, country) {
   const msid = searchForMSID(id, country);
-  const doc = fetchMorningstar(msid, country);
+  const url = getMorningstarLink(country, msid);
+  const doc = fetchURL(url);
 
   if (option == "nav")
     return processNav(getNavFromMorningstar(doc, country));

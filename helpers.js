@@ -57,27 +57,12 @@ function processSource(source) {
 }
 
 /* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url, cacheid = null) {
-  const cache = CacheService.getScriptCache();
-
-  if (cacheid !== null) {
-    const cached = cache.get(cacheid);
-    if (cached !== null) {
-      return cached;
-    }
-  }
-
+function fetchURL(url) {
   const fetch = UrlFetchApp.fetch(url);
   if (fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
     const body = fetch.getContentText();
     const $ = Cheerio.load(body);
-    const trimmed = $("body").html();
-
-    if (cacheid !== null) {
-      cache.put(cacheid, trimmed, 7200);
-    }
-    
-    return trimmed;
+    return $("body").html();
   } else {
     throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.");
   }

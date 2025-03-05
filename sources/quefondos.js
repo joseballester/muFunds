@@ -1,9 +1,9 @@
 function fetchQuefondos(id) {
-  return fetchURL('https://www.quefondos.com/es/fondos/ficha/index.html?isin=' + id, "quefondos-pp-" + id);
+  return fetchURL('https://www.quefondos.com/es/fondos/ficha/index.html?isin=' + id);
 }
 
 function fetchQuefondosPP(id) {
-  return fetchURL('https://www.quefondos.com/es/planes/ficha/index.html?isin=' + id, "quefondos-pp-" + id);
+  return fetchURL('https://www.quefondos.com/es/planes/ficha/index.html?isin=' + id);
 }
 
 function getNavFromQuefondos(doc) {
