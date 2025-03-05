@@ -137,7 +137,7 @@ function getChangeFromMorningstar(doc, country) {
     const nav = getNavFromMorningstar(doc, country);
 
     const text = $("table:eq(9)").find("td:eq(8)").text();
-    var change = text.substr(text.indexOf('$')+1);
+    let change = text.substr(text.indexOf('$')+1);
     if (!isNaN(parseFloat(nav)) && isFinite(nav) && !isNaN(parseFloat(change)) && isFinite(change) && nav > 0) {
       change = parseFloat(change)/parseFloat(nav)*100;
       return change.toString();

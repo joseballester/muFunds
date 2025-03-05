@@ -37,7 +37,7 @@ function getCategoryFromQuefondos(doc) {
 
 function loadFromQuefondos(option, id) {
   // Quefondos only reports for mutual funds and pension plans
-  var doc = (isISIN(id) ? fetchQuefondos(id) : fetchQuefondosPP(id));
+  const doc = (isISIN(id) ? fetchQuefondos(id) : fetchQuefondosPP(id));
 
   if (option == "nav")
     return processNav(getNavFromQuefondos(doc));
