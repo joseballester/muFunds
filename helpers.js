@@ -60,9 +60,9 @@ function processSource(source) {
 function fetchURL(url, cacheid = null) {
   const cache = CacheService.getScriptCache();
 
-  if (cacheid != null) {
+  if (cacheid !== null) {
     const cached = cache.get(cacheid);
-    if (cached != null) {
+    if (cached !== null) {
       return cached;
     }
   }
@@ -73,7 +73,7 @@ function fetchURL(url, cacheid = null) {
     const $ = Cheerio.load(body);
     const trimmed = $("body").html();
 
-    if (cacheid != null) {
+    if (cacheid !== null) {
       cache.put(cacheid, trimmed, 7200);
     }
     

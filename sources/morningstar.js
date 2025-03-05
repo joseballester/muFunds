@@ -72,7 +72,7 @@ function searchForMSID(id, country) {
   // Checks if there is a cached version
   const cache = CacheService.getScriptCache();
   const cached = cache.get("mf-msid-" + id);
-  if (cached != null) { 
+  if (cached !== null) { 
     return cached;
   }
 

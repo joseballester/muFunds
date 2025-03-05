@@ -20,7 +20,7 @@ function muFunds(option, id, source) {
     throw new Error( "Asset identifier is empty." );
   }
 
-  if (!source || source === 'morningstar') {
+  if (source === "" || source === undefined || source === null || source === 'morningstar') {
     return loadFromMorningstarScreener(option, id);
   }
 
