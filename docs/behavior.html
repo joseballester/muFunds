@@ -10,10 +10,10 @@
 		</script>
 		<meta charset="utf-8">
 		<title>
-			How µFunds works | µFunds
+			How muFunds works | muFunds
 		</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<meta name="description" content="Learn how µFunds works to import NAVs and all your assets data directly to your Google Sheets.">
+		<meta name="description" content="Learn how muFunds works to import NAVs and all your assets data directly to your Google Sheets.">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/dataTables-bootstrap4.min.css" rel="stylesheet" type="text/css" media="all" />
@@ -22,7 +22,7 @@
 	  <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-0 bg-white border-bottom box-shadow">
 	    <h5 class="my-0 mr-md-auto font-weight-normal">
 				<a href="index.html">
-					<img src="img/logo.png" class="logo" alt=""> µFunds
+					<img src="img/logo.png" class="logo" alt=""> muFunds
 				</a>
 			</h5>
 			<a class="btn btn-outline-secondary mr-2" href="https://github.com/joseballester/muFunds">View on GitHub</a>
@@ -33,7 +33,7 @@
 			<div class="container">
 				<div class="row text-left py-4">
 					<div class="col-sm-4 my-2">
-						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
+						<h5 class="mb-3"><a href="install.html">Installing muFunds</a></h5>
 					</div>
 					<div class="col-sm-4 my-2">
 						<h5 class="mb-3"><a href="usage.html">Usage and examples</a></h5>
@@ -42,7 +42,7 @@
 						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
 					</div>
 					<div class="col-sm-4">
-						<h5 class="mb-3 active"><a href="behavior.html">How µFunds works</a></h5>
+						<h5 class="mb-3 active"><a href="behavior.html">How muFunds works</a></h5>
 					</div>
 					<div class="col-sm-4">
 						<h5 class="mb-3"><a href="troubleshooting.html">Troubleshooting</a></h5>
@@ -58,11 +58,11 @@
 			<div class="px-3 pt-5 pb-4 mx-auto text-left">
 				<div class="row text-left mb-3 mb-sm-4">
 					<div class="col-12 mb-3">
-	    			<h2 class="mb-5">How µFunds works</h2>
-						<p>In a few words, µFunds works by fetching an HTML page from the chosen data source, parsing the asked data in it and just returning it back to you. More concretely, the performed steps are the following:</p>
+	    			<h2 class="mb-5">How muFunds works</h2>
+						<p>In a few words, muFunds works by fetching an HTML page from the chosen data source, parsing the asked data in it and just returning it back to you. More concretely, the performed steps are the following:</p>
 						<ol>
 							<li>The user calls the muFunds function from a Google Sheets spreadsheet for a certain <code>option</code> (asset attribute), <code>id</code> (asset identifier) and <code>source</code> (website where fetch data from).</li>
-							<li>If <code>source</code> is explicitly given by the user, then µFunds plans to fetch a the asset detail page for that <code>id</code>. Otherwise, µFunds plans to fetch a Morningstar page in generic mode (<code>morningstar</code>).</li>
+							<li>If <code>source</code> is explicitly given by the user, then muFunds plans to fetch a the asset detail page for that <code>id</code>. Otherwise, muFunds plans to fetch a Morningstar page in generic mode (<code>morningstar</code>).</li>
 							<li>If the page is cached by Google Apps Script's cache from the last 2 hours, then no external call is performed. Otherwise, the page is fetched and saved in Google Apps Script's cache for the next 2 hours.</li>
 							<li>The asked attribute is parsed from the Morningstar page's HTML and returned.</li>
 						</ol>
@@ -81,7 +81,7 @@
 			<div class="container">
 	      <div class="row">
 	        <div class="col-12">
-	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2019 µFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">µFunds community at GitHub</a>.</small></p>
+	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2019 muFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">muFunds community at GitHub</a>.</small></p>
 	          <p><small class="d-block mb-2 text-muted"><a href="https://github.com/joseballester/muFunds">GitHub add-on repo</a> | <a href="privacy.html">Privacy policy</a></small>
 	        </div>
 	      </div>

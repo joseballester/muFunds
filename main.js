@@ -40,10 +40,10 @@ function muFunds(option, id, source) {
 
 /* ----------- Google Sheets add-on functions ----------- */
 
-// Adds "About µFunds" menu
+// Adds "About muFunds" menu
 function onOpen(e) {
   SpreadsheetApp.getUi().createAddonMenu()
-      .addItem('About µFunds', 'showAbout')
+      .addItem('About muFunds', 'showAbout')
       .addToUi();
 }
 
@@ -52,9 +52,9 @@ function onInstall(e) {
   onOpen(e);
 }
 
-// Opens "About µFunds" page
+// Opens "About muFunds" page
 function showAbout() {
   const ui = HtmlService.createHtmlOutputFromFile('about')
-      .setTitle('About µFunds');
+      .setTitle('About muFunds');
   SpreadsheetApp.getUi().showSidebar(ui);
 }

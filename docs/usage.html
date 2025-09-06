@@ -10,10 +10,10 @@
 		</script>
 		<meta charset="utf-8">
 		<title>
-			Usage and examples | µFunds
+			Usage and examples | muFunds
 		</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<meta name="description" content="Check µFunds basics here to start importing your assets data to Google Sheets in a minute.">
+		<meta name="description" content="Check muFunds basics here to start importing your assets data to Google Sheets in a minute.">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	</head>
@@ -21,7 +21,7 @@
 	  <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-0 bg-white border-bottom box-shadow">
 	    <h5 class="my-0 mr-md-auto font-weight-normal">
 				<a href="index.html">
-					<img src="img/logo.png" class="logo" alt=""> µFunds
+					<img src="img/logo.png" class="logo" alt=""> muFunds
 				</a>
 			</h5>
 			<a class="btn btn-outline-secondary mr-2" href="https://github.com/joseballester/muFunds">View on GitHub</a>
@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="row text-left py-4 mt-2">
 					<div class="col-sm-4 mb-2">
-						<h5 class="mb-3"><a href="install.html">Installing µFunds</a></h5>
+						<h5 class="mb-3"><a href="install.html">Installing muFunds</a></h5>
 					</div>
 					<div class="col-sm-4 mb-2">
 						<h5 class="mb-3 active"><a href="usage.html">Usage and examples</a></h5>
@@ -41,7 +41,7 @@
 						<h5 class="mb-3"><a href="compatibility.html">Compatibility list</a></h5>
 					</div>
 					<div class="col-sm-4">
-						<h5 class="mb-3"><a href="behavior.html">How µFunds works</a></h5>
+						<h5 class="mb-3"><a href="behavior.html">How muFunds works</a></h5>
 					</div>
 					<div class="col-sm-4">
 						<h5 class="mb-3"><a href="troubleshooting.html">Troubleshooting</a></h5>
@@ -61,7 +61,7 @@
 					</div>
 			    <div class="col-12 mb-1 mb-md-0">
 					<h5 class="mb-4">Function call</h5>
-					<p>µFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
+					<p>muFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
 					<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
 						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option; id; source)</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
 						<p>where <code>option</code> is a valid <a href="#options">returned data option</a>, <code>id</code> is an <a href="#ids">asset identifier</a> (e.g. ISIN, ticker or Morningstar ID) and <code>source</code> is an identifier for the <a href="#sources">data source</a> where you want to get the data from.</p>
@@ -84,13 +84,13 @@
 					<div class="col-12" id="ids">
 						<hr class="mt-4 mb-5"/>
 						<h5 class="mb-4">Asset identifiers (<code>id</code>)</h5>
-						<p>µFunds can track several types of assets, including mutual funds, stocks, pension plans, bonds, ETFs... that can be identified by different names or tickers at the same time, depending on the context or source.</p>
+						<p>muFunds can track several types of assets, including mutual funds, stocks, pension plans, bonds, ETFs... that can be identified by different names or tickers at the same time, depending on the context or source.</p>
 						<p>An asset identifier can be used directly, without defining it anyway. However, it is important to use a proper identifier for an asset, but especially for a given information source. For that reason, we recommend checking the <a href="compatibility.html">Compatibility list</a> of assets, sources and identifiers.</p>
 						<ul>
 							<li>
 								<p><b>ISIN</b> (International Securities Identification Number)</p>
 								<p>The ISIN is a 12-character alphanumeric code used for unique identification of a security, as a result of normalizing its assigned national identifier. Its first two characters represent the issuing country, followed by nine alpha-numeric characters (the National Securities Identifying Number or NSIN) and one numerical check digit.</p>
-								<p>Most securities (equities, debt, entitlements, derivatives...) are identified by a ISIN, which makes a standard asset identifier and the most used for identifying assets in µFunds.</p>
+								<p>Most securities (equities, debt, entitlements, derivatives...) are identified by a ISIN, which makes a standard asset identifier and the most used for identifying assets in muFunds.</p>
 							</li>
 
 							<li>
@@ -119,7 +119,7 @@
 					<div class="col-12" id="sources">
 						<hr class="mt-4 mb-5"/>
 						<h5 class="mb-4">Data sources (<code>source</code>)</h5>
-						<p>Although µFunds was originally designed to import data from Morningstar, now it is compatible with other information sources that potentially offer more updated or reliable data in certain cases. This is performed, as of now, via HTML parsing.</p>
+						<p>Although muFunds was originally designed to import data from Morningstar, now it is compatible with other information sources that potentially offer more updated or reliable data in certain cases. This is performed, as of now, via HTML parsing.</p>
 						<p>If no source is defined, then the asked information will be loaded from Morningstar in generic mode.</p>
 						<ul>
 							<li>
@@ -129,7 +129,7 @@
 							</li>
 							<li>
 								<p><b>Morningstar country pages</b> (<code>morningstar-**</code>)</p>
-								<p>µFunds visits Morningstar snapshot pages and simulates the human behavior when checking for the data manually in a Morningstar website for a certain country. All attributes are up-to-date and reliable, including expense ratios, as the information is the one provided directly to Morningstar's visitors.</p>
+								<p>muFunds visits Morningstar snapshot pages and simulates the human behavior when checking for the data manually in a Morningstar website for a certain country. All attributes are up-to-date and reliable, including expense ratios, as the information is the one provided directly to Morningstar's visitors.</p>
 								<p>The <code>**</code> represents a country code from the list below in which the given asset is available for sale. In most cases, you can just use the country you live in. For example, data for mutual funds from Luxembourg is available in most European Morningstar pages.</p>
 								<p><u>Compatible countries:</u></p>
 								<ul>
@@ -195,8 +195,8 @@
 
 		  	<div class="row text-left mb-3 mb-sm-4">
 					<div class="col-12">
-		  			<h5 class="mb-4">Examples: see µFunds in action</h5>
-		  			<p>Check out our Google Sheets spreadsheet samples that use µFunds in different scenarios: a single asset, multiple mutual funds or a combination of funds and stocks with info from Google Finance.</p>
+		  			<h5 class="mb-4">Examples: see muFunds in action</h5>
+		  			<p>Check out our Google Sheets spreadsheet samples that use muFunds in different scenarios: a single asset, multiple mutual funds or a combination of funds and stocks with info from Google Finance.</p>
 		  		</div>
 					<div class="col-12">
 				  	<div class="card-deck mt-4 text-center">
@@ -209,7 +209,7 @@
 				  					<li>One single mutual fund</li>
 				            <li>List of purchases</li>
 				            <li>Evolution of each purchase</li>
-				            <li>All data via µFunds</li>
+				            <li>All data via muFunds</li>
 				  				</ul>
 				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-danger">See example</a>
 				  			</div>
@@ -223,7 +223,7 @@
 				  					<li>Multiple mutual funds</li>
 				  					<li>Sheet of positions</li>
 				  					<li>Sheet of operations</li>
-				            <li>All data via µFunds</li>
+				            <li>All data via muFunds</li>
 				  				</ul>
 				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-primary disabled">Coming soon!</a>
 				  			</div>
@@ -237,7 +237,7 @@
 				  					<li>Mutual funds and equities</li>
 				  					<li>Positions per asset and totals</li>
 				  					<li>Operations per asset</li>
-				  					<li>Data via µFunds and GFinance</li>
+				  					<li>Data via muFunds and GFinance</li>
 				  				</ul>
 				  				<a href="https://docs.google.com/spreadsheets/d/1CKog0J7FvuMGyh-XzF9yffor8-kqMLazBOg0PAedzUM/edit?usp=sharing" class="btn btn-lg btn-block btn-success disabled">Coming soon!</a>
 				  			</div>
@@ -252,7 +252,7 @@
 			<div class="container">
 	      <div class="row">
 	        <div class="col-12">
-	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2019 µFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">µFunds community at GitHub</a>.</small></p>
+	          <p><small class="d-block mb-2 text-muted">&copy; 2017-2019 muFunds, a Google Sheets add-on developed by <a href="http://jose.ballester.me/">José Ballester</a> and the <a href="https://github.com/joseballester/muFunds/graphs/contributors">muFunds community at GitHub</a>.</small></p>
 	          <p><small class="d-block mb-2 text-muted"><a href="https://github.com/joseballester/muFunds">GitHub add-on repo</a> | <a href="privacy.html">Privacy policy</a></small>
 	        </div>
 	      </div>
