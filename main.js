@@ -37,24 +37,3 @@ function muFunds(option, id, source) {
   // If no compatible source is chosen, return error
   throw new Error( "Source is not compatible. Please check the documentation for the compatibility list" );
 }
-
-/* ----------- Google Sheets add-on functions ----------- */
-
-// Adds "About muFunds" menu
-function onOpen(e) {
-  SpreadsheetApp.getUi().createAddonMenu()
-      .addItem('About muFunds', 'showAbout')
-      .addToUi();
-}
-
-// Installation
-function onInstall(e) {
-  onOpen(e);
-}
-
-// Opens "About muFunds" page
-function showAbout() {
-  const ui = HtmlService.createHtmlOutputFromFile('about')
-      .setTitle('About muFunds');
-  SpreadsheetApp.getUi().showSidebar(ui);
-}
