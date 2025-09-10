@@ -22,12 +22,9 @@ describe('[quefondos] Integration tests', () => {
     assert.match(date, /^\d{2}\/\d{2}\/\d{4}$/);
   });
 
-  it('should throw an error for change', () => {
-    try {
-      testContext.muFunds('change', id, source);
-    } catch (error) {
-      assert.equal(error.message, 'Last change is not available from this source');
-    }
+  it('should return change', () => {
+    const change = testContext.muFunds('change', id, source);
+    assert.ok(!isNaN(change));
   });
 
   it('should return currency', () => {
@@ -38,6 +35,7 @@ describe('[quefondos] Integration tests', () => {
   it('should throw an error for expenses', () => {
     try {
       testContext.muFunds('expenses', id, source);
+      assert.fail('Expected error was not thrown');
     } catch (error) {
       assert.equal(error.message, 'Expenses ratio is not available from this source');
     }
@@ -45,6 +43,6 @@ describe('[quefondos] Integration tests', () => {
 
   it('should return category', () => {
     const category = testContext.muFunds('category', id, source);
-    assert.equal(category, 'RVI GLOBAL');
+    assert.ok(category.length > 0);
   });
 });

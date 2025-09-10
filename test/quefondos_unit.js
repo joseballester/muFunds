@@ -21,12 +21,9 @@ describe('[quefondos] Unit tests', () => {
     assert.equal(date, '08/09/2025');
   });
 
-  it('should throw an error for change', () => {
-    try {
-      testContext.muFunds('change', id, source);
-    } catch (error) {
-      assert.equal(error.message, 'Last change is not available from this source');
-    }
+  it('should return change', () => {
+    const change = testContext.muFunds('change', id, source);
+    assert.equal(change, 0.0024);
   });
 
   it('should return currency', () => {

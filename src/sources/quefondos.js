@@ -18,7 +18,8 @@ function getDateFromQuefondos(doc) {
 }
 
 function getChangeFromQuefondos(doc) {
-  throw new Error("Last change is not available from this source");
+  const $ = Cheerio.load(doc);
+  return $(".informe:eq(0)").find(".w100:eq(1)").find(".floatright:eq(3)").text();
 }
 
 function getCurrencyFromQuefondos(doc) {
