@@ -18,7 +18,7 @@ function muFunds(option, id, source) {
     throw new Error('Asset identifier is empty.');
   }
 
-  if (source === "" || source === undefined || source === null || source === 'morningstar') {
+  if (source === "" || source === undefined || source === null || /^morningstar(-(au|es|de|ie|fr|za|at|be|dk|fi|gb|uk|ch|is|it|pt|no|nl))?$/.test(source)) {
     return loadFromMorningstar(option, id);
   }
 
