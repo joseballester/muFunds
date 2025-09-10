@@ -1,4 +1,5 @@
 .clasp.json
 .clasprc.json
+.vscode/
 test.js
 node_modules/
