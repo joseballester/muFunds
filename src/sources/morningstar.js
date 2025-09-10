@@ -72,9 +72,9 @@ function loadFromMorningstar(option, id, attempts = 0) {
 
       'FOGBR$$ALL', // UK funds
       'ETEXG$XLON', // UK ETFs
-      // 'CEEXG$XLON', // UK investment trusts
-      // 'SAGBR$$LSA', // UK pension funds 1
-      // 'SAGBR$$PSA', // UK pension funds 2
+      'CEEXG$XLON', // UK investment trusts
+      'SAGBR$$LSA', // UK pension funds 1
+      'SAGBR$$PSA', // UK pension funds 2
 
       'FOIND$$ALL', // India funds
       'FCIND$$ALL', // India close-ended funds
