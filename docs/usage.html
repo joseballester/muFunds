@@ -127,68 +127,9 @@
 						<p>If no source is defined, then the asked information will be loaded from Morningstar in generic mode.</p>
 						<ul>
 							<li>
-								<p><b>Morningstar generic mode</b> (<code>morningstar</code>)</p>
+								<p>Morningstar (<code>morningstar</code>)</p>
 								<p>This source relies on Morningstar screener pages, that happen to be the easiest way to get information from an asset, regardless of the used identifier, as they work with ISINs, mutual fund tickers, ETF tickers, Morningstar IDs, etc.</p>
-								<p>Morningstar screener info is not a user-friendly interface and therefore loading times are faster. Furthermore, no country needs to be chosen and no translation from standard identifiers to Morningstar IDs is required. On the other hand, expenses data is usually not available and sometimes data is provided in a different currency of the asset's, is provided incorrectly or is not provided at all. In these cases, Morningstar country-specific mode should be used.</p>
-							</li>
-							<li>
-								<p><b>Morningstar country pages</b> (<code>morningstar-**</code>)</p>
-								<p>muFunds visits Morningstar snapshot pages and simulates the human behavior when checking for the data manually in a Morningstar website for a certain country. All attributes are up-to-date and reliable, including expense ratios, as the information is the one provided directly to Morningstar's visitors.</p>
-								<p>The <code>**</code> represents a country code from the list below in which the given asset is available for sale. In most cases, you can just use the country you live in. For example, data for mutual funds from Luxembourg is available in most European Morningstar pages.</p>
-								<p><u>Compatible countries:</u></p>
-								<ul>
-									<li>
-										Australia (<code>morningstar-au</code>)
-									</li>
-									<li>
-										Austria (<code>morningstar-at</code>)
-									</li>
-									<li>
-										Belgium (<code>morningstar-be</code>)
-									</li>
-									<li>
-										Denmark (<code>morningstar-dk</code>)
-									</li>
-									<li>
-										Finland (<code>morningstar-fi</code>)
-									</li>
-									<li>
-										France (<code>morningstar-fr</code>)
-									</li>
-									<li>
-										Germany (<code>morningstar-de</code>)
-									</li>
-									<li>
-										Iceland (<code>morningstar-is</code>)
-									</li>
-									<li>
-										Ireland (<code>morningstar-ie</code>)
-									</li>
-									<li>
-										Italy (<code>morningstar-it</code>)
-									</li>
-									<li>
-										Norway (<code>morningstar-no</code>)
-									</li>
-									<li>
-										Netherlands (<code>morningstar-nl</code>)
-									</li>
-									<li>
-										Portugal (<code>morningstar-pt</code>)
-									</li>
-									<li>
-										South Africa (<code>morningstar-za</code>)
-									</li>
-									<li>
-										Spain (<code>morningstar-es</code>)
-									</li>
-									<li>
-										Switzerland (<code>morningstar-ch</code>)
-									</li>
-									<li>
-										United Kingdom (<code>morningstar-uk</code> or <code>morningstar-gb</code>)
-									</li>
-								</ul>
+								<p>Morningstar screener info is not a user-friendly interface and therefore loading times are faster. Furthermore, no country needs to be chosen and no translation from standard identifiers to Morningstar IDs is required. On the other hand, expenses data is usually not available and sometimes data is provided in a different currency of the asset's, is provided incorrectly or is not provided at all.</p>
 							</li>
 							<li>QueFondos.com (<code>quefondos</code>)</li>
 						</ul>

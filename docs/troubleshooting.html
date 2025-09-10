@@ -76,22 +76,10 @@
 							<li>
 								<p><b>Error: Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.</b></p>
 								<p>Please check the <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the asset is compatible with the data source you have chosen. This error is due to an exception when fetching the data page, for example a <i>Not Found</i> (404) code.</p>
-								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
 							</li>
 							<li>
 								<p><b>Error: (A certain option) is not available for this asset and source. Please try another data source.</b></p>
 								<p>Some data sources do not offer all the data options that are possible to call via muFunds. In this case, consider using an alternative data source for your same asset, as sometimes more than one source is compatible at the same time.</p>
-								<p>If you were using a generic Morningstar (<code>morningstar</code>) call, consider using a country-specific page (<code>morningstar-**</code>).</p>
-							</li>
-							<li>
-								<p><b>Error: Morningstar ID search failed. Try using the asset's Morningstar ID or another compatible data source.</b></p>
-								<p>If you are using a Morningstar country-specific page (<code>morningstar-**</code>) but introduced a standard asset identifier (e.g. ISIN) as <code>id</code>, an automatic search of the asset's Morningstar ID has to be done. The error means this search has failed.</p>
-								<p>To solve it, try to manually find the asset's Morningstar ID by searching the asset at Morningstar and extracting the ID from the URL (parameter <code>id</code> or <code>key</code>) and using it as the <code>id</code> argument for the <code>muFunds</code> function.</p>
-								<p>Another possiblility is that the asset is not available in that Morningstar country. In that case, try another country-specific Morningstar page or another data source.</p>
-							</li>
-							<li>
-								<p><b>Error: This asset is not compatible with this Morningstar country. Try another country or data source.</b></p>
-								<p>If you are using a Morningstar country-specific page (<code>morningstar-**</code>), please double check that the introduced asset is available for sale in that country. Otherwise, try calling another Morningstar country page or another data source different than Morningstar.</p>
 							</li>
 						</ul>
 					</div>
