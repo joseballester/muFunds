@@ -63,13 +63,133 @@
 							<b>Important:</b> As of September 8, 2025, muFunds is now published in <a href="https://workspace.google.com/marketplace/app/mufunds/1097038663644">this listing of the Google Workspace Marketplace</a>. Please install muFunds and <a href="install.html#enable"><u>enable it in your spreadsheet</u></a> again from there to keep using it. The previous version has been removed because it was not possible to push new versions or install for new users.
 						</div>
 					</div>
-			    <div class="col-12 mb-1 mb-md-0">
-					<h5 class="mb-4">Function call</h5>
-					<p>muFunds makes you able to use the <code>muFunds</code> function in any cell within your spreadsheet. This function will return the asked value based on three arguments, so you can call it as</p>
-					<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option, id, source)</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
-						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds(option; id; source)</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
-						<p>where <code>option</code> is a valid <a href="#options">returned data option</a>, <code>id</code> is an <a href="#ids">asset identifier</a> (e.g. ISIN, ticker or Morningstar ID) and <code>source</code> is an identifier for the <a href="#sources">data source</a> where you want to get the data from.</p>
+			    
+					<div class="col-12 mb-1 mb-md-0">
+						<h5 class="mb-4">Function call</h5>
+
+						<p>Use the <code>muFunds</code> function to load investment fund data in your spreadsheets.</p>
+
+						<p>For example, you can retrieve the current price (or <abbr title="Net Asset Value">NAV</abbr>) of the <a href="https://global.morningstar.com/en-gb/investments/funds/0P00000WLG/quote">Vanguard Global Stock Index Eur Acc</a> UCITS mutual fund (with ISIN IE00B03HD191) from Morningstar (muFunds' default data source) with:</p>
+
+						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds("nav", "IE00B03HD191")</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
+
+						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds("nav"; "IE00B03HD191")</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
+
+						<p>You can replace the first argument (<code>option</code>) with any of the <a href="#options">returned data options</a> and the second (<code>id</code>) with any of the <a href="#ids">accepted identifiers</a> (e.g. ISIN, ticker or Morningstar ID) of your financial asset.</p>
+
+						<p>You can also add a third optional argument (<code>source</code>) to choose a specific <a href="#sources">data source</a> different from Morningstar.</p>
+
+						<p><a href="#examples">Check out the example formulas below</a> to understand the possible combinations of <code>option</code>, <code>id</code> and <code>source</code>.</p>
+
 						<p>This function call will return the latest information available from the chosen source. Most of these sources don't offer historical values, which makes comparisons and backtesting difficult. If interested, you can consider <a href="history.html">saving a history of daily data to your own spreadsheet using a Google Apps Script function and a time-driven trigger</a> (link to guide).</p>
+					</div>
+					<div class="col-12">
+						<hr class="mt-4 mb-5"/>
+			    		<h5 class="mb-4" id="examples">Example formulas</h5>
+						<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th class="th-sm" style="width:20%;">Asset type</th>
+									<th class="th-sm" style="width:15%;">Data source</th>
+									<th class="th-sm" style="width:20%;">Asset identifier</th>
+									<th class="th-sm" style="width:45%;">Example for NAV</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="3">UCITS mutual fund</td>
+									<td rowspan="2">Morningstar</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "IE00B03HD191")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "F0GBR052TN")</code></td>
+								</tr>
+								<tr>
+									<td>QueFondos</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "IE00B03HD191", "quefondos")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="2">UK mutual fund</td>
+									<td rowspan="2">Morningstar</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "GB00B7QK1Y37")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "F00000OJRV")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="2">UK pension fund</td>
+									<td rowspan="2">Morningstar</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "GB00B2PGGQ45")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "VAUSA06JG4")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="3">Spanish pension plan</td>
+									<td rowspan="2">Morningstar</td>
+									<td>DGS code</td>
+									<td><code>=muFunds("nav", "N5396")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "F000016CB6")</code></td>
+								</tr>
+								<tr>
+									<td>QueFondos</td>
+									<td>DGS code</td>
+									<td><code>=muFunds("nav", "N5396", "quefondos")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="2">Canadian mutual fund</td>
+									<td rowspan="2">Morningstar</td>
+									<td>Fund code</td>
+									<td><code>=muFunds("nav", "N5396")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "F000016CB6")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="3">Australian mutual fund</td>
+									<td rowspan="3">Morningstar</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "AU60MMF15632")</code></td>
+								</tr>
+								<tr>
+									<td>APIR</td>
+									<td><code>=muFunds("nav", "MMF1563AU")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "F00000LKY3")</code></td>
+								</tr>
+								<tr>
+									<td rowspan="4">US mutual fund</td>
+									<td rowspan="4">Morningstar</td>
+									<td>ISIN</td>
+									<td><code>=muFunds("nav", "US9229087104")</code></td>
+								</tr>
+								<tr>
+									<td>Ticker</td>
+									<td><code>=muFunds("nav", "VFIAX")</code></td>
+								</tr>
+								<tr>
+									<td>CUSIP</td>
+									<td><code>=muFunds("nav", "922908710")</code></td>
+								</tr>
+								<tr>
+									<td>Morningstar ID</td>
+									<td><code>=muFunds("nav", "FOUSA00L8W")</code></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 					<div class="col-12" id="options">
 						<hr class="mt-4 mb-5"/>
