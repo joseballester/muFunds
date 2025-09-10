@@ -19,7 +19,7 @@ function muFunds(option, id, source) {
   }
 
   if (source === "" || source === undefined || source === null || source === 'morningstar') {
-    return loadFromMorningstarScreener(option, id);
+    return loadFromMorningstar(option, id);
   }
 
   if (source == "quefondos") {

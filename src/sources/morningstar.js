@@ -1,4 +1,4 @@
-function loadFromMorningstarScreener(option, id, attempts = 0) {
+function loadFromMorningstar(option, id, attempts = 0) {
   const cache = CacheService.getScriptCache();
 
   let url = 'https://lt.morningstar.com/api/rest.svc/klr5zyak8x/security/screener';
@@ -173,7 +173,7 @@ function loadFromMorningstarScreener(option, id, attempts = 0) {
 
     Utilities.sleep(1000);
 
-    return loadFromMorningstarScreener(option, id, attempts+1);
+    return loadFromMorningstar(option, id, attempts+1);
   }
 
   const json = JSON.parse(fetch.getContentText());
