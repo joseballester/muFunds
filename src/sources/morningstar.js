@@ -6,7 +6,7 @@ function loadFromMorningstar(option, id, attempts = 0) {
   const params = {
     outputType: 'json',
     page: 1,
-    pageSize: 1,
+    pageSize: 10,
     securityDataPoints: [
       'CategoryName',
       'ClosePrice',
@@ -17,6 +17,19 @@ function loadFromMorningstar(option, id, attempts = 0) {
       'GBRReturnD1',
       'SecId',
       'Universe',
+      'Isin',
+      'IsinMkt',
+      'IsinMic',
+      'TenforeId',
+      'Valoren',  // Swiss financial instruments identifier
+      'Wkn',      // German financial instruments identifier
+      'Sedol',    // European Stock Exchange Daily Official List (SEDOL) number
+      'Mex',      // Financial Times code for investment funds
+      'DgsCode',  // Spain Dirección General de Seguros code for pension plans
+      'Ticker',   // Stock ticker
+      'Apir',     // Australia fund code
+      'Custom',
+      'CustomInstitutionSecurityId',
     ],
     term: id,
     universeIds: [
@@ -151,7 +164,6 @@ function loadFromMorningstar(option, id, attempts = 0) {
     return url;
   }
 
-  // const fetch = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
   const fetch = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
 
   if (fetch.getResponseCode() == 403) {
@@ -178,17 +190,22 @@ function loadFromMorningstar(option, id, attempts = 0) {
 
   const json = JSON.parse(fetch.getContentText());
 
-  if (json.total < 1) {
+  const row = json.rows.length === 1 ? json.rows[0] : json.rows.find(row => {
+      return row.SecId === id || row.Isin === id || row.Valoren === id || row.Wkn === id || row.Sedol === id 
+        || row.Mex === id || row.DgsCode === id || row.Ticker === id || row.Apir === id;
+    });
+
+  if (!row) {
     throw new Error('Search failed. Please use a valid unique identifier for the asset.');
   }
 
   const values = {
-    nav: json.rows[0].ClosePrice ?? '-',
-    change: json.rows[0].GBRReturnD1 ? json.rows[0].GBRReturnD1 / 100 : '-',
-    date: json.rows[0].ClosePriceDate ?? '-',
-    currency: json.rows[0].PriceCurrency ?? '-',
-    expenses: json.rows[0].ExpenseRatio ? json.rows[0].ExpenseRatio / 100 : '-',
-    category: json.rows[0].CategoryName ?? '-',
+    nav: row.ClosePrice ?? '-',
+    change: row.GBRReturnD1 ? row.GBRReturnD1 / 100 : '-',
+    date: row.ClosePriceDate ?? '-',
+    currency: row.PriceCurrency ?? '-',
+    expenses: row.ExpenseRatio ? row.ExpenseRatio / 100 : '-',
+    category: row.CategoryName ?? '-',
   }
   
   cache.put(`mslt-nav-${id}`, values.nav, 12 * 60 * 60);
