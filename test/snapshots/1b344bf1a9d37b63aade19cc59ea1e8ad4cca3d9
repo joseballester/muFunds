@@ -1,0 +1,1596 @@
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="es-ES">
+	<head>
+		<title>MYINVESTOR INDEXADO GLOBAL (N5396) · MERCHBANC - Informe del plan de pensiones: Detalle</title>
+		
+
+		<meta name="keywords" content="Plan de pensiones, Ficha, Informe, MYINVESTOR INDEXADO GLOBAL, Código DGS, N5396, Gestora, MERCHBANC, Política de inversión, Valor liquidativo, Rentabilidad, Ranking, Riesgo, Rating VDOS, Comisiones, Gráfico, Evolución, Histórico" >
+		<meta name="description" content="Consulta el informe de MYINVESTOR INDEXADO GLOBAL (Código DGS: N5396) Valor liquidativo,
+rentabilidad, ranking, rating VDOS, riesgo, gráfico histórico, política de inversión, comisiones y
+otros datos de este plan de pensiones gestionado por MERCHBANC en comparación con su categoría VDOS:
+RVI GLOBAL" >
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+		
+
+		<link rel="shortcut icon" href="/opencms/export/system/modules/com.vdos.site.templates/recursos/img/favicon.ico" type="image/x-icon" />
+
+		
+			<link rel="alternate" media="only screen and (max-width: 640px)" href="/m/es/planes/ficha/index.html?isin=N5396" >
+		
+
+		
+		
+			<link rel="next" href="http://www.quefondos.com/es/planes/ficha/legal.html?isin=N5396"/>
+		
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+	
+	
+		
+			
+			
+			
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/custom/jquery-ui-1.8.6.custom.css" rel="stylesheet" type="text/css"/>
+					
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/central.css" rel="stylesheet" type="text/css"/>
+					
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/custom/jquery.alerts.css" rel="stylesheet" type="text/css"/>
+					
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/plot/jquery.jqplot.css" rel="stylesheet" type="text/css"/>
+					
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/slider/jquery.ui.slider.css" rel="stylesheet" type="text/css"/>
+					
+				
+					
+					
+			<link href="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/cookieconsent.css" rel="stylesheet" type="text/css"/>
+					
+				
+			
+
+			<script type="module" src="/system/modules/com.vdos.site.qf.templates/resources/js/cookieconsent-config.js"></script>
+			
+			
+			
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.templates/recursos/js/jquery-1.4.3.min.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.templates/recursos/js/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.templates/recursos/js/web_common.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jquery.alerts.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jquery.jqplot.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/excanvas.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jqplot.cursor.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jqplot.dateAxisRenderer.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jqplot.highlighter.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jqplot.logAxisRenderer.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/infofiucaract-lib.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/qf-common-lib.js" type="text/javascript"></script>
+					
+				
+					
+					
+			<script src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/js/jquery.ui.slider.js" type="text/javascript"></script>
+					
+				
+			
+
+			<script type="text/javascript">
+				var ff35 = new Array();
+				var ie7 = new Array();
+				var ie8 = new Array();
+				var ie9 = new Array();
+
+				
+
+				
+					
+						
+						
+							ie7.push("/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/ie7-hacks.css");
+						
+					
+				
+
+				
+					
+						
+						
+							ie8.push("/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/ie8-hacks.css");
+						
+					
+				
+
+				
+					
+						
+						
+							ie9.push("/opencms/export/system/modules/com.vdos.site.qf.templates/resources/css/ie9-hacks.css");
+						
+					
+				
+
+				function loadcss(){
+					var x;
+					if ((BrowserDetect.browser == "Firefox" && BrowserDetect.version<="3.5") || (BrowserDetect.browser == "Mozilla" && BrowserDetect.version<="3.5"))
+						for (x in ff35) {
+							appendstylesheet(ff35[x]);
+						}
+				 	else if (BrowserDetect.browser == "Explorer" && BrowserDetect.version=="7")
+				 		for (x in ie7) {
+							appendstylesheet(ie7[x]);
+						}
+					else if (BrowserDetect.browser == "Explorer" && BrowserDetect.version=="8")
+						for (x in ie8) {
+							appendstylesheet(ie8[x]);
+						}
+					else if (BrowserDetect.browser == "Explorer" && BrowserDetect.version=="9")
+						for (x in ie9) {
+							appendstylesheet(ie9[x]);
+						}
+				}
+				loadcss();
+
+			</script>
+			<script type="text/javascript">
+				var $mcGoal = {'settings':{'uuid':'e7db15bc5c3386511ab115e74','dc':'us1'}};
+					(function() {
+						var sp = document.createElement('script'); sp.type = 'text/javascript'; sp.async = true; sp.defer = true;
+						sp.src = ('https:' == document.location.protocol ? 'https://s3.amazonaws.com/downloads.mailchimp.com' : 'http://downloads.mailchimp.com') + '/js/goal.min.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sp, s);
+					})();
+			</script>
+
+			
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async type="text/plain" data-category="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-C37K8VSLPT"></script>
+<script type="text/plain" data-category="analytics">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-C37K8VSLPT');
+</script>
+<!-- End Google Analytics -->
+
+			
+			
+			
+				
+				
+					
+						
+
+
+
+
+
+
+
+
+	
+	
+		
+			<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+ 
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/36330543/baner_fondos', [728, 90], 'div-gpt-ad-1415292616032-0').addService(googletag.pubads());
+googletag.defineSlot('/36330543/baner_planes', [728, 90], 'div-gpt-ad-1415292616032-1').addService(googletag.pubads());
+googletag.defineSlot('/36330543/boton_fondos', [240, 90], 'div-gpt-ad-1415292616032-2').addService(googletag.pubads());
+googletag.defineSlot('/36330543/boton_home', [240, 90], 'div-gpt-ad-1415292616032-3').addService(googletag.pubads());
+googletag.defineSlot('/36330543/boton_planes', [240, 90], 'div-gpt-ad-1415292616032-4').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_inferior_fondos', [980, 90], 'div-gpt-ad-1415292616032-5').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_inferior_home', [980, 90], 'div-gpt-ad-1415292616032-6').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_inferior_planes', [980, 90], 'div-gpt-ad-1415292616032-7').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_superior_fondos', [980, 90], 'div-gpt-ad-1415292616032-8').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_superior_home', [980, 90], 'div-gpt-ad-1415292616032-9').addService(googletag.pubads());
+googletag.defineSlot('/36330543/megabanner_superior_planes', [980, 90], 'div-gpt-ad-1415292616032-10').addService(googletag.pubads());
+googletag.defineSlot('/36330543/patrocinio_fondos_home', [300, 90], 'div-gpt-ad-1415292616032-11').addService(googletag.pubads());
+googletag.defineSlot('/36330543/patrocinio_fondos_herramientas', [468, 60], 'div-gpt-ad-1415292616032-12').addService(googletag.pubads());
+googletag.defineSlot('/36330543/patrocinio_planes_herramientas', [468, 60], 'div-gpt-ad-1415292616032-13').addService(googletag.pubads());
+googletag.defineSlot('/36330543/patrocinio_planes_home', [300, 90], 'div-gpt-ad-1415292616032-14').addService(googletag.pubads());
+googletag.defineSlot('/36330543/robapaginas_fondos', [300, 250], 'div-gpt-ad-1415292616032-15').addService(googletag.pubads());
+googletag.defineSlot('/36330543/robapaginas_planes', [300, 250], 'div-gpt-ad-1415292616032-16').addService(googletag.pubads());
+googletag.defineSlot('/36330543/robapaginas_vertical_fondos', [300, 250], 'div-gpt-ad-1415292616032-17').addService(googletag.pubads());
+googletag.defineSlot('/36330543/robapaginas_vertical_planes', [300, 250], 'div-gpt-ad-1415292616032-18').addService(googletag.pubads());
+googletag.defineSlot('/36330543/robapaginas_home', [300, 250], 'div-gpt-ad-1415292616032-19').addService(googletag.pubads());
+googletag.defineSlot('/36330543/simon-prueba-rsa', [980, 90], 'div-gpt-ad-1415292616032-20').addService(googletag.pubads());
+googletag.defineSlot('/36330543/skycraper_fondos', [160, 300], 'div-gpt-ad-1415292616032-21').addService(googletag.pubads());
+googletag.defineSlot('/36330543/skycraper_planes', [160, 300], 'div-gpt-ad-1415292616032-22').addService(googletag.pubads());
+googletag.enableServices();
+});
+</script>
+		
+	
+
+
+					
+				
+			
+			
+	</head>
+	<body>
+		
+		<div id="page_margins">
+
+			
+			
+				
+				
+				
+					<div class="wrapper_megabanner_sup">
+						
+						
+							
+								
+
+
+
+
+
+
+
+
+	
+	
+		
+			<!-- Megabanner_Superior_Planes -->
+<div id='div-gpt-ad-1415292616032-10' style='width:980px; height:90px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1415292616032-10'); });
+</script>
+</div>
+		
+	
+
+
+							
+						
+					</div>
+				
+				
+			
+
+			
+			<div id="page">
+				
+		    	<div id="header">
+		    		<h1>MYINVESTOR INDEXADO GLOBAL (N5396) · MERCHBANC - Informe del plan de pensiones: Detalle</h1>
+					
+	  				<div id="topnav">
+						<a class="skip" title="skip link" href="#navigation">Ir a la navegación</a><span class="hideme">.</span>
+						<a class="skip" title="skip link" href="#main">Ir al contenido</a><span class="hideme">.</span>
+	  					
+	  				</div>
+	  				
+				</div>
+				
+
+				
+				<div id="nav">
+		    		
+						
+						
+							<a id="navigation" name="navigation"></a>
+							<div id="nav_main">
+								
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="topnav_content">
+		<a href="http://www.vdos.com/es/soluciones.html" target="_blank">Acceso a quefondos Servicios Institucionales</a>
+		<a href="/es/suscripcion.html" title="Suscríbete a quefondos" class="newsletter">Suscríbete a quefondos</a>
+	</div>
+
+
+<div class="nav_wrapper">
+	<a href="/" class="logo_coorporativo">
+		<img alt="Logo quefondos.com" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/bg_logo_sup.png"/>
+	</a>
+	<script type="text/javascript">
+	//<![CDATA[
+		$(document).ready(function(){
+
+			$(function() {
+
+				function showHideMenu(divToShow,divToHide) {
+					// Efecto seleccionado para mostrar menu
+					var selectedEffect = 'drop';
+					var options = {};
+					//Ocultamos el menu contrario al que queremos mostrar en el caso de que estuviese visible
+					$(divToHide).hide();
+					//Mostramos u ocultamos el menu seleccionado dependiendo del estado del mismo
+					$(divToShow).toggle( selectedEffect, options, 500 );
+				}
+
+				function addRemoveClass(imgClassToAdd,imgClassToRemove,itemParent) {
+
+					$(imgClassToRemove).removeClass();
+
+					var opc_currentClass = $(itemParent).attr('class');
+					var img_currentClass = $(imgClassToAdd).attr('class');
+
+					if ( img_currentClass == "menu_active" || img_currentClass == "menu_current_active")
+						$(imgClassToAdd).removeClass();
+					else
+						if (opc_currentClass != "current")
+							$(imgClassToAdd).addClass("menu_active");
+						else
+							$(imgClassToAdd).addClass("menu_current_active");
+				}
+
+				$( "#button_fondos" ).click(function() {
+					addRemoveClass("#img_menu_fondos","#img_menu_planes","#opc_fondos")
+					showHideMenu(".menu_fondos",".menu_planes");
+					return false;
+				});
+
+				$( "#button_planes" ).click(function() {
+					addRemoveClass("#img_menu_planes","#img_menu_fondos","#opc_planes");
+					showHideMenu(".menu_planes",".menu_fondos");
+					return false;
+				});
+			});
+		});
+	//]]>
+	</script>
+	
+
+	<ul class="menu_principal">
+		
+		
+			
+			
+				
+					
+					
+
+					<li id="opc_fondos">
+
+						<a href="/es/fondos/">Fondos de Inversión</a>
+
+						<a href="#" id="button_fondos">
+							<img id="img_menu_fondos" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png" alt="submenu_fondos"/>
+						</a>
+
+
+						<ul class="menu_fondos">
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="buscador" href="/es/fondos/buscador/">Buscador</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="comparador" href="/es/fondos/comparador/">Comparador</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="ranking" href="/es/fondos/ranking/">Ranking</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="analisis" href="/es/fondos/analisis/">Análisis</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="noticias" href="/es/fondos/noticias/">Noticias</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="rincon" href="/es/fondos/rincon/">Rincón del inversor</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="recursos" href="/es/fondos/recursos/">Recursos</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+						</ul>
+
+					</li>
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+					
+					
+
+					<li id="opc_planes" class="current">
+
+						<a href="/es/planes/">Planes de Pensiones</a>
+
+						<a href="#" id="button_planes">
+							<img id="img_menu_planes" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png" alt="submenu_planes"/>
+						</a>
+
+
+						<ul class="menu_planes">
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="buscador" href="/es/planes/buscador/">Buscador</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="comparador" href="/es/planes/comparador/">Comparador</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="ranking" href="/es/planes/ranking/">Ranking</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="analisis" href="/es/planes/analisis/">Análisis</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="noticias" href="/es/planes/noticias/">Noticias</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="rincon" href="/es/planes/rincon/">Rincón del inversor</a>
+										</li>
+
+								
+
+							
+
+								
+
+								
+
+										<li>
+											<a class="recursos" href="/es/planes/recursos/">Recursos</a>
+										</li>
+
+								
+
+							
+
+						</ul>
+
+					</li>
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+			
+			
+				
+			
+		
+	</ul>
+</div>
+</div>
+
+							</div>
+						
+					
+				</div>
+				
+
+				
+				
+				
+					
+					
+					
+						
+						
+						
+				
+						
+					
+				
+				
+
+				
+				
+					
+				
+				
+					
+				<div id="main">
+					
+					<div id="col1">
+						<div id="col1_content" class="clearfix">
+							
+
+
+
+
+
+
+<div id="nav_left">
+	<ul>
+		<li class="current"><a href="/es/planes/">Planes de Pensiones</a>
+
+			<ul>
+				
+				
+					
+
+					
+						
+						
+						
+						
+					
+
+					<li >
+
+						<a href="/es/planes/buscador/">
+							
+								<img class="buscador" title="Buscador" alt="Buscador" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Buscador</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/comparador/">
+							
+								<img class="comparador" title="Comparador" alt="Comparador" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Comparador</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/ranking/">
+							
+								<img class="ranking" title="Ranking" alt="Ranking" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Ranking</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/analisis/">
+							
+								<img class="analisis" title="Análisis" alt="Análisis" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Análisis</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/noticias/">
+							
+								<img class="noticias" title="Noticias" alt="Noticias" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Noticias</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/rincon/">
+							
+								<img class="rincon" title="Rincón del inversor" alt="Rincón del inversor" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Rincón del inversor</span>
+						</a>
+
+					
+				
+					
+
+					
+						
+						
+						</li>
+						
+					
+
+					<li >
+
+						<a href="/es/planes/recursos/">
+							
+								<img class="recursos" title="Recursos" alt="Recursos" src="/opencms/export/system/modules/com.vdos.site.qf.templates/resources/img/clear.png"/>
+							
+                      		<span>Recursos</span>
+						</a>
+
+					
+				
+
+				
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+
+
+
+	
+	
+	
+		<div class="wrapper_skycrapper">
+			
+			
+				
+					
+
+
+
+
+
+
+
+
+	
+	
+		
+			<!-- Skycrapper_Planes -->
+<div id='div-gpt-ad-1415292616032-22' style='width:160px; height:300px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1415292616032-22'); });
+</script>
+</div>
+		
+	
+
+
+				
+			
+		</div>
+	
+	
+
+
+
+						</div>
+					</div>
+					
+
+					
+					<div id="col3">
+						
+						
+	  						
+	  						
+	  				
+
+
+
+
+
+
+
+
+
+
+
+<div id="breadcrumbs">
+	<ol>
+		
+			
+		
+			
+				
+					
+						<li>
+							<span class="crumb">
+								<a href="/es/planes/">Planes de Pensiones</a>
+							</span>
+						</li>
+					
+					
+				
+			
+		
+			
+				
+					
+					
+						
+  							
+  								<li>
+									<span class="crumb">
+										<a href="/es/planes/ficha/index.html?isin=N5396">Ficha de plan</a>
+									</span>
+								</li>
+  							
+  							
+						
+					
+				
+			
+		
+	</ol>
+</div>
+
+	  						
+						
+						
+					<div id="col3_content" class="clearfix">
+					
+						<a id="content" name="content"></a>
+					
+					
+				
+			
+		
+		
+	
+
+
+
+
+
+
+
+
+	
+	
+		
+	
+	
+		
+			
+			
+				
+				
+					<h2>Informe del plan de pensiones</h2>
+				
+
+			
+				
+				
+			
+
+			<script type="text/javascript" xmlns="http://www.w3.org/1999/xhtml">
+			function submitRentEvolForm(f) {
+				f.submit();
+			}
+			function resetRentEvolForm() {
+				document.getElementById('nrefg').checked=false;
+				document.getElementById('diffm').options[7].selected=true;
+			}
+		</script><div class="informe">
+    <h2>MYINVESTOR INDEXADO GLOBAL</h2>
+    <div class="common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <p>
+            <span class="floatleft">Gestora:</span><span class="floatright">MERCHBANC</span><span class="mfloatright">ANDBANK</span>
+        </p>
+        <p>
+            <span class="floatleft">Categor&iacute;a VDOS:</span><span class="floatright">RVI GLOBAL</span><span class="mfloatright">RENTA VARIABLE</span>
+        </p>
+        <p>
+            <span class="floatleft">Rating VDOS:</span><span class="floatright"><sub class="print star">***</sub><img class="star_r3" title="Rating VDOS: 3 estrellas" alt="Rating VDOS: 3 estrellas" src="/resources/qf/img/clear.png"></span>
+        </p>
+        <p>
+            <span class="floatleft ">Rango de volatilidad:</span><span class="floatright"><span class="print">5</span><img class="nriesgom_r5" src="/resources/qf/img/clear.png" alt="Mayor 10%" title="Mayor 10%"></span>
+        </p>
+    </div>
+    <ul class="rad">
+        <li title="Rentabilidad en el a&ntilde;o">
+            <span class="label">% 2025</span><span class="rent"><span class="mas">1,14%</span></span>
+        </li>
+        <li title="Ranking">
+            <span class="label">Ranking</span><span class="ranking">49/81</span>
+        </li>
+        <li title="Fecha">
+            <span class="label">Fecha</span><span class="fecha">05/09/2025</span>
+        </li>
+    </ul>
+    <div class="solapas">
+        <h3>Detalle del plan</h3>
+        <ul class="flaps2">
+            <li id="detalle_flap" class="current">
+                <span>Detalle</span>
+            </li>
+            <li id="doc_flap">
+                <a href="legal.html?isin=N5396" title="Informaci&oacute;n legal"><span>Informaci&oacute;n legal</span></a>
+            </li>
+            <li id="back_flap"></li>
+            <li id="help_flap" class="help">
+                <a class="ayuda" href="javascript:popup('ayuda_ficha.html','help')" title=""><img title="" alt="" src="/resources/qf/img/clear.png"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="w100" style="margin-top: -30px;">
+        <h4 id="bodytitle_h3_1">Pol&iacute;tica de inversi&oacute;n</h4>
+        <p class="coment">El objetivo de gesti&oacute;n del Fondo de Pensiones es obtener, con una vocaci&oacute;n de renta variable y de acuerdo con la pol&iacute;tica de inversi&oacute;n establecida la m&aacute;xima rentabilidad a medio plazo. La pol&iacute;tica de inversiones busca el crecimiento en euros del valor de la participaci&oacute;n a medio plazo a trav&eacute;s de la inversi&oacute;n en los diferentes instrumentos financieros permitidos por la normativa vigente y mercados mundiales. Invierte, de forma directa o indirecta a trav&eacute;s de IICs, en renta variable y en renta fija de cualquier mercado mundial, mayoritariamente de la OCDE. Asimismo, puede invertir en los mercados financieros de opciones y futuros. El porcentaje de inversi&oacute;n en renta variable tender&aacute; a estar por encima del 75% del patrimonio de fondo, pudiendo alcanzar el 100%. Se podr&aacute; invertir en pa&iacute;ses emergentes. La exposici&oacute;n al riesgo de divisa puede alcanzar el 100% de la exposici&oacute;n total.</p>
+    </div>
+    <div class="w100">
+        <h4 id="bodytitle_h3_2">&Uacute;ltima valoraci&oacute;n</h4>
+        <p>
+            <span class="floatleft">Valor liquidativo: </span><span class="floatright">16,236230 EUR</span>
+        </p>
+        <p>
+            <span class="floatleft">Patrimonio (miles de euros):</span><span class="floatright">81.390,56</span>
+        </p>
+        <p>
+            <span class="floatleft">Fecha: </span><span class="floatright">05/09/2025</span>
+        </p>
+    </div>
+    <div class="w100 evolucion">
+        <h4 id="bodytitle_h3_3">Evoluci&oacute;n hist&oacute;rica del plan</h4>
+        <div class="panel_evolucion">
+            <script type="text/javascript" language="javascript">
+			var fondo = [["12/31/2020",10.070000],["01/31/2021",10.090000],["02/28/2021",10.420000],["03/31/2021",11.060000],["04/30/2021",11.240000],["05/31/2021",11.230000],["06/30/2021",11.720000],["07/31/2021",11.790000],["08/31/2021",12.130000],["09/30/2021",11.910000],["10/31/2021",12.458190],["11/30/2021",12.466370],["12/31/2021",12.936890],["01/31/2022",12.397070],["02/28/2022",12.098460],["03/31/2022",12.536980],["04/30/2022",12.290360],["05/31/2022",11.877030],["06/30/2022",11.143950],["07/31/2022",12.231250],["08/31/2022",11.920190],["09/30/2022",11.044340],["10/31/2022",11.512580],["11/30/2022",11.702820],["12/31/2022",10.967040],["01/31/2023",11.568060],["02/28/2023",11.526650],["03/31/2023",11.590860],["04/30/2023",11.591940],["05/31/2023",11.830450],["06/30/2023",12.303060],["07/31/2023",12.619060],["08/31/2023",12.454810],["09/30/2023",12.203350],["10/31/2023",11.813320],["11/30/2023",12.488290],["12/31/2023",12.917280],["01/31/2024",13.277330],["02/29/2024",13.818120],["03/31/2024",14.295580],["04/30/2024",14.007100],["05/31/2024",14.270630],["06/30/2024",14.874400],["07/31/2024",14.931670],["08/31/2024",14.868730],["09/30/2024",15.140970],["10/31/2024",15.178680],["11/30/2024",16.117890],["12/31/2024",16.052780],["01/31/2025",16.643350],["02/28/2025",16.300440],["03/31/2025",15.519540],["04/30/2025",14.500260],["05/31/2025",15.388530],["06/30/2025",15.528500],["07/31/2025",16.263960],["08/31/2025",16.227280],["09/08/2025",16.236230]];
+			var categoria = [["09/30/2015",1105.351956],["10/31/2015",1199.803539],["11/30/2015",1234.791895],["12/31/2015",1178.859212],["01/31/2016",1105.204014],["02/29/2016",1092.752754],["03/31/2016",1123.328364],["04/30/2016",1132.353476],["05/31/2016",1161.686601],["06/30/2016",1125.707270],["07/31/2016",1169.177684],["08/31/2016",1175.883272],["09/30/2016",1174.330860],["10/31/2016",1179.204467],["11/30/2016",1199.030856],["12/31/2016",1251.170986],["01/31/2017",1251.110729],["02/28/2017",1293.196512],["03/31/2017",1325.342908],["04/30/2017",1338.105653],["05/31/2017",1343.535120],["06/30/2017",1316.085694],["07/31/2017",1315.548538],["08/31/2017",1307.887771],["09/30/2017",1345.700490],["10/31/2017",1374.033608],["11/30/2017",1361.038239],["12/31/2017",1367.005359],["01/31/2018",1396.205160],["02/28/2018",1359.543579],["03/31/2018",1317.739585],["04/30/2018",1366.110149],["05/31/2018",1386.857763],["06/30/2018",1381.398464],["07/31/2018",1412.595997],["08/31/2018",1414.058650],["09/30/2018",1411.725985],["10/31/2018",1332.065802],["11/30/2018",1333.274759],["12/31/2018",1235.292241],["01/31/2019",1323.678949],["02/28/2019",1367.571670],["03/31/2019",1390.461698],["04/30/2019",1447.849184],["05/31/2019",1359.426830],["06/30/2019",1421.215303],["07/31/2019",1444.847441],["08/31/2019",1415.413347],["09/30/2019",1450.708811],["10/31/2019",1463.323702],["11/30/2019",1517.695915],["12/31/2019",1550.128899],["01/31/2020",1533.560056],["02/29/2020",1419.753490],["03/31/2020",1219.852637],["04/30/2020",1344.528266],["05/31/2020",1394.879185],["06/30/2020",1435.256886],["07/31/2020",1442.833367],["08/31/2020",1518.224496],["09/30/2020",1491.709937],["10/31/2020",1455.739605],["11/30/2020",1615.358685],["12/31/2020",1666.833050],["01/31/2021",1676.649913],["02/28/2021",1719.309643],["03/31/2021",1794.202037],["04/30/2021",1835.313453],["05/31/2021",1833.433839],["06/30/2021",1902.229171],["07/31/2021",1915.692725],["08/31/2021",1966.688363],["09/30/2021",1920.322045],["10/31/2021",2012.319975],["11/30/2021",1999.582951],["12/31/2021",2056.086476],["01/31/2022",1956.053866],["02/28/2022",1900.301889],["03/31/2022",1955.691630],["04/30/2022",1898.132572],["05/31/2022",1854.416964],["06/30/2022",1728.764062],["07/31/2022",1890.038768],["08/31/2022",1834.197679],["09/30/2022",1712.864486],["10/31/2022",1794.059969],["11/30/2022",1846.832346],["12/31/2022",1736.676906],["01/31/2023",1842.162008],["02/28/2023",1842.140929],["03/31/2023",1862.720332],["04/30/2023",1860.770794],["05/31/2023",1911.990128],["06/30/2023",1970.488422],["07/31/2023",2021.056195],["08/31/2023",1995.626612],["09/30/2023",1950.725583],["10/31/2023",1883.943095],["11/30/2023",2003.623698],["12/31/2023",2073.016927],["01/31/2024",2127.608211],["02/29/2024",2213.369604],["03/31/2024",2286.420006],["04/30/2024",2240.546702],["05/31/2024",2299.889783],["06/30/2024",2386.369719],["07/31/2024",2375.173189],["08/31/2024",2371.039184],["09/30/2024",2384.687235],["10/31/2024",2387.498672],["11/30/2024",2520.849079],["12/31/2024",2537.272849],["01/31/2025",2619.053720],["02/28/2025",2579.109147],["03/31/2025",2372.181681],["04/30/2025",2286.669231],["05/31/2025",2431.587511],["06/30/2025",2464.433821],["07/31/2025",2560.088063],["08/31/2025",2558.519921],["09/08/2025",2570.643894]];
+
+			var label_fondo = "MYINVESTOR INDEXADO GLOBAL";
+			var label_cat = "RVI GLOBAL";
+
+			var ultdia = "09/08/2025";
+
+			function drawRent(){
+				muestraVliq(null);
+			}
+
+			$(document).ready(function(){
+				setTimeout("drawRent()",100);
+			});
+		</script>
+            <div id="chart" style="margin-top:20px; width:100%; height:400px;"></div>
+        </div>
+        <div class="controles">
+            <div class="wrapper_controles">
+                <div class="check">
+                    <input type="checkbox" class="check" id="nrefg" name="nrefg" onclick="showHideCategoria()" checked="true"><label for="nrefg">Mostrar categor&iacute;a</label>
+                    <div class="boton">
+                        <button class="btn" value="reset" type="button" onclick="plot.resetZoom();plot.replot();">Restaurar gr&aacute;fico</button>
+                    </div>
+                </div>
+                <div class="periodos">
+                    <p class="titulo">Periodos disponibles</p>
+                    <div class="wrapper_periodos_left">
+                        <input type="radio" checked value="120" name="periodo" id="diffm_120" class="opt" onclick="muestraVliq(this.value)"><label title="10 a&ntilde;os" for="diffm_120" class="opt" id="diffm_120_label">10 a&ntilde;os</label><input type="radio" value="60" name="periodo" id="diffm_60" class="opt" onclick="muestraVliq(this.value)"><label title="5 a&ntilde;os" for="diffm_60" class="opt" id="diffm_60_label">5 a&ntilde;os</label><input type="radio" value="36" name="periodo" id="diffm_36" class="opt" onclick="muestraVliq(this.value)"><label title="3 a&ntilde;os" for="diffm_36" class="opt" id="diffm_36_label">3 a&ntilde;os</label><input type="radio" value="24" name="periodo" id="diffm_24" class="opt" onclick="muestraVliq(this.value)"><label title="2 a&ntilde;os" for="diffm_24" class="opt" id="diffm_24_label">2 a&ntilde;os</label>
+                    </div>
+                    <div class="wrapper_periodos_right">
+                        <input type="radio" value="12" name="periodo" id="diffm_12" class="opt" onclick="muestraVliq(this.value)"><label title="1 a&ntilde;o" for="diffm_12" class="opt" id="diffm_12_label">1 a&ntilde;o</label><input type="radio" value="6" name="periodo" id="diffm_6" class="opt" onclick="muestraVliq(this.value)"><label title="6 meses" for="diffm_6" class="opt" id="diffm_6_label">6 meses</label><input type="radio" value="3" name="periodo" id="diffm_3" class="opt" onclick="muestraVliq(this.value)"><label title="3 meses" for="diffm_3" class="opt" id="diffm_3_label">3 meses</label><input type="radio" value="1" name="periodo" id="diffm_1" class="opt" onclick="muestraVliq(this.value)"><label title="1 mes" for="diffm_1" class="opt" id="diffm_1_label">1 mes</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w50">
+        <h4 id="bodytitle_h3_4">Rentabilidades anuales</h4>
+        <table>
+            <caption id="table_1_caption">tabla de informe: Rentabilidades anuales</caption>
+            <col>
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <thead>
+                <tr>
+                    <th class="first"></th><th>2025</th><th>2024</th><th>2023</th><th>2022</th><th class="last">2021</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="6">Ranking y quintil respecto a la categor&iacute;a RVI GLOBAL</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr id="ra_row" class="par">
+                    <td class="label">Plan</td><td class="mas">1,14%</td><td class="mas">24,27%</td><td class="mas">17,78%</td><td class="menos">-15,23%</td><td class="mas">28,47%</td>
+                </tr>
+                <tr id="gppi_ra_row" class="impar">
+                    <td class="label">Categor&iacute;a</td><td class="mas">1,32%</td><td class="mas">22,40%</td><td class="mas">19,37%</td><td class="menos">-15,53%</td><td class="mas">23,35%</td>
+                </tr>
+                <tr id="prra_row" class="par">
+                    <td class="label">Ranking</td><td class="igual">49/81</td><td class="igual">10/79</td><td class="igual">18/79</td><td class="igual">51/78</td><td class="igual">8/73</td>
+                </tr>
+                <tr id="qra_row" class="impar quintil">
+                    <td class="label">Quintil</td><td class="q4">4</td><td class="q1">1</td><td class="q2">2</td><td class="q4">4</td><td class="q1">1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="w50">
+        <h4 id="bodytitle_h3_5">Rentabilidades acumuladas</h4>
+        <table>
+            <caption id="table_2_caption">tabla de informe: Rentabilidades acumuladas</caption>
+            <col>
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <col class="w15">
+            <thead>
+                <tr>
+                    <th class="first"></th><th>1 mes</th><th>3 meses</th><th>1 a&ntilde;o</th><th>3 a&ntilde;os</th><th class="last">5 a&ntilde;os</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="6">Ranking y quintil respecto a la categor&iacute;a RVI GLOBAL</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr id="rXm_row" class="par">
+                    <td class="label">Plan</td><td class="mas">0,96%</td><td class="mas">4,70%</td><td class="mas">13,29%</td><td class="mas">35,64%</td><td class="igual">&middot;</td>
+                </tr>
+                <tr id="gppi_rXm_row" class="impar">
+                    <td class="label">Categor&iacute;a</td><td class="mas">1,33%</td><td class="mas">4,14%</td><td class="mas">13,34%</td><td class="mas">39,52%</td><td class="mas">74,14%</td>
+                </tr>
+                <tr id="prrXm_row" class="par">
+                    <td class="label">Ranking</td><td class="igual">51/82</td><td class="igual">11/82</td><td class="igual">32/79</td><td class="igual">32/77</td><td class="igual"></td>
+                </tr>
+                <tr id="qrXm_row" class="impar quintil">
+                    <td class="label">Quintil</td><td class="q4">4</td><td class="q1">1</td><td class="q3">3</td><td class="q3">3</td><td class="q">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="w100">
+        <h4 id="bodytitle_h3_6">Rentabilidad/Riesgo a 1 a&ntilde;o</h4>
+        <div class="w50">
+            <p>
+                <span class="floatleft">Rentabilidad media:
+							</span><span class="floatright"><span class="mas">0,81%</span></span>
+            </p>
+            <p>
+                <span class="floatleft">Ranking:
+							</span><span class="floatright">20/80</span>
+            </p>
+            <p>
+                <span class="floatleft">Quintil:
+							</span><span class="floatright q2">2</span>
+            </p>
+        </div>
+        <div class="w50">
+            <p>
+                <span class="floatleft">Volatilidad:
+							</span><span class="floatright">13,97%</span>
+            </p>
+            <p>
+                <span class="floatleft">Ranking:
+							</span><span class="floatright">20/80</span>
+            </p>
+            <p>
+                <span class="floatleft">Quintil:
+							</span><span class="floatright q2">2</span>
+            </p>
+        </div>
+    </div>
+    <div class="w100">
+        <h4 id="bodytitle_h3_7">Otras caracter&iacute;sticas del plan</h4>
+        <p>
+            <span class="floatleft">C&oacute;digo DGS: </span><span class="floatright">N5396</span>
+        </p>
+        <p>
+            <span class="floatleft">Fecha de constituci&oacute;n: </span><span class="floatright">26/11/2020</span>
+        </p>
+        <p>
+            <span class="floatleft">Divisa: </span><span class="floatright">EUR</span>
+        </p>
+        <p>
+            <span class="floatleft">Fija: </span><span class="floatright">0,30%</span>
+        </p>
+        <p>
+            <span class="floatleft">Dep&oacute;sito: </span><span class="floatright">0,08%</span>
+        </p>
+        <p>
+            <span class="floatleft">Aportaci&oacute;n m&iacute;nima:</span><span class="floatright">10,00 EUR</span>
+        </p>
+        <p>
+            <span class="floatleft">Aportaci&oacute;n m&iacute;nima peri&oacute;dica:</span><span class="floatright">&middot; -</span>
+        </p>
+    </div>
+</div>
+
+
+			
+		
+		
+	
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+							
+ 							<div id="ie_clearing"></div>
+						</div>
+						
+						
+						
+							
+							
+							
+								<div class="wrapper_megabanner_inf" style="width: 980px;margin: 10px auto 0;">
+									
+									
+										
+											
+
+
+
+
+
+
+
+
+	
+	
+		
+			<!-- Megabanner_Inferior_Planes -->
+<div id='div-gpt-ad-1415292616032-7' style='width:980px; height:90px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1415292616032-7'); });
+</script>
+</div>
+		
+	
+
+
+										
+									
+								</div>
+							
+							
+						
+					</div>
+	
+		
+			
+				
+				<div id="footer">
+					
+						
+						
+							
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+<div class="footer_left">
+	
+</div>
+<div class="footer_center">
+
+	<span id="foot_links">
+		<a href="/es/sitemap.html" title="Mapa del site">Mapa</a>
+	
+	
+	|	
+			
+				<a href="/m/es/planes/ficha/index.html?isin=N5396" rel="nofollow" class="movil_link" title="Versión móvil">Versión móvil</a>
+			
+			
+		
+	
+	| <a href="/es/suscripcion.html" title="Suscríbete a quefondos" class="newsletter_link">Suscríbete a quefondos</a>
+	| <a href="/es/rss.html" class="rss_link" title="Configurador RSS" target="_blank">Configurador RSS</a>
+	
+	
+		
+			
+			
+			
+			
+		
+	</span>
+	<span id="marcador">
+		© 2011
+		<a href="http://www.vdos.com" title="VDOS Site">VDOS Stochastics</a> |
+		<a href="#marcador"  onClick="javascript:popup('/legal.html', 'InfoLegal');">Información Legal</a>
+		|
+		<a href="mailto:info@quefondos.com">Contacto</a>
+	</span>
+
+</div>
+<div class="footer_right">
+	<a class="logo_vdos" href="http://www.vdos.com" title="VDOS Site">
+		<img  alt="Logo VDOS"  src="/opencms/export/system/modules/com.vdos.site.templates/recursos/img/clear.png"/>
+	</a>
+</div>
+<form style="display:none" id="logout_form" method="get" action="/es/login.html">
+	<input type="hidden" name="action" value="logoff" />
+	<input type="hidden" name="requestedResource" value="/es/planes/ficha/index.html"/>
+</form>
+
+
+						
+
+					
+				</div>
+				
+			
+			
+		
+
+		
+	
+
+				</div>
+				
+		 	</div>
+		 	
+		</body>
+	</html>
+
+
