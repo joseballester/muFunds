@@ -4,6 +4,7 @@ const vm = require('vm');
 const cheerio = require('cheerio');
 
 const CacheService = require('./CacheService');
+const Logger = require('./Logger');
 
 function newTestContext(mocks = {}) {
   const files = walk(__dirname + '/../../src').filter((f) => path.extname(f) === '.js');
@@ -11,6 +12,7 @@ function newTestContext(mocks = {}) {
   const ctx = vm.createContext({
     CacheService: CacheService,
     Cheerio: cheerio,
+    Logger: Logger,
     ...mocks,
   });
 
