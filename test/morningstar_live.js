@@ -1,15 +1,12 @@
 const assert = require('assert');
+
 const newTestContext = require('./mocks');
 
-const UrlFetchAppFromFetch = require('./mocks/UrlFetchApp_fetch');
-
-describe('[morningstar] Integration tests', () => {
+describe('[morningstar_live] UCITS mutual fund (IE00B03HD191)', () => {
   const id = 'IE00B03HD191';
   const source = 'morningstar';
 
-  const testContext = newTestContext({
-    UrlFetchApp: UrlFetchAppFromFetch,
-  });
+  const testContext = newTestContext();
 
   it('should return NAV', () => {
     const nav = testContext.muFunds('nav', id, source);

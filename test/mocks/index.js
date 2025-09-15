@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 
 const CacheService = require('./CacheService');
 const Logger = require('./Logger');
+const UrlFetchApp = require('./UrlFetchApp');
 
 function newTestContext(mocks = {}) {
   const files = walk(__dirname + '/../../src').filter((f) => path.extname(f) === '.js');
@@ -13,6 +14,7 @@ function newTestContext(mocks = {}) {
     CacheService: CacheService,
     Cheerio: cheerio,
     Logger: Logger,
+    UrlFetchApp: UrlFetchApp,
     ...mocks,
   });
 

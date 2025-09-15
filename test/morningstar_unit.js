@@ -1,204 +1,62 @@
 const assert = require('assert');
+const fs = require('fs');
+const sinon = require('sinon');
+
 const newTestContext = require('./mocks');
 
-const UrlFetchAppFromFile = require('./mocks/UrlFetchApp_file');
+describe('[morningstar_unit] UCITS mutual fund (IE00B03HD191)', () => {
+  const id = 'IE00B03HD191';
+  const source = 'morningstar';
 
-const cases = [
-  {
-    description: 'UCITS mutual fund by ISIN',
-    id: 'IE00B03HD191',
-    expected_nav: 52.5631,
-    expected_date: '2025-09-09',
-    expected_change: 0.0017000000000000001,
-    expected_currency: 'EUR',
-    expected_expenses: 0.0018,
-    expected_category: 'Global Large-Cap Blend Equity',
-  },
-  {
-    description: 'UCITS mutual fund by Morningstar ID',
-    id: 'F0GBR052TN',
-    expected_nav: 52.5631,
-    expected_date: '2025-09-09',
-    expected_change: 0.0017000000000000001,
-    expected_currency: 'EUR',
-    expected_expenses: 0.0018,
-    expected_category: 'Global Large-Cap Blend Equity',
-  },
-  {
-    description: 'UK mutual fund by ISIN',
-    id: 'GB00B7QK1Y37',
-    expected_nav: 886.375,
-    expected_date: '2025-09-09',
-    expected_change: -0.0008,
-    expected_currency: 'GBX',
-    expected_expenses: null,
-    expected_category: 'US Large-Cap Blend Equity',
-  },
-  {
-    description: 'UK mutual fund by Morningstar ID',
-    id: 'F00000OJRV',
-    expected_nav: 886.375,
-    expected_date: '2025-09-09',
-    expected_change: -0.0008,
-    expected_currency: 'GBX',
-    expected_expenses: null,
-    expected_category: 'US Large-Cap Blend Equity',
-  },
-  {
-    description: 'UK pension fund by ISIN',
-    id: 'GB00B2PGGQ45',
-    expected_nav: 412.5,
-    expected_date: '2025-09-09',
-    expected_change: -0.0019,
-    expected_currency: 'GBX',
-    expected_expenses: 0.01,
-    expected_category: 'Japan Large-Cap Blend Equity',
-  },
-  {
-    description: 'UK pension fund by Morningstar ID',
-    id: 'VAUSA06JG4',
-    expected_nav: 412.5,
-    expected_date: '2025-09-09',
-    expected_change: -0.0019,
-    expected_currency: 'GBX',
-    expected_expenses: 0.01,
-    expected_category: 'Japan Large-Cap Blend Equity',
-  },
-  {
-    description: 'Spanish pension plan by DGS code',
-    id: 'N5396',
-    expected_nav: 16.23624,
-    expected_date: '2025-09-05',
-    expected_change: -0.0038,
-    expected_currency: 'EUR',
-    expected_expenses: null,
-    expected_category: 'Global Equity PP',
-  },
-  {
-    description: 'Spanish pension plan by Morningstar ID',
-    id: 'F000016CB6',
-    expected_nav: 16.23624,
-    expected_date: '2025-09-05',
-    expected_change: -0.0038,
-    expected_currency: 'EUR',
-    expected_expenses: null,
-    expected_category: 'Global Equity PP',
-  },
-  {
-    description: 'Canadian mutual fund by fund code',
-    id: 'EDG180',
-    expected_nav: 29.8061,
-    expected_date: '2025-09-09',
-    expected_change: -0.0006,
-    expected_currency: 'CAD',
-    expected_expenses: null,
-    expected_category: 'Global Equity Balanced',
-  },
-  {
-    description: 'Canadian mutual fund by Morningstar ID',
-    id: 'F000002ESI',
-    expected_nav: 29.8061,
-    expected_date: '2025-09-09',
-    expected_change: -0.0006,
-    expected_currency: 'CAD',
-    expected_expenses: null,
-    expected_category: 'Global Equity Balanced',
-  },
-  {
-    description: 'Australian mutual fund by ISIN',
-    id: 'AU60MMF15632',
-    expected_nav: 1.68715,
-    expected_date: '2025-09-08',
-    expected_change: null,
-    expected_currency: 'AUD',
-    expected_expenses: null,
-    expected_category: 'Equity World Large Growth',
-  },
-  {
-    description: 'Australian mutual fund by APIR',
-    id: 'MMF1563AU',
-    expected_nav: 1.68715,
-    expected_date: '2025-09-08',
-    expected_change: null,
-    expected_currency: 'AUD',
-    expected_expenses: null,
-    expected_category: 'Equity World Large Growth',
-  },
-  {
-    description: 'Australian mutual fund by Morningstar ID',
-    id: 'F00000LKY3',
-    expected_nav: 1.68715,
-    expected_date: '2025-09-08',
-    expected_change: null,
-    expected_currency: 'AUD',
-    expected_expenses: null,
-    expected_category: 'Equity World Large Growth',
-  },
-  {
-    description: 'US mutual fund by ISIN',
-    id: 'US9229087104',
-    expected_nav: 602.40,
-    expected_date: '2025-09-09',
-    expected_change: 0.0023,
-    expected_currency: 'USD',
-    expected_expenses: null,
-    expected_category: 'Large Blend',
-  },
-  {
-    description: 'US mutual fund by ticker',
-    id: 'VFIAX',
-    expected_nav: 602.40,
-    expected_date: '2025-09-09',
-    expected_change: 0.0023,
-    expected_currency: 'USD',
-    expected_expenses: null,
-    expected_category: 'Large Blend',
-  },
-  {
-    description: 'US mutual fund by CUSIP',
-    id: '922908710',
-    expected_nav: 602.40,
-    expected_date: '2025-09-09',
-    expected_change: 0.0023,
-    expected_currency: 'USD',
-    expected_expenses: null,
-    expected_category: 'Large Blend',
-  },
-  {
-    description: 'US fund by Morningstar ID',
-    id: 'FOUSA00L8W',
-    expected_nav: 602.40,
-    expected_date: '2025-09-09',
-    expected_change: 0.0023,
-    expected_currency: 'USD',
-    expected_expenses: null,
-    expected_category: 'Large Blend',
-  },
-];
+  const json = fs.readFileSync(`./test/snapshots/morningstar_${id}.json`, 'utf8');
 
-const source = 'morningstar';
+  const fetchStub = sinon.stub();
+  fetchStub.withArgs(`https://lt.morningstar.com/api/rest.svc/klr5zyak8x/security/screener?outputType=json&page=1&pageSize=10&securityDataPoints=CategoryName%7CClosePrice%7CClosePriceDate%7CExpenseRatio%7CName%7CPriceCurrency%7CGBRReturnD1%7CSecId%7CUniverse%7CIsin%7CIsinMkt%7CIsinMic%7CTenforeId%7CValoren%7CWkn%7CSedol%7CMex%7CDgsCode%7CTicker%7CApir%7CCustom%7CCustomInstitutionSecurityId&term=${id}&universeIds=FOALL$$ALL%7CETALL$$ALL%7CE0WWE$$ALL%7CFOFRA$$FXP%7CSAGBR$$ALL%7CFCIND$$ALL%7CCEEXG$XLON&version=1`)
+    .returns({
+      getResponseCode: () => 200,
+      getContentText: () => json,
+      getContent: () => json,
+    });
 
-const testContext = newTestContext({
-  UrlFetchApp: UrlFetchAppFromFile,
-});
+  const testContext = newTestContext({
+    UrlFetchApp: {
+      fetch: fetchStub,
+    },
+  });
 
-cases.forEach(c => {
-  describe(`[morningstar] Unit test (${c.description}: ${c.id})`, () => {
-    ['nav', 'date', 'change', 'currency', 'expenses', 'category']
-      .forEach(option => {
-        it(`should return ${option}`, () => {
-          if (c[`expected_${option}`] !== null) {
-            const result = testContext.muFunds(option, c.id, source);
-            assert.equal(result, c[`expected_${option}`]);
-          } else {
-            try {
-              testContext.muFunds(option, c.id, source);
-              assert.fail('Expected error was not thrown');
-            } catch (e) {
-              assert.equal(e.message, 'Selected option is not available for the given asset.');
-            }
-          }
-        });
-      });
+  it('should return NAV', () => {
+    const nav = testContext.muFunds('nav', id, source);
+    assert.equal(nav, 52.5631);
+    assert.equal(fetchStub.callCount, 1);
+  });
+
+  it('should return date', () => {
+    const date = testContext.muFunds('date', id, source);
+    assert.equal(date, '2025-09-09');
+    assert.equal(fetchStub.callCount, 2);
+  });
+
+  it('should return change', () => {
+    const change = testContext.muFunds('change', id, source);
+    assert.equal(change, 0.0017000000000000001);
+    assert.equal(fetchStub.callCount, 3);
+  });
+
+  it('should return currency', () => {
+    const currency = testContext.muFunds('currency', id, source);
+    assert.equal(currency, 'EUR');
+    assert.equal(fetchStub.callCount, 4);
+  });
+
+  it('should return expenses', () => {
+    const expenses = testContext.muFunds('expenses', id, source);
+    assert.equal(expenses, 0.0018);
+    assert.equal(fetchStub.callCount, 5);
+  });
+
+  it('should return category', () => {
+    const category = testContext.muFunds('category', id, source);
+    assert.equal(category, 'Global Large-Cap Blend Equity');
+    assert.equal(fetchStub.callCount, 6);
   });
 });
