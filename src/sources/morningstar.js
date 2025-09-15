@@ -33,114 +33,15 @@ function loadFromMorningstar(option, id, attempts = 0) {
     ],
     term: id,
     universeIds: [
-      'FOEUR$$ALL', // Europe funds
-      'ETEUR$$ALL', // Europe ETFs
+      'FOALL$$ALL', // All open-ended funds
+      'ETALL$$ALL', // All ETFs
+      'E0WWE$$ALL', // All stocks
 
-      'FOBEL$$ALL', // Belgium funds
-      'ETEXG$XBRU', // Belgium ETFs
-      'FOBEL$$PEN', // Belgium pension plans
-
-      'FODNK$$ALL', // Denmark funds
-      'ETEXG$XCSE', // Denmark ETFs
-
-      'FODEU$$ALL', // Germany funds
-      'ETEXG$$XFRA', // Germany ETFs (Frankfurt)
-      'ETEXG$$XETR', // Germany ETFs (Xetra)
-
-      'FOESP$$ALL', // Spain funds
-      'ETEXG$XMAD', // Spain ETFs
-      'FOESP$$PEN', // Spain pension plans
-
-      'FOFRA$$ALL', // France funds
-      'ETEXG$XPAR', // France ETFs
-      'FOFRA$$FXP', // France pension plans (FCPI/FIP)
-
-      'FOIRL$$ALL', // Ireland funds
-      'ETEXG$XDUB', // Ireland ETFs
-
-      'FOITA$$ALL', // Italy funds
-      'ETEXG$XMIL', // Italy ETFs
-      'FOITA$$PEN', // Italy pension plans
-
-      'FONLD$$ALL', // Netherlands funds
-      'ETEXG$XAMS', // Netherlands ETFs
-
-      'FONOR$$ALL', // Norway funds
-      'ETEXG$XOSE', // Norway ETFs
-
-      'FOAUT$$ALL', // Austria funds
-      'ETEXG$XWBO', // Austria ETFs
-
-      'FOPRT$$ALL', // Portugal funds
-      'ETEXG$XLIS', // Portugal ETFs
-
-      'FOCHE$$ALL', // Switzerland funds
-      'ETEXG$XSWX', // Switzerland ETFs
-
-      'FOFIN$$ALL', // Finland funds
-      'ETEXG$XHEL', // Finland ETFs
-
-      'FOSWE$$ALL_5498', // Sweden funds
-      'ETEXG$XSTO', // Sweden ETFs
-
-      'FOGBR$$ALL', // UK funds
-      'ETEXG$XLON', // UK ETFs
-      'CEEXG$XLON', // UK investment trusts
-      'SAGBR$$LSA', // UK pension funds 1
-      'SAGBR$$PSA', // UK pension funds 2
-
-      'FOIND$$ALL', // India funds
-      'FCIND$$ALL', // India close-ended funds
-
-      'FOCAN$$ALL', // Canada funds
-      'ETCAN$$FFE', // Canada ETFs
-      'E0CAN$$FST', // Canada stocks
-
-      'FOBRA$$ALL', // Brazil funds
-
-      'FOUSA$$ALL', // US funds
-      'ETUSA$$FFE', // US ETFs
-
-      'FOSGP$$ALL', // Singapore funds
-      'ETEXG$XSES', // Singapore ETFs
-
-      'FOIDN$$ALL', // Indonesia funds
-
-      'FOCHL$$ALL', // Chile funds
-      'ETEXG$XSGO', // Chile ETFs
-
-      'FOMEX$$ALL', // Mexico funds
-      'ETEXGRXMEX', // Mexico ETFs 1
-      'ETEXGIXMEX', // Mexico ETFs 2
-
-      'FOAUS$$ALL', // Australia investment trusts
-      'FOAUS$$SAF', // Australia superannuation funds
-      'FOAUS$$PAF', // Australia pension and annuities funds
-      'FOAUS$$IBF', // Australia investment bonds
-
-      'FONZL$$ALL', // New Zealand investment trusts
-      'FONZL$$SAF', // New Zealand superannuation funds
-      'FONZL$$IBF', // New Zealand investment bonds
-
-      'FOHKG$$ALL', // Hong Kong funds
-      'FOHKG$$PEN', // Hong Kong pension plans
-      'ETEXG$XHKG', // Hong Kong ETFs
-
-      'FOMYS$$ALL', // Malaysia funds
-      'ETEXG$XKLS', // Malaysia ETFs
-
-      'FOTHA$$ALL', // Thailand funds
-      'ETEXG$XBKK', // Thailand ETFs
-
-      'FOTWN$$ALL', // Taiwan funds
-      'ETEXG$XTAI', // Taiwan ETFs
-
-      'FOISR$$ALL', // Israel funds
-      'ETEXG$XTAE', // Israel ETFs
-
-      // 'FOALL$$ALL', // Fallback
-
-      // 'E0WWE$$ALL', // All stocks
+      // Additional universe IDs that need to be explicitly included
+      'FOFRA$$FXP', // French pension funds
+      'SAGBR$$ALL', // All UK pension funds
+      'FCIND$$ALL', // Indian closed-end funds
+      'CEEXG$XLON', // LSE investment trusts
     ],
     version: 1,
   };
