@@ -1,4 +1,3 @@
-/* ----------- Data processing functions ----------- */
 function isISIN(id) {
   // ISIN have 12 characters
   // Not the most robust way (TODO: improve it)
@@ -54,16 +53,4 @@ function processCategory(category) {
 function processSource(source) {
   source = stripCharacters_(source);
   return source;
-}
-
-/* -------- Fetching cached/non-cached pages -------- */
-function fetchURL(url) {
-  const fetch = UrlFetchApp.fetch(url);
-  if (fetch.getResponseCode() == 200 && fetch.getContent().length > 0) {
-    const body = fetch.getContentText();
-    const $ = Cheerio.load(body);
-    return $("body").html();
-  } else {
-    throw new Error("Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.");
-  }
 }
