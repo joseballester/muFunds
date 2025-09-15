@@ -1,6 +1,4 @@
-function loadFromMorningstar(option, id, attempts = 0) {
-  const cache = CacheService.getScriptCache();
-
+function loadFromMorningstar(option, id) {
   let url = 'https://lt.morningstar.com/api/rest.svc/klr5zyak8x/security/screener';
 
   const params = {
@@ -61,33 +59,7 @@ function loadFromMorningstar(option, id, attempts = 0) {
         return url + joiner + key + '=' + value;
       }, '');
 
-  if (option === 'url') {
-    return url;
-  }
-
   const fetch = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
-
-  if (fetch.getResponseCode() == 403) {
-    const cached = cache.get(`mslt-${option}-${id}`);
-
-    if (cached !== null) {
-      if (['nav', 'change', 'expenses'].includes(option) && !isNaN(cached)) {
-        return parseFloat(cached);
-      } else if (cached !== '-') {
-        return cached;
-      }
-
-      throw new Error('Selected option is not available for the given asset.');
-    }
-
-    if (attempts >= 5) {
-      throw new Error('Morningstar error. Please delete the cell, wait 3 seconds and press Ctrl+Z to reload data.');
-    }
-
-    Utilities.sleep(1000);
-
-    return loadFromMorningstar(option, id, attempts+1);
-  }
 
   const json = JSON.parse(fetch.getContentText());
 
@@ -108,13 +80,6 @@ function loadFromMorningstar(option, id, attempts = 0) {
     expenses: row.ExpenseRatio ? row.ExpenseRatio / 100 : '-',
     category: row.CategoryName ?? '-',
   }
-  
-  cache.put(`mslt-nav-${id}`, values.nav, 12 * 60 * 60);
-  cache.put(`mslt-change-${id}`, values.change, 12 * 60 * 60);
-  cache.put(`mslt-date-${id}`, values.date, 12 * 60 * 60);
-  cache.put(`mslt-currency-${id}`, values.currency, 12 * 60 * 60);
-  cache.put(`mslt-expenses-${id}`, values.expenses, 12 * 60 * 60);
-  cache.put(`mslt-category-${id}`, values.category, 12 * 60 * 60);
 
   if (option in values) {
     if (values[option] !== '-') {
