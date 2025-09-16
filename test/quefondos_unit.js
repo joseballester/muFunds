@@ -12,7 +12,6 @@ describe('[quefondos_unit] Asset not found', () => {
   fetchStub.returns({
       getResponseCode: () => 404,
       getContentText: () => '',
-      getContent: () => '',
     });
 
   const testContext = newTestContext({
@@ -43,7 +42,6 @@ describe('[quefondos_unit] Mutual fund', () => {
     .returns({
       getResponseCode: () => 200,
       getContentText: () => html,
-      getContent: () => html,
     });
 
   const testContext = newTestContext({
@@ -104,7 +102,6 @@ describe('[quefondos_unit] Spanish pension plan', () => {
     .returns({
       getResponseCode: () => 200,
       getContentText: () => html,
-      getContent: () => html,
     });
 
   const testContext = newTestContext({

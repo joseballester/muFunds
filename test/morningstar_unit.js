@@ -15,7 +15,6 @@ describe('[morningstar_unit] Happy path', () => {
     .returns({
       getResponseCode: () => 200,
       getContentText: () => json,
-      getContent: () => json,
     });
 
   const testContext = newTestContext({
@@ -70,7 +69,6 @@ describe('[morningstar_unit] Result with no attributes', () => {
     .returns({
       getResponseCode: () => 200,
       getContentText: () => '{"rows":[{"SecId":"security_id"}]}',
-      getContent: () => '{"rows":[{"SecId":"security_id"}]}',
     });
 
   const testContext = newTestContext({
@@ -104,7 +102,6 @@ describe('[morningstar_unit] No results', () => {
     .returns({
       getResponseCode: () => 200,
       getContentText: () => '{"rows":[]}',
-      getContent: () => '{"rows":[]}',
     });
 
   const testContext = newTestContext({

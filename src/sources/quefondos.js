@@ -4,7 +4,7 @@ function loadFromQuefondos(option, id) {
     : `https://www.quefondos.com/es/planes/ficha/index.html?isin=${id}`;
 
   const fetch = UrlFetchApp.fetch(url);
-  if (fetch.getResponseCode() !== 200 || fetch.getContent().length === 0) {
+  if (fetch.getResponseCode() !== 200 || fetch.getContentText().length === 0) {
     throw AssetNotFoundError();
   }
 
@@ -28,7 +28,7 @@ function loadFromQuefondos(option, id) {
     const currencyStr = $('.informe:eq(0)').find('.w100:eq(1)').find('.floatright:eq(0)').text();
     return processCurrency(currencyStr.substring(currencyStr.length-3));
   }
-  
+
   if (option === 'category') {
     return processCategory($('.informe:eq(0)').find('.common:eq(0)').find('.floatright:eq(1)').text());
   }
