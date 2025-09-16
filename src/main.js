@@ -12,11 +12,11 @@ function muFunds(option, id, source) {
     const validOptions = ['nav', 'date', 'change', 'currency', 'expenses', 'category'];
 
     if (!validOptions.includes(option)) {
-      throw new Error('You have selected an invalid option.');
+      throw UnknownOptionError();
     }
 
     if (!id) {
-      throw new Error('Asset identifier is empty.');
+      throw EmptyAssetIdentifierError();
     }
 
     if (source === "" || source === undefined || source === null || /^morningstar(-(au|es|de|ie|fr|za|at|be|dk|fi|gb|uk|ch|is|it|pt|no|nl))?$/.test(source)) {
@@ -27,7 +27,7 @@ function muFunds(option, id, source) {
       return loadFromQuefondos(option, id);
     }
 
-    throw new Error('Source is not compatible. Please check the documentation for the compatibility list.');
+    throw UnknownSourceError();
   }
   catch (error) {
     Logger.severe({

@@ -4,7 +4,35 @@ const sinon = require('sinon');
 
 const newTestContext = require('./mocks');
 
-describe('[quefondos_unit] UCITS mutual fund (IE00B03HD191)', () => {
+describe('[quefondos_unit] Asset not found', () => {
+  const id = 'wrong_id';
+  const source = 'quefondos';
+
+  const fetchStub = sinon.stub();
+  fetchStub.returns({
+      getResponseCode: () => 404,
+      getContentText: () => '',
+      getContent: () => '',
+    });
+
+  const testContext = newTestContext({
+    UrlFetchApp: {
+      fetch: fetchStub,
+    },
+  });
+
+  it('should throw an error', () => {
+    try {
+      testContext.muFunds('nav', id, source);
+      assert.fail('Expected error was not thrown');
+    } catch (error) {
+      assert.equal(error.message, 'Asset not found. Please use another identifier and/or data source.');
+    }
+    assert.equal(fetchStub.callCount, 1);
+  });
+});
+
+describe('[quefondos_unit] Mutual fund', () => {
   const id = 'IE00B03HD191';
   const source = 'quefondos';
 
@@ -53,7 +81,7 @@ describe('[quefondos_unit] UCITS mutual fund (IE00B03HD191)', () => {
       testContext.muFunds('expenses', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Expenses ratio is not available from this source');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
     assert.equal(fetchStub.callCount, 5);
   });
@@ -65,7 +93,7 @@ describe('[quefondos_unit] UCITS mutual fund (IE00B03HD191)', () => {
   });
 });
 
-describe('[quefondos_unit] Spanish pension plan (N5396)', () => {
+describe('[quefondos_unit] Spanish pension plan', () => {
   const id = 'N5396';
   const source = 'quefondos';
 
@@ -102,7 +130,7 @@ describe('[quefondos_unit] Spanish pension plan (N5396)', () => {
       testContext.muFunds('change', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Last change is not available for this asset and source. Please try another data source.');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
     assert.equal(fetchStub.callCount, 3);
   });
@@ -118,7 +146,7 @@ describe('[quefondos_unit] Spanish pension plan (N5396)', () => {
       testContext.muFunds('expenses', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Expenses ratio is not available from this source');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
     assert.equal(fetchStub.callCount, 5);
   });

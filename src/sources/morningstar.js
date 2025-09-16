@@ -69,7 +69,7 @@ function loadFromMorningstar(option, id) {
     });
 
   if (!row) {
-    throw new Error('Search failed. Please use a valid unique identifier for the asset.');
+    throw AssetNotFoundError();
   }
 
   const values = {
@@ -81,13 +81,9 @@ function loadFromMorningstar(option, id) {
     category: row.CategoryName ?? '-',
   }
 
-  if (option in values) {
-    if (values[option] !== '-') {
-      return values[option];
-    }
-
-    throw new Error('Selected option is not available for the given asset.')
+  if (option in values && values[option] !== '-') {
+    return values[option];
   }
 
-  throw new Error('Unknown option');
+  throw DataNotAvailableError();
 }

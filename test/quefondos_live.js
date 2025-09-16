@@ -34,7 +34,7 @@ describe('[quefondos_live] UCITS mutual fund (IE00B03HD191)', () => {
       testContext.muFunds('expenses', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Expenses ratio is not available from this source');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
   });
 
@@ -66,7 +66,7 @@ describe('[quefondos_live] Spanish pension plan (N5396)', () => {
       testContext.muFunds('change', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Last change is not available for this asset and source. Please try another data source.');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
   });
 
@@ -80,7 +80,7 @@ describe('[quefondos_live] Spanish pension plan (N5396)', () => {
       testContext.muFunds('expenses', id, source);
       assert.fail('Expected error was not thrown');
     } catch (error) {
-      assert.equal(error.message, 'Expenses ratio is not available from this source');
+      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
   });
 
