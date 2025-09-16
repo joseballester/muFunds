@@ -50,28 +50,29 @@ describe('[quefondos_unit] Mutual fund', () => {
     },
   });
 
-  it('should return NAV', () => {
-    const nav = testContext.muFunds('nav', id, source);
-    assert.equal(nav, 52.3934);
-    assert.equal(fetchStub.callCount, 1);
-  });
+  const expectedValues = {
+    nav: 52.3934,
+    date: '08/09/2025',
+    currency: 'EUR',
+    category: 'RVI GLOBAL',
+    change: 0.0024,
+    return1d: 0.0024,
+    return1m: 0.0125,
+    return3m: 0.0438,
+    return1y: 0.1457,
+    return3y: 0.1217,
+    return5y: 0.1400,
+    returnytd: 0.0092,
+  };
 
-  it('should return date', () => {
-    const date = testContext.muFunds('date', id, source);
-    assert.equal(date, '08/09/2025');
-    assert.equal(fetchStub.callCount, 2);
-  });
+  Object.keys(expectedValues).forEach((option) => {
+    it(`should return ${option}`, () => {
+      const value = testContext.muFunds(option, id, source);
+      assert.equal(value, expectedValues[option]);
 
-  it('should return change', () => {
-    const change = testContext.muFunds('change', id, source);
-    assert.equal(change, 0.0024);
-    assert.equal(fetchStub.callCount, 3);
-  });
-
-  it('should return currency', () => {
-    const currency = testContext.muFunds('currency', id, source);
-    assert.equal(currency, 'EUR');
-    assert.equal(fetchStub.callCount, 4);
+      assert.equal(fetchStub.callCount, 1);
+      fetchStub.resetHistory();
+    });
   });
 
   it('should throw an error for expenses', () => {
@@ -81,13 +82,8 @@ describe('[quefondos_unit] Mutual fund', () => {
     } catch (error) {
       assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
     }
-    assert.equal(fetchStub.callCount, 5);
-  });
-
-  it('should return category', () => {
-    const category = testContext.muFunds('category', id, source);
-    assert.equal(category, 'RVI GLOBAL');
-    assert.equal(fetchStub.callCount, 6);
+    assert.equal(fetchStub.callCount, 1);
+    fetchStub.resetHistory();
   });
 });
 
@@ -110,47 +106,38 @@ describe('[quefondos_unit] Spanish pension plan', () => {
     },
   });
 
-  it('should return NAV', () => {
-    const nav = testContext.muFunds('nav', id, source);
-    assert.equal(nav, 16.23623);
-    assert.equal(fetchStub.callCount, 1);
+  const expectedValues = {
+    nav: 16.23623,
+    date: '05/09/2025',
+    currency: 'EUR',
+    category: 'RVI GLOBAL',
+    return1m: 0.0096,
+    return3m: 0.0470,
+    return1y: 0.1329,
+    return3y: 0.1070,
+    returnytd: 0.011399999999999999,
+  };
+
+  Object.keys(expectedValues).forEach((option) => {
+    it(`should return ${option}`, () => {
+      const value = testContext.muFunds(option, id, source);
+      assert.equal(value, expectedValues[option]);
+
+      assert.equal(fetchStub.callCount, 1);
+      fetchStub.resetHistory();
+    });
   });
 
-  it('should return date', () => {
-    const date = testContext.muFunds('date', id, source);
-    assert.equal(date, '05/09/2025');
-    assert.equal(fetchStub.callCount, 2);
-  });
-
-  it('should return change', () => {
-    try {
-      testContext.muFunds('change', id, source);
-      assert.fail('Expected error was not thrown');
-    } catch (error) {
-      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
-    }
-    assert.equal(fetchStub.callCount, 3);
-  });
-
-  it('should return currency', () => {
-    const currency = testContext.muFunds('currency', id, source);
-    assert.equal(currency, 'EUR');
-    assert.equal(fetchStub.callCount, 4);
-  });
-
-  it('should throw an error for expenses', () => {
-    try {
-      testContext.muFunds('expenses', id, source);
-      assert.fail('Expected error was not thrown');
-    } catch (error) {
-      assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
-    }
-    assert.equal(fetchStub.callCount, 5);
-  });
-
-  it('should return category', () => {
-    const category = testContext.muFunds('category', id, source);
-    assert.equal(category, 'RVI GLOBAL');
-    assert.equal(fetchStub.callCount, 6);
+  ['expenses', 'change', 'return1d'].forEach((option) => {
+    it(`should throw an error for ${option}`, () => {
+      try {
+        testContext.muFunds(option, id, source);
+        assert.fail('Expected error was not thrown');
+      } catch (error) {
+        assert.equal(error.message, 'Requested data is not available for this asset from this data source. Please try a different source.');
+      }
+      assert.equal(fetchStub.callCount, 1);
+      fetchStub.resetHistory();
+    });
   });
 });

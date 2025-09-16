@@ -19,11 +19,6 @@ describe('[morningstar_live] UCITS mutual fund (IE00B03HD191)', () => {
     assert.match(date, /^\d{4}-\d{2}-\d{2}$/);
   });
 
-  it('should return change', () => {
-    const change = testContext.muFunds('change', id, source);
-    assert.ok(!isNaN(change));
-  });
-
   it('should return currency', () => {
     const currency = testContext.muFunds('currency', id, source);
     assert.equal(currency, 'EUR');
@@ -38,5 +33,12 @@ describe('[morningstar_live] UCITS mutual fund (IE00B03HD191)', () => {
   it('should return category', () => {
     const category = testContext.muFunds('category', id, source);
     assert.equal(category, 'Global Large-Cap Blend Equity');
+  });
+
+  ['change', 'return1d', 'return1m', 'return3m', 'return1y', 'return3y', 'return5y', 'returnytd'].forEach((option) => {
+    it(`should return ${option}`, () => {
+      const value = testContext.muFunds(option, id, source);
+      assert.ok(!isNaN(value));
+    });
   });
 });

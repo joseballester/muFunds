@@ -9,7 +9,8 @@
  */
 function muFunds(option, id, source) {
   try {
-    const validOptions = ['nav', 'date', 'change', 'currency', 'expenses', 'category'];
+    const validOptions = ['nav', 'date', 'change', 'currency', 'expenses', 'category', 'return1d', 
+      'return1m', 'return3m', 'return1y', 'return3y', 'return5y', 'returnytd'];
 
     if (!validOptions.includes(option)) {
       throw UnknownOptionError();
