@@ -67,155 +67,37 @@
 					<div class="col-12 mb-1 mb-md-0">
 						<h5 class="mb-4">Function call</h5>
 
-						<p>Use the <code>muFunds</code> function to load investment fund data in your spreadsheets.</p>
+						<p>Use the <code>muFunds</code> function to load investment fund data in your spreadsheets, with the following format:</p>
 
-						<p>For example, you can retrieve the current price (or <abbr title="Net Asset Value">NAV</abbr>) of the <a href="https://global.morningstar.com/en-gb/investments/funds/0P00000WLG/quote">Vanguard Global Stock Index Eur Acc</a> UCITS mutual fund (with ISIN IE00B03HD191) from Morningstar (muFunds' default data source) with:</p>
+						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds({option}, {asset_id})</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
 
-						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds("nav", "IE00B03HD191")</code> <small>(if you use a <i>period</i> as decimal separator)</small></p>
+						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds({option}; {asset_id})</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
 
-						<p class="lead text-center"><code class="formula rounded bg-light p-2">=muFunds("nav"; "IE00B03HD191")</code> <small>(if you use a <i>comma</i> as decimal separator)</small></p>
+						<p>You can find the possible values of <code>{option}</code> and <code>{asset_id}</code> below, as well as an optional <code>{source}</code> third argument.</p>
 
-						<p>You can replace the first argument (<code>option</code>) with any of the <a href="#options">returned data options</a> and the second (<code>id</code>) with any of the <a href="#ids">accepted identifiers</a> (e.g. ISIN, ticker or Morningstar ID) of your financial asset.</p>
-
-						<p>You can also add a third optional argument (<code>source</code>) to choose a specific <a href="#sources">data source</a> different from Morningstar.</p>
-
-						<p><a href="#examples">Check out the example formulas below</a> to understand the possible combinations of <code>option</code>, <code>id</code> and <code>source</code>.</p>
-
-						<p>This function call will return the latest information available from the chosen source. Most of these sources don't offer historical values, which makes comparisons and backtesting difficult. If interested, you can consider <a href="history.html">saving a history of daily data to your own spreadsheet using a Google Apps Script function and a time-driven trigger</a> (link to guide).</p>
+						<p><b>Example:</b> You can retrieve the current price (or <abbr title="Net Asset Value">NAV</abbr>) of the <a href="https://global.morningstar.com/en-gb/investments/funds/0P00000WLG/quote">Vanguard Global Stock Index Eur Acc</a> UCITS mutual fund (with ISIN IE00B03HD191) from Morningstar (muFunds' default data source) with <code class="formula rounded bg-light p-1">=muFunds("nav", "IE00B03HD191")</code>.</p>
+						
+			    	<h5 class="mt-5 mb-4" id="options">Available data options (<code>{option}</code>)</h5>
 					</div>
-					<div class="col-12">
-						<hr class="mt-4 mb-5"/>
-			    		<h5 class="mb-4" id="examples">Example formulas</h5>
-						<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th class="th-sm" style="width:20%;">Asset type</th>
-									<th class="th-sm" style="width:15%;">Data source</th>
-									<th class="th-sm" style="width:20%;">Asset identifier</th>
-									<th class="th-sm" style="width:45%;">Example for NAV</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td rowspan="3">UCITS mutual fund</td>
-									<td rowspan="2">Morningstar</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "IE00B03HD191")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "F0GBR052TN")</code></td>
-								</tr>
-								<tr>
-									<td>QueFondos</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "IE00B03HD191", "quefondos")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="2">UK mutual fund</td>
-									<td rowspan="2">Morningstar</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "GB00B7QK1Y37")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "F00000OJRV")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="2">UK pension fund</td>
-									<td rowspan="2">Morningstar</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "GB00B2PGGQ45")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "VAUSA06JG4")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="3">Spanish pension plan</td>
-									<td rowspan="2">Morningstar</td>
-									<td>DGS code</td>
-									<td><code>=muFunds("nav", "N5396")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "F000016CB6")</code></td>
-								</tr>
-								<tr>
-									<td>QueFondos</td>
-									<td>DGS code</td>
-									<td><code>=muFunds("nav", "N5396", "quefondos")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="2">Canadian mutual fund</td>
-									<td rowspan="2">Morningstar</td>
-									<td>Fund code</td>
-									<td><code>=muFunds("nav", "N5396")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "F000016CB6")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="3">Australian mutual fund</td>
-									<td rowspan="3">Morningstar</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "AU60MMF15632")</code></td>
-								</tr>
-								<tr>
-									<td>APIR</td>
-									<td><code>=muFunds("nav", "MMF1563AU")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "F00000LKY3")</code></td>
-								</tr>
-								<tr>
-									<td rowspan="4">US mutual fund</td>
-									<td rowspan="4">Morningstar</td>
-									<td>ISIN</td>
-									<td><code>=muFunds("nav", "US9229087104")</code></td>
-								</tr>
-								<tr>
-									<td>Ticker</td>
-									<td><code>=muFunds("nav", "VFIAX")</code></td>
-								</tr>
-								<tr>
-									<td>CUSIP</td>
-									<td><code>=muFunds("nav", "922908710")</code></td>
-								</tr>
-								<tr>
-									<td>Morningstar ID</td>
-									<td><code>=muFunds("nav", "FOUSA00L8W")</code></td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="col-sm-6">
+						<p><code>"nav"</code>: Net Asset Value (NAV) or price.</p>
+						<p><code>"change"</code>/<code>"return1d"</code>: Last NAV/price change.</p>
+						<p><code>"currency"</code>: Asset currency, in 3-letter code.</p>
+						<p><code>"date"</code>: Last NAV/price date.</p>
+						<p><code>"expenses"</code>: Total Expenses Ratio (TER).</p>
+						<p><code>"category"</code>: Fund category according to the source.</p>
 					</div>
-					<div class="col-12" id="options">
-						<hr class="mt-4 mb-5"/>
-			    	<h5 class="mb-4">Returned data options (<code>option</code>)</h5>
-					</div>
-					<div class="col-sm-6 mb-1 mb-md-0">
-						<p><code>nav</code>: Net Asset Value (NAV) or price.</p>
-						<p><code>change</code>/<code>return1d</code>: Last NAV/price change.</p>
-						<p><code>currency</code>: Asset currency, in 3-letter code.</p>
-						<p><code>date</code>: Last NAV/price date.</p>
-						<p><code>expenses</code>: Total Expenses Ratio (TER).</p>
-						<p><code>category</code>: Fund category according to the source.</p>
-					</div>
-					<div class="col-sm-6 mb-1 mb-md-0">
-						<p><code>returnytd</code>: Fund year-to-date (YTD) return.</p>
-						<p><code>return1m</code>: Fund return in the last month.</p>
-						<p><code>return3m</code>: Fund return in the last 3 months.</p>
-						<p><code>return1y</code>: Fund return in the last year.</p>
-						<p><code>return3y</code>: Fund return in the last 5 years (annualized).</p>
-						<p><code>return5y</code>: Fund return in the last 5 years (annualized).</p>
+					<div class="col-sm-6">
+						<p><code>"returnytd"</code>: Fund year-to-date (YTD) return.</p>
+						<p><code>"return1m"</code>: Fund return in the last month.</p>
+						<p><code>"return3m"</code>: Fund return in the last 3 months.</p>
+						<p><code>"return1y"</code>: Fund return in the last year.</p>
+						<p><code>"return3y"</code>: Fund return in the last 3 years (annualized).</p>
+						<p><code>"return5y"</code>: Fund return in the last 5 years (annualized).</p>
 					</div>
 					<div class="col-12" id="ids">
-						<hr class="mt-4 mb-5"/>
-						<h5 class="mb-4">Asset identifiers (<code>id</code>)</h5>
-						<p>muFunds can track several types of assets, including mutual funds, stocks, pension plans, bonds, ETFs... that can be identified by different names or tickers at the same time, depending on the context or source.</p>
-						<p>An asset identifier can be used directly, without defining it anyway. However, it is important to use a proper identifier for an asset, but especially for a given information source. For that reason, we recommend checking the <a href="compatibility.html">Compatibility list</a> of assets, sources and identifiers.</p>
+						<h5 class="mt-5 mb-4" id="ids">Asset identifiers (types of <code>{asset_id}</code>)</h5>
+						<p>muFunds can track several types of assets, including mutual funds, stocks, pension plans, bonds, ETFs... that can be identified by different names or tickers at the same time, depending on the context or source. Check the <a href="compatibility.html">Compatibility list</a> to make sure you use the proper identifier(s) for an asset and a data source.</p>
 						<ul>
 							<li>
 								<p><b>ISIN</b> (International Securities Identification Number)</p>
@@ -224,40 +106,46 @@
 							</li>
 
 							<li>
-								<p><b>Morningstar ID</b> (non-official name)</p>
-								<p>Apart from standard codes that identify certain assets, in most countries Morningstar uses an internal code to identify each tracked asset, which we will call Morningstar ID. This information can be really useful for certain assets that cannot be found in Morningstar by any other code (e.g. pension plans).</p>
-								<p>In this case, you can obtain this ID by searching an asset in Morningstar (preferably European versions) and extracting it as the id query parameter of the asset's page URL. For example, the Morningstar ID for the Vanguard Total Stock ETF (American ETF) is 0P00002DAJ, or for the azValor Global Value PP (Spanish pension plan) is F00000XL5T.</p>
-								<p>When using a Morningstar country-specific source, an automatic translation from ISIN or other standard identifier to Morningstar ID is performed, since Morningstar country pages only work with Morningstar IDs.</p>
+								<p><b>Morningstar IDs</b></p>
+								<p>These identifiers are particularly useful for assets that are listed in several exchanges (e.g. multi-listed stocks) or that cannot be uniquely identified with a standard identifier (e.g. stocks that share the same ticker in different markets).</p>
+
+								<p>In this case, you can obtain this identifier by searching an asset in the Morningstar website and going to its detail page. Then you can extract the Morningstar ID as the 10-character identifier from the URL. For example:</p>
+
+								<p><code>https://global.morningstar.com/en-gb/investments/funds/<b><u>0P00000WLG</u></b>/quote</code></p>
+
+								<p><code>https://global.morningstar.com/es/inversiones/pensiones/<b><u>0P0001LIG7</u></b>/cotizacion</code></p>
 							</li>
 
 							<li>
 								<p><b>Country or market ticker</b></p>
-								<p>Certain assets can be identified through a ticker in their market. To avoid coincidences between tickers from different markets, some sources use prefixes for every market (see the <a href="compatibility.html">Compatibility list</a>). However, other sources (e.g. Morningstar) don't, making preferrable to identify assets via another identifier (ISIN or Morningstar ID) in these cases.</p>
+								<p>Certain assets can be identified through a ticker in their market. Unlike Google Finance, Morningstar does not use prefixes for every market, so the same ticker can refer to different assets in different markets, making preferrable to identify assets via another identifier (ISIN or Morningstar ID) in these cases.</p>
 							</li>
 
 							<li>
-								<p><b>APIR</b> (for Australia and New Zealand)</p>
-								<p>The APIR code is universal across the Australian wealth management industry, being used by all the distribution platforms, custodians and fund administrators.</p>
+								<p><b>APIR</b> (for Australia and New Zealand mutual funds)</p>
 							</li>
 
 							<li>
-								<p><b>DGS code</b> (for Spain)</p>
-								<p>The DGS code is a specific identifier for pension plans and unit-linked assets in Spain, given by the Directorate General for Insurance and Pensions Funds (Dirección General de Seguros y Fondos de Pensiones).</p>
+								<p><b>DGS code</b> (for Spanish pension plans)</p>
+							</li>
+
+							<li>
+								<p><b>Canada fund code</b> (for Canadian mutual funds)</p>
+							</li>
+
+							<li>
+								<p><b>CUSIP</b> (for North American securities)</p>
+							</li>
+
+							<li>
+								<p><b>Chinese stock code</b> (for Chinese securities)</p>
 							</li>
 						</ul>
-					</div>
-					<div class="col-12" id="sources">
-						<hr class="mt-4 mb-5"/>
-						<h5 class="mb-4">Data sources (<code>source</code>)</h5>
-						<p>Although muFunds was originally designed to import data from Morningstar, now it is compatible with other information sources that potentially offer more updated or reliable data in certain cases. This is performed, as of now, via HTML parsing.</p>
-						<p>If no source is defined, then the asked information will be loaded from Morningstar in generic mode.</p>
+
+						<h5 class="mt-5 mb-4" id="sources">Data sources (<code>{source}</code>)</h5>
 						<ul>
-							<li>
-								<p>Morningstar (<code>morningstar</code>)</p>
-								<p>This source relies on Morningstar screener pages, that happen to be the easiest way to get information from an asset, regardless of the used identifier, as they work with ISINs, mutual fund tickers, ETF tickers, Morningstar IDs, etc.</p>
-								<p>Morningstar screener info is not a user-friendly interface and therefore loading times are faster. Furthermore, no country needs to be chosen and no translation from standard identifiers to Morningstar IDs is required. On the other hand, expenses data is usually not available and sometimes data is provided in a different currency of the asset's, is provided incorrectly or is not provided at all.</p>
-							</li>
-							<li>QueFondos.com (<code>quefondos</code>)</li>
+							<li>Morningstar (<code>"morningstar"</code>, default)</li>
+							<li>QueFondos.com (<code>"quefondos"</code>)</li>
 						</ul>
 					</div>
 	  		</div>

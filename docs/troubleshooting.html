@@ -59,27 +59,39 @@
 				<div class="row text-left mb-3 mb-sm-4">
 					<div class="col-12 mb-3">
 	    			<h2 class="mb-5">Troubleshooting</h2>
-						<p>This page aims to consider, comment and solve errors that muFunds users can face. If you find an unexpected issue, please <a href="https://github.com/joseballester/muFunds/issues">log them at GitHub</a> or contact us to the e-mail address available at <i>Add-ons > muFunds > About muFunds</i>.</p>
+						<p>This page aims to consider, comment and solve errors that muFunds users can face.<br> If you find an unexpected issue, please <a href="https://github.com/joseballester/muFunds/issues">log them at GitHub</a>.</p>
 						<ul>
 							<li>
-								<p><b>Error: You have selected an invalid option.</b></p>
-								<p>Please check that you introduced a valid option (check them at <a href="usage.html">Usage and examples</a>) as the first argument of the <code>muFunds</code> function.</p>
+								<p><b>I'm getting wrong data, or data for another listing of the same asset (e.g. multi-listed stocks).</b></p>
+								<p>A same security may trade in different exchanges simultaneously under the same name, ticker and ISIN. In those cases, consider using an asset identifier that uniquely identifies the specific listing you want. For example, search the ISIN/ticker in Morningstar, find the URL of the detail page of the your listing, and extract the Morningstar ID from there:</p>
+
+								<p class="text-center mb-4">
+									<img src="img/multi-listed.png" srcset="img/multi-listed.png 1x, img/multi-listed@2x.png 2x" alt="Morningstar search for multi-listed assets" width="1000" style="max-width: 100%;">
+								</p>
+							</li>
+							<li>
+								<p><b>Error: Unknown option.</b></p>
+								<p>Please check that you introduced a <a href="usage.html#options">valid option</a> as the first argument of the <code>muFunds</code> function call.</p>
 							</li>
 							<li>
 								<p><b>Error: Asset identifier is empty.</b></p>
-								<p>Please check that you introduced an asset identifier (string) as the second argument of the <code>muFunds</code> function.</p>
+								<p>Please check that you introduced an <a href="usage.html#ids">asset identifier</a> (string) as the second argument of the <code>muFunds</code> function.</p>
 							</li>
 							<li>
-								<p><b>Error: Source is not compatible. Please check the documentation for the compatibility list.</b></p>
+								<p><b>Error: Unknown data source.</b></p>
 								<p>Please check the <a href="usage.html">Usage and examples</a> and <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the data source is compatible with muFunds. Remember that, if you want to obtain data from Google Finance, you should use the <a href="https://support.google.com/docs/answer/3093281">Google Finance function included in Google Sheets</a> instead.</p>
 							</li>
 							<li>
-								<p><b>Error: Wrong combination of asset identifier and source. Please check the accepted ones at the documentation.</b></p>
-								<p>Please check the <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the asset is compatible with the data source you have chosen. This error is due to an exception when fetching the data page, for example a <i>Not Found</i> (404) code.</p>
+								<p><b>Error: Asset not found.</b></p>
+								<p>Please check the <a href="compatibility.html">Compatibility list</a> documentation pages to verify that the asset is compatible with the data source you have chosen, as well as the identifier you have used for it.</p>
 							</li>
 							<li>
-								<p><b>Error: (A certain option) is not available for this asset and source. Please try another data source.</b></p>
+								<p><b>Error: Requested data is not available for this asset from this data source. Please try a different source.</b></p>
 								<p>Some data sources do not offer all the data options that are possible to call via muFunds. In this case, consider using an alternative data source for your same asset, as sometimes more than one source is compatible at the same time.</p>
+							</li>
+							<li>
+								<p><b>Error: Exceeded maximum execution time.</b></p>
+								<p>This is not a muFunds' error itself, but Google Sheets complaining because the function is taking too much time. This can happen because Morningstar is responding slowly in that moment, or because many function calls are being performed at the same time (e.g. when you open a spreadsheet with many cells using muFunds). In the latter case, try reducing the number of cells using the function or call muFunds asynchronously, with a time-based trigger.</p>
 							</li>
 						</ul>
 					</div>

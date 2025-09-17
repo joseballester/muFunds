@@ -60,217 +60,300 @@
 					<div class="col-12 mb-3">
 	    			<h2 class="mb-5">Compatibility list</h2>
 						<p>This list includes all assets than can be tracked in Google Sheets via muFunds.</p>
-						<p>Many real-time data assets (such as stocks or ETFs) are compatible with Google Finance, and in these cases we recommend the <a href="https://support.google.com/docs/answer/3093281">Google Finance function included in Google Sheets</a>, that usually provides reliable data with small delays. The list of exchanges connected to Google Finance is available in <a href="https://www.google.com/googlefinance/disclaimer/">their disclaimer page</a>.</p>
-						<p>For all the other assets (mutual funds, pension plans, bonds, etc.), muFunds relies in different data sources listed below, with the codes that should be used as the <a href="usage.html"><code>source</code> argument for the <code>muFunds</code> function</a>.</p>
-						<p><u>Note:</u> Search compatible sources and identifiers for the country where the asset is available for sale, not where the asset is registered. For example, data for mutual funds from Luxembourg is available in most European Morningstar pages.</p>
+						<p>Many real-time data assets (such as stocks or ETFs) are compatible with Google Finance, and in these cases we recommend the <a href="https://support.google.com/docs/answer/3093281">Google Finance function included in Google Sheets</a>, which usually provides reliable data with small delays. The list of exchanges connected to Google Finance is available in <a href="https://www.google.com/googlefinance/disclaimer/">their disclaimer page</a>.</p>
+						<p>For all the other assets (mutual funds, pension plans, bonds, etc.), muFunds relies in different data sources listed below, with the codes that should be used as the <a href="usage.html"><code>{source}</code> argument for the <code>muFunds</code> function</a>.</p>
 					</div>
 			    <div class="col-12 mb-1 mb-md-0">
-					<table id="compatibility-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+					<table class="table table-bordered table-sm" cellspacing="0" width="100%">
 						<thead>
-						    <tr>
-								<th class="th-sm">Country</th>
-								<th class="th-sm" style="width:30%;">Asset type</th>
-								<th class="th-sm" style="width:30%;" style="width:30%;">Data source</th>
-								<th class="th-sm" style="width:18%;">Source code</th>
-								<th class="th-sm" style="width:22%;">Asset identifiers</th>
-						    </tr>
+							<tr>
+								<th class="th-sm" style="width:35%;">Asset type</th>
+								<th class="th-sm" style="width:25%;">Data source</th>
+								<th class="th-sm" style="width:22%;">Asset identifier</th>
+								<th class="th-sm" style="width:18%;">Example identifier</th>
+							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Australia</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>APIR<br>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Austria</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Belgium</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Denmark</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Finland</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>France</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Germany</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td rowspan="2">Hong Kong</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>ETFs</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID<br>SEHK Stock Code</td>
-						    </tr>
-							<tr>
-								<td>Iceland</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Ireland</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Italy</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Norway</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Netherlands</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>New Zealand</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>APIR<br>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Portugal</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td rowspan="3">Singapore</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>ETFs</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID<br>SGX Stock Code</td>
-						    </tr>
-							<tr>
-								<td>Insurance Linked Funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>South Africa</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td rowspan="5">Spain</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>ETFs</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID<br>BME Ticker</td>
-						    </tr>
-							<tr>
-								<td>Pension plans</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>Morningstar ID</td>
-						    </tr>
-							<tr>
-								<td>Mutual funds</td>
-								<td>Quefondos.com</td>
-								<td><code>quefondos</code></td>
+								<td rowspan="3">
+									UCITS mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-gb/investments/funds/0P00000WLG/quote" target="_blank">Vanguard Global Stock Index Eur Acc</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
 								<td>ISIN</td>
-						    </tr>
+								<td><code>IE00B03HD191</code></td>
+							</tr>
 							<tr>
-								<td>Pension plans</td>
-								<td>Quefondos.com</td>
-								<td><code>quefondos</code></td>
-								<td>DGS Code</td>
-						    </tr>
+								<td>Morningstar ID</td>
+								<td><code>0P00000WLG</code></td>
+							</tr>
 							<tr>
-								<td>Switzerland</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
+								<td>QueFondos (<code>quefondos</code>)</td>
+								<td>ISIN</td>
+								<td><code>IE00B03HD191</code></td>
+							</tr>
+
 							<tr>
-								<td rowspan="2">United Kingdom</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
+								<td rowspan="2">
+									UCITS ETF<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-gb/investments/etfs/0P0001BVGE/quote" target="_blank">Vanguard FTSE Dev Eurp ex UK ETF Dis</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td><s>ISIN</s> <small>(not recommended, shared among exchanges)</small></td>
+								<td><code><s>IE00BKX55S42</s></code></td>
+							</tr>
 							<tr>
-								<td>Pension funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Morningstar ID</td>
-						    </tr>
+								<td>Morningstar ID <small>(recommended, uniquely identifies each listing)</small></td>
+								<td>
+									<code>0P0001BVGE</code> <small>(XFRA)</small><br>
+									<code>0P00016SSA</code> <small>(CHIX)</small><br>
+									<code>0P00014D7Q</code> <small>(XLON)</small><br>
+									<code>0P0001O0UQ</code> <small>(AQSE)</small><br>
+									<code>0P00014D7M</code> <small>(XAMS)</small>
+								</td>
+							</tr>
 							<tr>
-								<td>United States</td>
-								<td>Mutual funds</td>
-								<td>Morningstar</td>
-								<td><code>morningstar</code></td>
-								<td>ISIN<br>Ticker<br>CUSIP<br>Morningstar ID</td>
-						    </tr>
+								<td rowspan="2">
+									UK mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-gb/investments/funds/F00000OJRV/quote" target="_blank">iShares North American Eq Idx (UK) D Acc</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>GB00B7QK1Y37</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00000OJRV</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									UK pension fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-gb/investments/pensions/0P0000F3DY/quote" target="_blank">Baillie Gifford Japanese Equity Series 3</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>GB00B2PGGQ45</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P0000F3DY</code></td>
+							</tr>
+							<tr>
+								<td rowspan="3">
+									Spanish pension plan<br>
+									<small>(e.g. <a href="https://global.morningstar.com/es/inversiones/pensiones/F000016CB6/cotizacion" target="_blank">MyInvestor Indexado Global PP</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>DGS code</td>
+								<td><code>N5396</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F000016CB6</code></td>
+							</tr>
+							<tr>
+								<td>QueFondos (<code>quefondos</code>)</td>
+								<td>DGS code</td>
+								<td><code>N5396</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Canadian mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ca/investments/funds/0P0000IUYM/quote" target="_blank">EdgePoint Global Growth & Inc Port Sr A</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>Fund code</td>
+								<td><code>EDG180</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P0000IUYM</code></td>
+							</tr>
+							<tr>
+								<td rowspan="4">
+									Australian mutual fund<br>
+									<small>(e.g. <a href="https://www.morningstar.com.au/investments/security/fund/18568" target="_blank">OnePath OA FR IP-T. Rowe Price Global Eq</a>)</small>
+								</td>
+								<td rowspan="4">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>AU60MMF15632</code></td>
+							</tr>
+							<tr>
+								<td>APIR</td>
+								<td><code>MMF1563AU</code></td>
+							</tr>
+							<tr>
+								<td>Ticker</td>
+								<td><code>18568</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00000LKY3</code></td>
+							</tr>
+							<tr>
+								<td rowspan="4">
+									US mutual fund<br>
+									<small>(e.g. <a href="https://www.morningstar.com/funds/xnas/vfiax/quote" target="_blank">Vanguard 500 Index Fund Admiral Shares</a>)</small>
+								</td>
+								<td rowspan="4">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>US9229087104</code></td>
+							</tr>
+							<tr>
+								<td>Ticker</td>
+								<td><code>VFIAX</code></td>
+							</tr>
+							<tr>
+								<td>CUSIP</td>
+								<td><code>922908710</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>FOUSA00L8W</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Chinese mutual fund<br>
+									<small>(e.g. <a href="https://www.morningstar.cn/#/fund/017305" target="_blank">China Life Security Ultra-Short Bond A</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>Stock code</td>
+								<td><code>017305</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00001ESHW</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Singaporean mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ea/investments/funds/0P00006Q06/quote" target="_blank">Eastspring Inv UT Global Technology</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>SG9999002794</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P00006Q06</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Indonesian mutual fund<br>
+									<small>(e.g. <a href="https://www.panin-am.co.id/product_01?/7aq5S8hdAMBKXRUPkbJqA==" target="_blank">Panin Dana Maksima</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>IDN000016706</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F000003YB6</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Thai mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ea/investments/funds/0P0001PAL0/quote" target="_blank">BCAP Global Private Equity 22A NFRI</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>THA792010003</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P0001PAL0</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Brazilian mutual fund<br>
+									<small>(e.g. <a href="https://valorainvest.com.br/en/fund/valora-horizon/" target="_blank">Valora Horizon High Yield Fi</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>BRVVGICTF000</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00000PRN3</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Chilean mutual fund<br>
+									<small>(e.g. <a href="https://banco.bice.cl/inversiones/fondos-mutuos/fondo-mutuo-bice-estrategia-balanceada" target="_blank">BICE Balanceado Clásica</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>CL0001523589</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00000ZUTU</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Mexican mutual fund<br>
+									<small>(e.g. <a href="https://www.blackrock.com/mx/intermediarios/productos/298584/portafolio-estrategico-gold-oportunidad" target="_blank">BlackRock Portafolio Estratégico Gold</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>MX52GO090015</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00000LVWX</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Israeli ETF<br>
+									<small>(e.g. Tachlit SAL 40 Composite Local Equity)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>IL0011450694</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>F00001Q2I1</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Hong Kong mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ea/investments/funds/0P0001SKSP/quote" target="_blank">Allianz Choice Asian Ord A HKD</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>HK0000061553</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P0001SKSP</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Taiwanese mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ea/investments/funds/0P0001LF7Y/quote" target="_blank">ABITL US Growth Fund-A2 TWD</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>TW000T1819A9</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P0001LF7Y</code></td>
+							</tr>
+							<tr>
+								<td rowspan="2">
+									Malaysian mutual fund<br>
+									<small>(e.g. <a href="https://global.morningstar.com/en-ea/investments/funds/0P00008MH7/quote" target="_blank">Phillip Master Money Market</a>)</small>
+								</td>
+								<td rowspan="2">Morningstar (<code>morningstar</code>)</td>
+								<td>ISIN</td>
+								<td><code>MYU00007AA09</code></td>
+							</tr>
+							<tr>
+								<td>Morningstar ID</td>
+								<td><code>0P00008MH7</code></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
