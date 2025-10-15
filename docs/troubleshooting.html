@@ -62,8 +62,8 @@
 						<p>This page aims to consider, comment and solve errors that muFunds users can face.<br> If you find an unexpected issue, please <a href="https://github.com/joseballester/muFunds/issues">log them at GitHub</a>.</p>
 						<ul>
 							<li>
-								<p><b>I'm getting wrong data, or data for another listing of the same asset (e.g. multi-listed stocks).</b></p>
-								<p>A same security may trade in different exchanges simultaneously under the same name, ticker and ISIN. In those cases, consider using an asset identifier that uniquely identifies the specific listing you want. For example, search the ISIN/ticker in Morningstar, find the URL of the detail page of the your listing, and extract the Morningstar ID from there:</p>
+								<p><b>I'm getting wrong data, data for another listing of the same asset, or the error "Multiple results found (e.g. multi-listed stocks/ETFs). Please use a unique or alternative identifier".</b></p>
+								<p>A same security may trade in different exchanges simultaneously under the same name, ticker and ISIN, which may have different NAVs and/or currencies. In such cases, use an asset identifier that uniquely identifies the specific listing you want. For example, search the ISIN/ticker in your country's Morningstar website, find the URL of the detail page of the specific listing you hold, extract the Morningstar ID from there and use it as the asset identifier for muFunds:</p>
 
 								<p class="text-center mb-4">
 									<img src="img/multi-listed.png" srcset="img/multi-listed.png 1x, img/multi-listed@2x.png 2x" alt="Morningstar search for multi-listed assets" width="1000" style="max-width: 100%;">
