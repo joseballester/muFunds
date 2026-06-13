@@ -2,33 +2,21 @@ function loadFromMorningstar(option, id) {
   let securityId = id;
 
   let response;
+  const initialCurrency = 'EUR';
 
   try {
-    response = fetchMorningstarScreener(id);
+    response = fetchMorningstarScreener(id, initialCurrency);
   } catch (e) {}
 
   if (response) {
-    let row;
-
-    if (response.rows.length === 1) {
-      row = response.rows[0];
-    } else if (response.rows.length > 1) {
-      const rows = response.rows.filter(r => {
-          return r.SecId === id || r.PerformanceId === id || r.Isin === id || r.Valoren === id || r.Wkn === id || r.Sedol === id 
-            || r.Mex === id || r.DgsCode === id || r.Ticker === id || r.Apir === id;
-        });
+    let row = getRowFromMorningstarScreener(response, id);
+    
+    if (row.PriceCurrency !== initialCurrency) {
+      try {
+        response = fetchMorningstarScreener(id, row.PriceCurrency);
+      } catch (e) {}
       
-      if (rows.length === 1) {
-        row = rows[0];
-      }
-    }
-
-    if (!row) {
-      if (response.rows.length > 1) {
-        throw AmbiguousAssetIdentifierError();
-      }
-      
-      throw AssetNotFoundError();
+      row = getRowFromMorningstarScreener(response, id);
     }
 
     if (option === 'nav' && row.ClosePrice !== undefined) {
@@ -57,6 +45,23 @@ function loadFromMorningstar(option, id) {
 
     if (option === 'category' && row.CategoryName !== undefined) {
       return row.CategoryName;
+    }
+
+    if (['change', 'return1d', 'return1m', 'return3m', 'return1y', 'return3y', 'return5y', 'returnytd'].includes(option)) {
+      const returnField = {
+        'change': 'GBRReturnD1',
+        'return1d': 'GBRReturnD1',
+        'return1m': 'GBRReturnM1',
+        'return3m': 'GBRReturnM3',
+        'return1y': 'GBRReturnM12',
+        'return3y': 'GBRReturnM36',
+        'return5y': 'GBRReturnM60',
+        'returnytd': 'GBRReturnM0',
+      }[option];
+      
+      if (row[returnField] !== undefined) {
+        return row[returnField] / 100;
+      }
     }
 
     // if (row.Universe !== 'ETALL$$ALL' && row.Isin !== undefined) {
@@ -92,68 +97,17 @@ function loadFromMorningstar(option, id) {
     }
   }
 
-  if (['category', 'expenses', 'change', 'return1d', 'return1m', 'return3m', 'return1y', 'return3y', 'return5y', 'returnytd'].includes(option)) {
-    const dataResponse = fetchMorningstarScreenerDataApi(securityId);
-
-    let result;
-    if (dataResponse.results.length === 0) {
-      if (response) {
-        // Asset found in Screener but not in Quote API
-        throw DataNotAvailableError();
-      }
-
-      throw AssetNotFoundError();
-    } else if (dataResponse.results.length === 1) {
-      result = dataResponse.results[0];
-    } else {
-      const results = dataResponse.results.filter(result => {
-        return result.meta?.securityID === securityId || result.meta?.performanceID === securityId || result.meta?.fundID === securityId || 
-          result.fields?.['isin']?.value === securityId || result.fields?.['dgsCode']?.value === securityId;
-      });
-      
-      if (results.length === 1) {
-        result = results[0];
-      } else {
-        throw AmbiguousAssetIdentifierError();
-      }
-    }
-
-    if (option === 'category') {
-      if (result.fields?.['morningstarCategory']?.value !== undefined) {
-        return result.fields['morningstarCategory'].value;
-      }
-    } else if (option === 'expenses') {
-      if (result.fields?.['priipsKidCosts[ongoing]']?.value !== undefined) {
-        return result.fields['priipsKidCosts[ongoing]'].value / 100;
-      }
-    } else {
-      const morningstarKey = {
-        'change': 'totalReturn[1d]',
-        'return1d': 'totalReturn[1d]',
-        'return1m': 'totalReturn[1m]',
-        'return3m': 'totalReturn[3m]',
-        'return1y': 'totalReturn[1y]',
-        'return3y': 'totalReturn[3y]',
-        'return5y': 'totalReturn[5y]',
-        'returnytd': 'totalReturn[ytd]',
-      }[option];
-
-      if (result.fields?.[morningstarKey]?.value !== undefined) {
-        return result.fields[morningstarKey].value / 100;
-      }
-    }
-  }
-
   throw DataNotAvailableError();
 }
 
-function fetchMorningstarScreener(term) {
+function fetchMorningstarScreener(term, currency) {
   let url = 'https://lt.morningstar.com/api/rest.svc/klr5zyak8x/security/screener';
 
   const params = {
     outputType: 'json',
     page: 1,
     pageSize: 10,
+    currencyId: currency,
     securityDataPoints: [
       'CategoryName',
       'ClosePrice',
@@ -162,6 +116,12 @@ function fetchMorningstarScreener(term) {
       'Name',
       'PriceCurrency',
       'GBRReturnD1',
+      'GBRReturnM1',
+      'GBRReturnM3',
+      'GBRReturnM0',
+      'GBRReturnM12',
+      'GBRReturnM36',
+      'GBRReturnM60',
       'SecId',
       'PerformanceId',
       'Universe',
@@ -212,6 +172,29 @@ function fetchMorningstarScreener(term) {
   const fetch = UrlFetchApp.fetch(url);
 
   return JSON.parse(fetch.getContentText());
+}
+
+function getRowFromMorningstarScreener(response, id) {
+  if (response.rows.length === 1) {
+    return response.rows[0];
+  }
+  
+  if (response.rows.length > 1) {
+    const rows = response.rows.filter(r => {
+        return r.SecId === id || r.PerformanceId === id || r.Isin === id || r.Valoren === id || r.Wkn === id || r.Sedol === id 
+          || r.Mex === id || r.DgsCode === id || r.Ticker === id || r.Apir === id;
+      });
+    
+    if (rows.length === 1) {
+      return rows[0];
+    }
+  }
+
+  if (response.rows.length > 1) {
+    throw AmbiguousAssetIdentifierError();
+  }
+  
+  throw AssetNotFoundError();
 }
 
 function fetchMorningstarScreenerDataApi(securityId) {
