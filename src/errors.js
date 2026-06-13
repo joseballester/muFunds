@@ -6,6 +6,10 @@ function EmptyAssetIdentifierError() {
   return Error('Asset identifier is empty.');
 }
 
+function AmbiguousAssetIdentifierError() {
+  return Error('Multiple results found (e.g. multi-listed stocks/ETFs). Please use a unique or alternative identifier. Check the docs at mufunds.com/troubleshooting.html');
+}
+
 function UnknownSourceError() {
   return Error('Unknown data source. Check the docs at mufunds.com/usage.html');
 }
