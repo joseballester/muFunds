@@ -95,7 +95,7 @@ HTML parsing uses the [Cheerio for Apps Script](https://github.com/tani/cheeriog
 
 All errors are defined in `src/errors.ts`, in one table that gives each code its user-facing message, a short internal message for the logs, and a severity. Throw them with `new MuFundsError(code)`, or pass `{ internalMessage }` to log something more specific. The internal message is never shown to the user. Anything else a source throws, like a network failure or an `HttpError`, reaches the user as `SOURCE_UNAVAILABLE`, and the original error is kept as its `cause`. The exception is Apps Script's daily UrlFetch quota error, which `appsScriptServices()` turns into `QUOTA_EXCEEDED` before any source sees it.
 
-`muFunds()` logs every error with `Logger`, which sends it to Cloud Logging as a structured `jsonPayload`: `INFO` errors with `Logger.log`, `ERROR` errors with `Logger.severe`. Each entry has `errorCode`, `message` (the internal message, which Logs Explorer shows as the summary line), `userMessage` (what the cell shows) and a `context` with the arguments and stack trace. Filter on `jsonPayload.errorCode` to find one kind of error.
+`muFunds()` logs errors with `Logger`, which sends it to Cloud Logging as a structured `jsonPayload`: `INFO` errors with `Logger.log`, `ERROR` errors with `Logger.severe`. `NONE` errors, like `EMPTY_ID`, aren't logged. Each entry has `errorCode`, `message` (the internal message, which Logs Explorer shows as the summary line), `userMessage` (what the cell shows) and a `context` with the arguments and stack trace. Filter on `jsonPayload.errorCode` to find one kind of error.
 
 ### Commands
 

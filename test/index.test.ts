@@ -173,6 +173,14 @@ describe('muFunds', () => {
     });
   });
 
+  it("doesn't log errors with NONE severity", () => {
+    assert.throws(() => muFunds('nav', '  ', 'quefondos'), {
+      message: ERRORS.EMPTY_ID.message,
+    });
+
+    assert.equal(logged.length, 0);
+  });
+
   it('shows unexpected errors as SOURCE_UNAVAILABLE and logs the original at ERROR', () => {
     assert.throws(() => muFunds('nav', 'N5396', 'quefondos'), {
       message: ERRORS.SOURCE_UNAVAILABLE.message,

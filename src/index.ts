@@ -78,6 +78,9 @@ export function muFunds(option: unknown, id: unknown, source: unknown): string |
     return getAssetValue(option, id, source, appsScriptServices());
   } catch (caught) {
     const error = toMuFundsError(caught);
+    if (error.severity === 'NONE') {
+      throw error;
+    }
     // Logger, unlike console, sends objects to Cloud Logging as a structured jsonPayload.
     // `message` is the summary line in Logs Explorer, so it gets the detailed internal message.
     const entry = {

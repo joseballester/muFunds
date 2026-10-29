@@ -1,10 +1,11 @@
-export type Severity = 'INFO' | 'ERROR';
+export type Severity = 'NONE' | 'INFO' | 'ERROR';
 
 /**
  * Every error muFunds reports. `message` is shown to the user in the cell.
  * `internalMessage` is the default summary for the logs; throw sites can replace
- * it with something more specific. `severity` sets the log level: INFO for bad
- * input or missing data, ERROR for failures that need a look.
+ * it with something more specific. `severity` sets the log level: NONE for noise
+ * not worth logging, INFO for bad input or missing data, ERROR for failures that
+ * need a look.
  */
 export const ERRORS = {
   UNKNOWN_OPTION: {
@@ -12,8 +13,9 @@ export const ERRORS = {
     internalMessage: 'Unknown option',
     message: 'Unknown option. Check the docs at mufunds.com/usage.html',
   },
+  /** Not logged: sheets often point at blank cells, so this would flood the logs. */
   EMPTY_ID: {
-    severity: 'INFO',
+    severity: 'NONE',
     internalMessage: 'Empty asset ID',
     message: 'Asset identifier is empty.',
   },
