@@ -28,10 +28,18 @@ export interface HttpResponse {
   body: string;
 }
 
+/** A string store whose entries expire. */
+export interface Cache {
+  /** Returns null when the key is missing or expired. */
+  get(key: string): string | null;
+  put(key: string, value: string, expirationInSeconds: number): void;
+}
+
 /** Side effects the sources depend on, passed in so tests can replace them. */
 export interface Services {
   fetch(url: string): HttpResponse;
   loadHtml(html: string): CheerioAPI;
+  cache: Cache;
 }
 
 /** Looks up an asset and returns what it knows about it. */

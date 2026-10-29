@@ -72,6 +72,63 @@ describe('getAssetValue', () => {
   });
 });
 
+describe('getAssetValue cache', () => {
+  const screenerRow = JSON.stringify({ rows: [{ ClosePrice: 10, CategoryName: 'Equity' }] });
+
+  it('serves every option of an asset from one lookup', () => {
+    const services = fakeServices(() => screenerRow);
+
+    assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
+    assert.equal(getAssetValue('category', 'asset_id', undefined, services), 'Equity');
+    assert.throws(() => getAssetValue('expenses', 'asset_id', undefined, services), {
+      code: 'DATA_NOT_AVAILABLE',
+    });
+
+    assert.equal(services.requests.length, 1);
+    assert.deepEqual([...services.cache.entries.keys()], ['v1:morningstar:asset_id']);
+    assert.equal(services.cache.entries.get('v1:morningstar:asset_id')!.expirationInSeconds, 2 * 60 * 60);
+  });
+
+  it('shares entries between names of the same source', () => {
+    const services = fakeServices(() => screenerRow);
+
+    getAssetValue('nav', 'asset_id', 'morningstar-es', services);
+    getAssetValue('nav', 'asset_id', ' Morningstar ', services);
+    getAssetValue('nav', 'asset_id', undefined, services);
+
+    assert.equal(services.requests.length, 1);
+  });
+
+  it('keeps assets and sources apart', () => {
+    const services = fakeServices(() => '<html></html>');
+
+    assert.throws(() => getAssetValue('nav', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
+    services.cache.put('v1:morningstar:N5396', JSON.stringify({ nav: 1 }), 60);
+    services.cache.put('v1:quefondos:other_id', JSON.stringify({ nav: 2 }), 60);
+    assert.throws(() => getAssetValue('nav', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
+
+    assert.equal(services.requests.length, 2);
+  });
+
+  it('doesn’t cache errors, so the next lookup asks again', () => {
+    const responses = [
+      { status: 503, body: '' }, // Screener
+      { status: 503, body: '' }, // Quote API fallback
+      JSON.stringify({ rows: [] }),
+      screenerRow,
+    ];
+    const services = fakeServices(() => responses.shift() ?? assert.fail('Too many requests'));
+
+    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'SOURCE_UNAVAILABLE' });
+    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'ASSET_NOT_FOUND' });
+    assert.equal(services.cache.entries.size, 0);
+    assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
+    assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
+
+    assert.equal(services.requests.length, 4);
+  });
+});
+
 describe('muFunds', () => {
   // Stand-ins for the Apps Script globals, which Node doesn't have.
   const scope = globalThis as { Logger?: unknown; UrlFetchApp?: unknown };

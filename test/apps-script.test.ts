@@ -29,10 +29,11 @@ describe('isUrlFetchQuotaError', () => {
 });
 
 describe('appsScriptServices', () => {
-  const scope = globalThis as { UrlFetchApp?: unknown };
+  const scope = globalThis as { UrlFetchApp?: unknown; CacheService?: unknown };
 
   afterEach(() => {
     delete scope.UrlFetchApp;
+    delete scope.CacheService;
   });
 
   const failWith = (message: string) => {
@@ -51,6 +52,39 @@ describe('appsScriptServices', () => {
       code: 'QUOTA_EXCEEDED',
       internalMessage: 'Error: Service invoked too many times for one day: urlfetch.',
     });
+  });
+
+  it('caches in the script cache', () => {
+    const stored = new Map<string, { value: string; seconds: number }>();
+    scope.CacheService = {
+      getScriptCache: () => ({
+        get: (key: string) => stored.get(key)?.value ?? null,
+        put: (key: string, value: string, seconds: number) => stored.set(key, { value, seconds }),
+      }),
+    };
+    const { cache } = appsScriptServices();
+
+    assert.equal(cache.get('key'), null);
+    cache.put('key', 'value', 60);
+    assert.equal(cache.get('key'), 'value');
+    assert.deepEqual(stored.get('key'), { value: 'value', seconds: 60 });
+  });
+
+  it('treats a cache failure as a miss', () => {
+    scope.CacheService = {
+      getScriptCache: () => ({
+        get: () => {
+          throw new Error('Service error: CacheService');
+        },
+        put: () => {
+          throw new Error('Argument too large: value');
+        },
+      }),
+    };
+    const { cache } = appsScriptServices();
+
+    assert.equal(cache.get('key'), null);
+    assert.doesNotThrow(() => cache.put('key', 'value', 60));
   });
 
   it('rethrows other errors unchanged', () => {

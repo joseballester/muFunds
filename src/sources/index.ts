@@ -16,8 +16,11 @@ const SOURCES = new Map<string, Source>([
  */
 const LEGACY_MORNINGSTAR_SOURCE = /^morningstar-(au|es|de|ie|fr|za|at|be|dk|fi|gb|uk|ch|is|it|pt|no|nl)$/;
 
-/** Returns the source named by the `source` argument. Blank means the default source. */
-export function resolveSource(name: unknown): Source {
+/**
+ * Returns the source named by the `source` argument, with its canonical name.
+ * Blank means the default source.
+ */
+export function resolveSource(name: unknown): { name: string; load: Source } {
   let key = String(name ?? '')
     .trim()
     .toLowerCase();
@@ -26,9 +29,9 @@ export function resolveSource(name: unknown): Source {
     key = DEFAULT_SOURCE;
   }
 
-  const source = SOURCES.get(key);
-  if (!source) {
+  const load = SOURCES.get(key);
+  if (!load) {
     throw new MuFundsError('UNKNOWN_SOURCE');
   }
-  return source;
+  return { name: key, load };
 }

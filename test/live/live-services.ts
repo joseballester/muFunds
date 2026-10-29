@@ -26,11 +26,15 @@ function fetchSync(url: string): HttpResponse {
   return response;
 }
 
-/** Services that make real requests. `fetch` can be wrapped, e.g. to simulate an outage. */
+/**
+ * Services that make real requests. `fetch` can be wrapped, e.g. to simulate an outage.
+ * Asset data isn't cached, so every test runs the source's code.
+ */
 export function liveServices(wrapFetch: (fetch: Services['fetch']) => Services['fetch'] = (fetch) => fetch): Services {
   return {
     fetch: wrapFetch(fetchSync),
     loadHtml: (html) => cheerio.load(html),
+    cache: { get: () => null, put: () => {} },
   };
 }
 

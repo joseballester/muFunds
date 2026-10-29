@@ -1,7 +1,7 @@
 import { describeError, MuFundsError } from './errors.ts';
-import type { Services } from './types.ts';
+import type { Cache, Services } from './types.ts';
 
-/** Services backed by Apps Script's UrlFetchApp and the Cheerio library from the manifest. */
+/** Services backed by Apps Script's UrlFetchApp, CacheService and the Cheerio library from the manifest. */
 export function appsScriptServices(): Services {
   return {
     fetch(url) {
@@ -22,6 +22,30 @@ export function appsScriptServices(): Services {
     },
     loadHtml(html) {
       return Cheerio.load(html);
+    },
+    cache: scriptCache(),
+  };
+}
+
+/**
+ * The script cache, which every user of the add-on shares. Asset data is public, so one
+ * lookup can serve everyone. A cache failure counts as a miss, so it never breaks a lookup.
+ */
+function scriptCache(): Cache {
+  return {
+    get(key) {
+      try {
+        return CacheService.getScriptCache().get(key);
+      } catch {
+        return null;
+      }
+    },
+    put(key, value, expirationInSeconds) {
+      try {
+        CacheService.getScriptCache().put(key, value, expirationInSeconds);
+      } catch {
+        // Not cached: the next lookup fetches again.
+      }
     },
   };
 }
