@@ -51,15 +51,16 @@ Percentages are returned as fractions (`0.012` for 1.2%), so format the cell as 
 
 ### Errors
 
-| Message                             | Meaning                                                                                                            |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `Unknown option.`                   | `option` is not in the list above.                                                                                 |
-| `Asset identifier is empty.`        | `id` is blank.                                                                                                     |
-| `Unknown data source.`              | `source` is not supported.                                                                                         |
-| `Asset not found.`                  | The source has no match for `id`.                                                                                  |
-| `Multiple results found`            | The `id` matches several assets (for example, an ETF listed on several exchanges). Use a more specific identifier. |
-| `Requested data is not available`   | The asset exists but the source doesn't provide that option for it. Try another source.                            |
-| `The data source is not responding` | The source failed or answered with something unexpected. Try again later.                                          |
+| Message                                | Meaning                                                                                                            |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `Unknown option.`                      | `option` is not in the list above.                                                                                 |
+| `Asset identifier is empty.`           | `id` is blank.                                                                                                     |
+| `Unknown data source.`                 | `source` is not supported.                                                                                         |
+| `Asset not found.`                     | The source has no match for `id`.                                                                                  |
+| `Multiple results found...`            | The `id` matches several assets (for example, an ETF listed on several exchanges). Use a more specific identifier. |
+| `Requested data is not available...`   | The asset exists but the source doesn't provide that option for it. Try another source.                            |
+| `Your Google account has reached...`   | Google limits how many requests a script can make per account per day. Values load again within 24 hours.          |
+| `The data source is not responding...` | The source failed or answered with something unexpected. Try again later.                                          |
 
 See [mufunds.com/troubleshooting.html](https://mufunds.com/troubleshooting.html) for more help.
 
@@ -92,7 +93,7 @@ HTML parsing uses the [Cheerio for Apps Script](https://github.com/tani/cheeriog
 
 ### Errors and logging
 
-All errors are defined in `src/errors.ts`, in one table that gives each code its user-facing message, a short internal message for the logs, and a severity. Throw them with `new MuFundsError(code)`, or pass `{ internalMessage }` to log something more specific. The internal message is never shown to the user. Anything else a source throws, like a network failure or an `HttpError`, reaches the user as `SOURCE_UNAVAILABLE`, and the original error is kept as its `cause`.
+All errors are defined in `src/errors.ts`, in one table that gives each code its user-facing message, a short internal message for the logs, and a severity. Throw them with `new MuFundsError(code)`, or pass `{ internalMessage }` to log something more specific. The internal message is never shown to the user. Anything else a source throws, like a network failure or an `HttpError`, reaches the user as `SOURCE_UNAVAILABLE`, and the original error is kept as its `cause`. The exception is Apps Script's daily UrlFetch quota error, which `appsScriptServices()` turns into `QUOTA_EXCEEDED` before any source sees it.
 
 `muFunds()` logs every error with `Logger`, which sends it to Cloud Logging as a structured `jsonPayload`: `INFO` errors with `Logger.log`, `ERROR` errors with `Logger.severe`. Each entry has `errorCode`, `message` (the internal message, which Logs Explorer shows as the summary line), `userMessage` (what the cell shows) and a `context` with the arguments and stack trace. Filter on `jsonPayload.errorCode` to find one kind of error.
 

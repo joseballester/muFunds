@@ -131,6 +131,29 @@ describe('muFunds', () => {
     // The stack of the original error, not of the wrapper.
     assert.match(entry.context.stack ?? '', /^Error: DNS error/);
   });
+
+  it('shows the daily UrlFetch quota as QUOTA_EXCEEDED, logs it at INFO and skips the fallback', () => {
+    let fetches = 0;
+    scope.UrlFetchApp = {
+      fetch: () => {
+        fetches++;
+        throw new Error('Service invoked too many times for one day: urlfetch.');
+      },
+    };
+
+    assert.throws(() => muFunds('nav', 'IE00B03HD191', undefined), {
+      message: ERRORS.QUOTA_EXCEEDED.message,
+    });
+
+    // The Morningstar quote API fallback would hit the same quota, so it isn't tried.
+    assert.equal(fetches, 1);
+    assert.equal(logged.length, 1);
+    const { level, entry } = logged[0]!;
+    assert.equal(level, 'log');
+    assert.equal(entry.errorCode, 'QUOTA_EXCEEDED');
+    assert.equal(entry.message, 'Error: Service invoked too many times for one day: urlfetch.');
+    assert.equal(entry.userMessage, ERRORS.QUOTA_EXCEEDED.message);
+  });
 });
 
 interface LogEntry {

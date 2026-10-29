@@ -38,6 +38,13 @@ export const ERRORS = {
     internalMessage: 'Option not available for this asset',
     message: 'Requested data is not available for this asset from this data source. Please try a different source.',
   },
+  /** The user's Google account ran out of its daily UrlFetch quota. A usage limit, not a failure. */
+  QUOTA_EXCEEDED: {
+    severity: 'INFO',
+    internalMessage: 'UrlFetch daily quota exceeded',
+    message:
+      'Your Google account has reached its daily limit of data requests. Values will load again within 24 hours. Check the docs at mufunds.com/troubleshooting.html',
+  },
   /** Anything unexpected: network failures, odd responses, bugs. */
   SOURCE_UNAVAILABLE: {
     severity: 'ERROR',
