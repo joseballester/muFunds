@@ -132,7 +132,7 @@ describe('[morningstar_live] UCITS ETF', testCaseFor(['0P0001BVGE'], {
   nav: true,
   date: true,
   currency: 'EUR',
-  expenses: true,
+  expenses: false,
   category: 'Europe ex-UK Equity',
   change: true,
   return1d: true,
@@ -188,7 +188,7 @@ describe('[morningstar_live] Spanish pension plan', testCaseFor(['N5396', 'F0000
   return3m: true,
   return1y: true,
   return3y: true,
-  return5y: false,
+  return5y: true,
   returnytd: true,
 }));
 
@@ -228,7 +228,7 @@ describe('[morningstar_live] US mutual fund', testCaseFor(['US9229087104', 'VFIA
   nav: true,
   date: true,
   currency: 'USD',
-  expenses: false,
+  expenses: true,
   category: 'Large Blend',
   change: true,
   return1d: true,
@@ -246,14 +246,14 @@ describe('[morningstar_live] Chinese mutual fund', testCaseFor(['017305', 'F0000
   currency: 'CNY',
   expenses: true,
   category: 'Short-Term Bond',
-  change: false,
-  return1d: false,
-  return1m: false,
-  return3m: false,
-  return1y: false,
-  return3y: false,
+  change: true,
+  return1d: true,
+  return1m: true,
+  return3m: true,
+  return1y: true,
+  return3y: true,
   return5y: false,
-  returnytd: false,
+  returnytd: true,
 }));
 
 describe('[morningstar_live] Singaporean mutual fund', testCaseFor(['SG9999002794', '0P00006Q06'], {
@@ -299,16 +299,16 @@ describe('[morningstar_live] Thai mutual fund', testCaseFor(['THA792010003', '0P
   return1m: true,
   return3m: true,
   return1y: true,
-  return3y: false,
+  return3y: true,
   return5y: false,
   returnytd: true,
 }));
 
-describe('[morningstar_live] Brazilian mutual fund', testCaseFor(['BRVVGICTF000', 'F00000PRN3'], {
+describe('[morningstar_live] Brazilian mutual fund', testCaseFor(['BR018ZCTF006', 'F000013FB3'], {
   nav: true,
   date: true,
   currency: 'BRL',
-  expenses: false,
+  expenses: true,
   category: 'BRL Corporate Bond',
   change: true,
   return1d: true,
@@ -324,7 +324,7 @@ describe('[morningstar_live] Chilean mutual fund', testCaseFor(['CL0001523589', 
   nav: true,
   date: true,
   currency: 'CLP',
-  expenses: true,
+  expenses: false,
   category: 'Moderate Allocation',
   change: true,
   return1d: true,
@@ -396,7 +396,7 @@ describe('[morningstar_live] Taiwanese mutual fund', testCaseFor(['TW000T1819A9'
   return3m: true,
   return1y: true,
   return3y: true,
-  return5y: false,
+  return5y: true,
   returnytd: true,
 }));
 
