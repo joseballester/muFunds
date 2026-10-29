@@ -207,7 +207,7 @@ function fetchMorningstarScreenerDataApi(securityId) {
 }
 
 function fetchMorningstarQuoteApi(securityId) {
-  let url = `https://global.morningstar.com/api/v1/en/stores/realtime/quotes?securities=${securityId}`;
+  let url = `https://global.morningstar.com/api/v1/en-gb/stores/realtime/quotes?securities=${securityId}`;
 
   const fetch = UrlFetchApp.fetch(url);
 
