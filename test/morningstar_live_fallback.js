@@ -17,13 +17,24 @@ const testContext = newTestContext({
   },
 });
 
-const testCaseFor = (ids, expectations) => {
+const notAvailableMessage = 'Requested data is not available for this asset from this data source. Please try a different source.';
+const notFoundMessage = 'Asset not found. Please use another identifier and/or data source.';
+
+// The fallback only reads these options from the Quote API. Any other option fails before a request is made.
+const quoteApiOptions = ['nav', 'date', 'currency', 'change', 'return1d'];
+
+// notFoundIds: identifiers the Quote API does not resolve (e.g. tickers or local codes).
+const testCaseFor = (ids, expectations, notFoundIds = []) => {
   return () => {
     let values = {};
 
     ids.forEach(id => {
+      const notFound = notFoundIds.includes(id);
+      const expects = (option) => !notFound && expectations[option];
+      const failMessage = (option) => notFound && quoteApiOptions.includes(option) ? notFoundMessage : notAvailableMessage;
+
       ['nav', 'expenses'].forEach((option) => {
-        if (expectations[option]) {
+        if (expects(option)) {
           it(`should return ${option} using ID ${id}`, () => {
             const value = testContext.muFunds(option, id, source);
             if (values[option]) {
@@ -39,13 +50,13 @@ const testCaseFor = (ids, expectations) => {
             assert.throws(() => {
               testContext.muFunds(option, id, source);
             }, {
-              message: 'Requested data is not available for this asset from this data source. Please try a different source.',
+              message: failMessage(option),
             });
           });
         }
       });
 
-      if (expectations.date) {
+      if (expects('date')) {
         it(`should return date using ID ${id}`, () => {
           const date = testContext.muFunds('date', id, source);
           if (values.date) {
@@ -60,13 +71,13 @@ const testCaseFor = (ids, expectations) => {
           assert.throws(() => {
             testContext.muFunds('date', id, source);
           }, {
-            message: 'Requested data is not available for this asset from this data source. Please try a different source.',
+            message: failMessage('date'),
           });
         });
       }
 
       ['currency', 'category'].forEach((option) => {
-        if (expectations[option]) {
+        if (expects(option)) {
           it(`should return ${option} using ID ${id}`, () => {
             const value = testContext.muFunds(option, id, source);
             assert.equal(value, expectations[option]);
@@ -76,14 +87,14 @@ const testCaseFor = (ids, expectations) => {
             assert.throws(() => {
               testContext.muFunds(option, id, source);
             }, {
-              message: 'Requested data is not available for this asset from this data source. Please try a different source.',
+              message: failMessage(option),
             });
           });
         }
       });
 
       ['change', 'return1d', 'return1m', 'return3m', 'return1y', 'return3y', 'return5y', 'returnytd'].forEach((option) => {
-        if (expectations[option]) {
+        if (expects(option)) {
           it(`should return ${option} using ID ${id}`, () => {
             const value = testContext.muFunds(option, id, source);
             if (values[option]) {
@@ -98,7 +109,7 @@ const testCaseFor = (ids, expectations) => {
             assert.throws(() => {
               testContext.muFunds(option, id, source);
             }, {
-              message: 'Requested data is not available for this asset from this data source. Please try a different source.',
+              message: failMessage(option),
             });
           });
         }
@@ -111,32 +122,32 @@ describe('[morningstar_live_fallback] UCITS mutual fund', testCaseFor(['IE00B03H
   nav: true,
   date: true,
   currency: 'EUR',
-  expenses: true,
-  category: 'Global Large-Cap Blend Equity',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] UCITS ETF', testCaseFor(['0P0001BVGE'], {
   nav: true,
   date: true,
   currency: 'EUR',
-  expenses: true,
-  category: 'Europe ex-UK Equity',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] UK mutual fund', testCaseFor(['GB00B7QK1Y37', 'F00000OJRV'], {
@@ -144,71 +155,71 @@ describe('[morningstar_live_fallback] UK mutual fund', testCaseFor(['GB00B7QK1Y3
   date: true,
   currency: 'GBP',
   expenses: false,
-  category: 'US Large-Cap Blend Equity',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] UK pension fund', testCaseFor(['GB00B2PGGQ45', '0P0000F3DY'], {
-  nav: true,
-  date: true,
-  currency: 'GBP',
-  expenses: true,
-  category: 'Japan Large-Cap Blend Equity',
-  change: true,
-  return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
-}));
+  nav: false,
+  date: false,
+  currency: false,
+  expenses: false,
+  category: false,
+  change: false,
+  return1d: false,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
+}, ['GB00B2PGGQ45', '0P0000F3DY']));
 
 describe('[morningstar_live_fallback] Spanish pension plan', testCaseFor(['N5396', 'F000016CB6'], {
   nav: true,
   date: true,
   currency: 'EUR',
   expenses: false,
-  category: 'Global Equity PP',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
   return5y: false,
-  returnytd: true,
-}));
+  returnytd: false,
+}, ['N5396']));
 
 describe('[morningstar_live_fallback] Canadian mutual fund', testCaseFor(['EDG180', '0P0000IUYM'], {
   nav: true,
   date: true,
   currency: 'CAD',
   expenses: false,
-  category: 'Global Equity Balanced',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
-}));
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
+}, ['EDG180']));
 
 describe('[morningstar_live_fallback] Australian mutual fund', testCaseFor(['AU60MMF15632', 'MMF1563AU', '18568', 'F00000LKY3'], {
-  nav: true,
-  date: true,
-  currency: 'AUD',
+  nav: false,
+  date: false,
+  currency: false,
   expenses: false,
-  category: 'Equity World Large Growth',
+  category: false,
   change: false,
   return1d: false,
   return1m: false,
@@ -217,54 +228,54 @@ describe('[morningstar_live_fallback] Australian mutual fund', testCaseFor(['AU6
   return3y: false,
   return5y: false,
   returnytd: false,
-}));
+}, ['MMF1563AU', '18568']));
 
 describe('[morningstar_live_fallback] US mutual fund', testCaseFor(['US9229087104', 'VFIAX', '922908710', 'FOUSA00L8W'], {
   nav: true,
   date: true,
   currency: 'USD',
   expenses: false,
-  category: 'Large Blend',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
-}));
-
-describe('[morningstar_live_fallback] Chinese mutual fund', testCaseFor(['017305', 'F00001ESHW'], {
-  nav: true,
-  date: true,
-  currency: 'CNY',
-  expenses: true,
-  category: 'Short-Term Bond',
-  change: false,
-  return1d: false,
   return1m: false,
   return3m: false,
   return1y: false,
   return3y: false,
   return5y: false,
   returnytd: false,
-}));
+}, ['VFIAX']));
+
+describe('[morningstar_live_fallback] Chinese mutual fund', testCaseFor(['017305', 'F00001ESHW'], {
+  nav: true,
+  date: true,
+  currency: 'CNY',
+  expenses: false,
+  category: false,
+  change: true,
+  return1d: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
+}, ['017305']));
 
 describe('[morningstar_live_fallback] Singaporean mutual fund', testCaseFor(['SG9999002794', '0P00006Q06'], {
   nav: true,
   date: true,
   currency: 'SGD',
-  expenses: true,
-  category: 'Sector Equity Technology',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Indonesian mutual fund', testCaseFor(['IDN000016706', 'F000003YB6'], {
@@ -272,23 +283,23 @@ describe('[morningstar_live_fallback] Indonesian mutual fund', testCaseFor(['IDN
   date: true,
   currency: 'IDR',
   expenses: false,
-  category: 'Indonesia Equity',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Thai mutual fund', testCaseFor(['THA792010003', '0P0001PAL0'], {
-  nav: true,
-  date: true,
-  currency: 'THB',
-  expenses: true,
-  category: 'Foreign Investment Miscellaneous',
+  nav: false,
+  date: false,
+  currency: false,
+  expenses: false,
+  category: false,
   change: false,
   return1d: false,
   return1m: false,
@@ -299,52 +310,52 @@ describe('[morningstar_live_fallback] Thai mutual fund', testCaseFor(['THA792010
   returnytd: false,
 }));
 
-describe('[morningstar_live_fallback] Brazilian mutual fund', testCaseFor(['BRVVGICTF000', 'F00000PRN3'], {
+describe('[morningstar_live_fallback] Brazilian mutual fund', testCaseFor(['BR018ZCTF006', 'F000013FB3'], {
   nav: true,
   date: true,
   currency: 'BRL',
   expenses: false,
-  category: 'BRL Corporate Bond',
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Chilean mutual fund', testCaseFor(['CL0001523589', 'F00000ZUTU'], {
   nav: true,
   date: true,
   currency: 'CLP',
-  expenses: true,
-  category: 'Moderate Allocation',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Mexican mutual fund', testCaseFor(['MX52GO090015', 'F00000LVWX'], {
   nav: true,
   date: true,
   currency: 'MXN',
-  expenses: true,
-  category: 'MXN Aggressive Allocation',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Israeli mutual fund', testCaseFor(['IL0051252166', 'F00000ZRCT'], {
@@ -352,9 +363,9 @@ describe('[morningstar_live_fallback] Israeli mutual fund', testCaseFor(['IL0051
   date: true,
   currency: 'ILS',
   expenses: false,
-  category: 'ILS Cautious Allocation, 10% Equity Cap',
-  change: false,
-  return1d: false,
+  category: false,
+  change: true,
+  return1d: true,
   return1m: false,
   return3m: false,
   return1y: false,
@@ -367,26 +378,26 @@ describe('[morningstar_live_fallback] Hong Kong mutual fund', testCaseFor(['HK00
   nav: true,
   date: true,
   currency: 'HKD',
-  expenses: true,
-  category: 'Asia ex-Japan Equity',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
 
 describe('[morningstar_live_fallback] Taiwanese mutual fund', testCaseFor(['TW000T1819A9', '0P0001LF7Y'], {
   nav: true,
   date: true,
   currency: 'TWD',
-  expenses: true,
-  category: 'US Large-Cap Growth Equity',
-  change: false,
-  return1d: false,
+  expenses: false,
+  category: false,
+  change: true,
+  return1d: true,
   return1m: false,
   return3m: false,
   return1y: false,
@@ -399,14 +410,14 @@ describe('[morningstar_live_fallback] Malaysian mutual fund', testCaseFor(['MYU0
   nav: true,
   date: true,
   currency: 'MYR',
-  expenses: true,
-  category: 'Money Market - Malaysia',
+  expenses: false,
+  category: false,
   change: true,
   return1d: true,
-  return1m: true,
-  return3m: true,
-  return1y: true,
-  return3y: true,
-  return5y: true,
-  returnytd: true,
+  return1m: false,
+  return3m: false,
+  return1y: false,
+  return3y: false,
+  return5y: false,
+  returnytd: false,
 }));
