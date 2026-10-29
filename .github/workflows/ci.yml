@@ -1,9 +1,15 @@
 name: CI
 
+# Pushes to master and pull requests run the checks.
+# Pushing a tag like v20 also uploads the add-on to Apps Script and creates a new version.
 on:
   push:
     branches: [master]
+    tags: ['v*']
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   check:
@@ -19,3 +25,92 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: check
+    runs-on: ubuntu-latest
+    # Holds the clasp secrets. Limit it to v* tags in the repo settings.
+    environment: apps-script
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history and tags, to compare OAuth scopes with the previous release.
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Set up clasp
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+          APPS_SCRIPT_ID: ${{ secrets.APPS_SCRIPT_ID }}
+        run: |
+          if [ -z "$CLASPRC_JSON" ] || [ -z "$APPS_SCRIPT_ID" ]; then
+            echo "::error::Set the CLASPRC_JSON and APPS_SCRIPT_ID secrets on the apps-script environment."
+            exit 1
+          fi
+          umask 077
+          printf '%s' "$CLASPRC_JSON" > ~/.clasprc.json
+          printf '{"scriptId":"%s","rootDir":"."}\n' "$APPS_SCRIPT_ID" > .clasp.json
+
+      - name: Push to Apps Script
+        run: npx clasp push --force
+
+      - name: Create version
+        id: version
+        run: |
+          description="$GITHUB_REF_NAME: $(git log -1 --format=%s)"
+          number=$(npx clasp --json create-version "$description" | jq -r .versionNumber)
+          if ! [[ "$number" =~ ^[0-9]+$ ]]; then
+            echo "::error::clasp did not return a version number."
+            exit 1
+          fi
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Compare OAuth scopes with the previous release
+        id: scopes
+        run: |
+          previous=$(git describe --tags --abbrev=0 --match 'v*' HEAD^ 2>/dev/null || true)
+          if [ -z "$previous" ]; then
+            echo "changed=unknown" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          before=$(git show "$previous:appsscript.json" | jq -S '.oauthScopes // [] | sort')
+          after=$(jq -S '.oauthScopes // [] | sort' appsscript.json)
+          if [ "$before" = "$after" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::OAuth scopes changed since $previous. Update them in the Marketplace SDK and the OAuth consent screen before publishing."
+          fi
+          echo "previous=$previous" >> "$GITHUB_OUTPUT"
+
+      - name: Summary
+        env:
+          VERSION: ${{ steps.version.outputs.number }}
+          SCOPES_CHANGED: ${{ steps.scopes.outputs.changed }}
+          PREVIOUS: ${{ steps.scopes.outputs.previous }}
+        run: |
+          {
+            echo "## Apps Script version $VERSION is ready"
+            echo
+            echo "Users still get the old version. To publish this one:"
+            echo
+            echo "1. Open the [Google Workspace Marketplace SDK](https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk) and go to **App Configuration**."
+            echo "2. Set the Sheets add-on version to **$VERSION** and click **Save**."
+            echo
+            case "$SCOPES_CHANGED" in
+              true) echo "> [!WARNING]"
+                    echo "> OAuth scopes changed since $PREVIOUS. Update them in the Marketplace SDK and the OAuth consent screen first. Google may need to verify the app again." ;;
+              false) echo "OAuth scopes are unchanged since $PREVIOUS." ;;
+              *) echo "No earlier v* tag, so OAuth scopes were not compared." ;;
+            esac
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice::Created Apps Script version $VERSION. Set it in the Marketplace SDK App Configuration to publish."

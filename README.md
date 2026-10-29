@@ -112,7 +112,7 @@ npm install
 | `npm run build`     | Bundles the add-on into `dist/`                                |
 | `npm run push`      | Builds and pushes to Apps Script with clasp                    |
 
-CI runs formatting, type-checking, offline tests and the build on every push and pull request. The live tests can break when upstream data changes, so they are run by hand.
+CI runs formatting, type-checking, offline tests and the build on every push and pull request, and deploys when you push a `v*` tag (see [Deploying](#deploying)). The live tests can break when upstream data changes, so they are run by hand.
 
 ### Adding a source
 
@@ -121,6 +121,23 @@ CI runs formatting, type-checking, offline tests and the build on every push and
 3. Save a sample response in `test/fixtures/` and add `test/<name>.test.ts`.
 
 ### Deploying
+
+Releases go through CI. Tag the commit and push the tag:
+
+```bash
+git tag v20 && git push origin v20
+```
+
+Once the checks pass, CI builds the add-on, pushes it to Apps Script and creates a new version. The run summary shows the version number. Users don't get it until you set that number on the **App Configuration** page of the Google Workspace Marketplace SDK and click **Save**. Google has no API for that step. If the release changes `oauthScopes` in `appsscript.json`, CI warns you, and you also need to update the scopes in the Marketplace SDK and the OAuth consent screen.
+
+The deploy job reads two secrets from the `apps-script` environment:
+
+| Secret           | Value                                                                        |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `CLASPRC_JSON`   | Contents of `~/.clasprc.json` after `npx clasp login` with the owner account |
+| `APPS_SCRIPT_ID` | The Apps Script project's script ID                                          |
+
+To push by hand while developing, for example to test the head deployment:
 
 ```bash
 npx clasp login
