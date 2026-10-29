@@ -1,6 +1,4 @@
-package.json
-globals.d.ts
-package-lock.json
-jsconfig.json
-node_modules/**
-test/**
+# clasp pushes from the project root. Upload only the manifest and the bundle.
+**/**
+!appsscript.json
+!dist/muFunds.js

@@ -1,16 +1,32 @@
 {
+  "name": "mufunds",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Google Sheets add-on that adds a =muFunds() function for mutual fund, ETF, pension plan and stock data.",
+  "homepage": "https://mufunds.com",
+  "repository": "github:joseballester/muFunds",
   "license": "MIT",
-  "devDependencies": {
-    "@types/cheerio": "^0.22.35",
-    "@types/google-apps-script": "^1.0.100"
+  "type": "module",
+  "engines": {
+    "node": ">=24"
   },
   "scripts": {
-    "test": "mocha"
+    "build": "node scripts/build.ts",
+    "check": "tsc",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test \"test/*.test.ts\"",
+    "test:live": "node --test \"test/live/*.test.ts\"",
+    "push": "npm run build && clasp push"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@google/clasp": "^3.4.1",
+    "@types/google-apps-script": "^2.0.13",
+    "@types/node": "^24.19.2",
     "cheerio": "^1.2.0",
-    "mocha": "^12.0.3",
-    "sinon": "^21.1.2",
-    "sync-fetch": "^0.6.0"
+    "domhandler": "^5.0.3",
+    "esbuild": "^0.28.2",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2"
   }
 }

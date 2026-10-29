@@ -1,5 +1,8 @@
+node_modules/
+dist/
+
+# clasp credentials and project settings
 .clasp.json
 .clasprc.json
+
 .vscode/
-test.js
-node_modules/
