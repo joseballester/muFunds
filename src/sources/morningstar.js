@@ -11,7 +11,7 @@ function loadFromMorningstar(option, id) {
   if (response) {
     let row = getRowFromMorningstarScreener(response, id);
     
-    if (row.PriceCurrency !== initialCurrency) {
+    if (row.PriceCurrency !== undefined && row.PriceCurrency !== initialCurrency) {
       try {
         response = fetchMorningstarScreener(id, row.PriceCurrency);
       } catch (e) {}
