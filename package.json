@@ -1,15 +1,15 @@
 {
   "devDependencies": {
     "@types/cheerio": "^0.22.35",
-    "@types/google-apps-script": "^1.0.97"
+    "@types/google-apps-script": "^1.0.100"
   },
   "scripts": {
-    "test": "./node_modules/.bin/_mocha"
+    "test": "mocha"
   },
   "dependencies": {
-    "cheerio": "^1.1.2",
-    "mocha": "^11.7.2",
-    "sinon": "^21.0.0",
-    "sync-fetch": "^0.6.0-2"
+    "cheerio": "^1.2.0",
+    "mocha": "^12.0.3",
+    "sinon": "^21.1.2",
+    "sync-fetch": "^0.6.0"
   }
 }
