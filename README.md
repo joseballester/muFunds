@@ -46,7 +46,7 @@ Percentages are returned as fractions (`0.012` for 1.2%), so format the cell as 
 
 ### Data sources
 
-- **`morningstar`** (default): uses Morningstar's screener API across funds, ETFs, stocks, UK and French pension funds, Indian closed-end funds and LSE investment trusts. It matches the `id` against ISIN, SecId, PerformanceId, ticker, Valoren, WKN, SEDOL, MEX, DGS code and APIR. If the screener is unavailable, it falls back to Morningstar's quote API, which only has `nav`, `date`, `currency` and `change`. Older country-specific names like `morningstar-es` or `morningstar-uk` are still accepted and behave the same.
+- **`morningstar`** (default): uses Morningstar's screener API across funds, ETFs, stocks, UK pension funds, French innovation and local investment funds (FCPI, FIP), Indian closed-end funds and LSE investment trusts. It matches the `id` against ISIN, SecId, PerformanceId, ticker, Valoren, WKN, SEDOL, MEX, DGS code and APIR. If the screener is unavailable, it falls back to Morningstar's quote API, which only has `nav`, `date`, `currency` and `change`. Older country-specific names like `morningstar-es` or `morningstar-uk` are still accepted and behave the same.
 - **`quefondos`**: scrapes [quefondos.com](https://www.quefondos.com) for Spanish funds (by ISIN) and pension plans (by DGS code). Does not support `expenses`.
 
 ### Errors

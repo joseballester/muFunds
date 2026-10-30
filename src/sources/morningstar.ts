@@ -78,7 +78,7 @@ const UNIVERSES = [
   'ETALL$$ALL', // All ETFs
   'E0WWE$$ALL', // All stocks
   // Not included in the "all" universes above
-  'FOFRA$$FXP', // French pension funds
+  'FOFRA$$FXP', // French innovation and local investment funds (FCPI, FIP)
   'SAGBR$$ALL', // UK pension funds
   'FCIND$$ALL', // Indian closed-end funds
   'CEEXG$XLON', // LSE investment trusts
