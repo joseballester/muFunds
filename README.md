@@ -81,6 +81,7 @@ src/
     morningstar.ts       Morningstar screener, with the quote API as fallback
     quefondos.ts         quefondos.com scraper
 scripts/build.ts         Bundles src/ into dist/muFunds.js
+scripts/try.ts           Prints every option for one asset, from the real source
 test/
   *.test.ts              Offline tests against saved responses in fixtures/
   live/*.test.ts         Tests that call the real data sources
@@ -107,10 +108,19 @@ npm install
 | ------------------- | -------------------------------------------------------------- |
 | `npm test`          | Runs the offline tests                                         |
 | `npm run test:live` | Runs tests against Morningstar and quefondos (needs network)   |
+| `npm run try`       | Prints every option for one asset (see below)                  |
 | `npm run check`     | Type-checks everything with `tsc`                              |
 | `npm run format`    | Formats the code with Prettier (`format:check` only checks it) |
 | `npm run build`     | Bundles the add-on into `dist/`                                |
 | `npm run push`      | Builds and pushes to Apps Script with clasp                    |
+
+To see what an asset returns while you work on a source, pass its id and, optionally, a source (blank means the default):
+
+```bash
+npm run try -- IE00B03HD191 quefondos
+```
+
+It calls `getAssetValue()` for every option against the real site and prints a table with each value, or the error code and message. Each page is downloaded once per run, and nothing is cached between runs.
 
 CI runs formatting, type-checking, offline tests and the build on every push and pull request, and deploys when you push a `v*` tag (see [Deploying](#deploying)). The live tests can break when upstream data changes, so they are run by hand.
 

@@ -17,7 +17,8 @@
     "format:check": "prettier --check .",
     "test": "node --test \"test/*.test.ts\"",
     "test:live": "node --test \"test/live/*.test.ts\"",
-    "push": "npm run build && clasp push"
+    "push": "npm run build && clasp push",
+    "try": "node scripts/try.ts"
   },
   "devDependencies": {
     "@google/clasp": "^3.4.1",
