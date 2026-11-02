@@ -1,5 +1,6 @@
 import { appsScriptServices } from './apps-script.ts';
 import { MuFundsError, toMuFundsError } from './errors.ts';
+import { isMistypedIsin } from './isin.ts';
 import { resolveSource } from './sources/index.ts';
 import type { AssetData, Cache, Field, Services } from './types.ts';
 
@@ -46,6 +47,9 @@ export function getAssetValue(option: unknown, id: unknown, source: unknown, ser
   }
   if (SHEETS_ERRORS.has(assetId)) {
     throw new MuFundsError('ID_IS_ERROR');
+  }
+  if (isMistypedIsin(assetId)) {
+    throw new MuFundsError('INVALID_ISIN');
   }
 
   const { name, load } = resolveSource(source);

@@ -25,6 +25,12 @@ export const ERRORS = {
     internalMessage: 'Asset ID is a spreadsheet error',
     message: 'The asset identifier cell contains an error. Fix that cell first.',
   },
+  /** Shaped like an ISIN, but the check digit doesn't match: almost always a typo. */
+  INVALID_ISIN: {
+    severity: 'INFO',
+    internalMessage: 'ISIN check digit does not match',
+    message: 'This ISIN is not valid. Please check it for typos.',
+  },
   UNKNOWN_SOURCE: {
     severity: 'INFO',
     internalMessage: 'Unknown source',

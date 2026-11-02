@@ -56,6 +56,7 @@ Percentages are returned as fractions (`0.012` for 1.2%), so format the cell as 
 | `Unknown option.`                                | `option` is not in the list above.                                                                                 |
 | `Asset identifier is empty.`                     | `id` is blank.                                                                                                     |
 | `The asset identifier cell contains an error...` | The `id` cell shows an error like `#REF!` or `#N/A`. Fix that cell first.                                          |
+| `This ISIN is not valid...`                      | The `id` looks like an ISIN but its check digit is wrong, usually from a typo.                                     |
 | `Unknown data source.`                           | `source` is not supported.                                                                                         |
 | `Asset not found.`                               | The source has no match for `id`.                                                                                  |
 | `Multiple results found...`                      | The `id` matches several assets (for example, an ETF listed on several exchanges). Use a more specific identifier. |

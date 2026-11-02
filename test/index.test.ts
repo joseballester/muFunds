@@ -31,6 +31,15 @@ describe('getAssetValue', () => {
     }
   });
 
+  it('rejects an ISIN with a wrong check digit', () => {
+    for (const id of ['IE00B03HD192', 'ie00b03hd192']) {
+      assert.throws(() => getAssetValue('nav', id, undefined, noRequests()), {
+        code: 'INVALID_ISIN',
+        message: ERRORS.INVALID_ISIN.message,
+      });
+    }
+  });
+
   it('still looks up ids that only resemble an error value', () => {
     const services = fakeServices(() => JSON.stringify({ rows: [{ ClosePrice: 10 }] }));
     assert.equal(getAssetValue('nav', 'IE00B03HD191', undefined, services), 10);

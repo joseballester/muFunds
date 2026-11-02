@@ -68,7 +68,8 @@ for (const asset of ASSETS) {
 }
 
 it(`quefondos: doesn't find an unknown id`, () => {
-  assert.throws(() => getAssetValue('nav', 'XX0000000000', 'quefondos', services), {
+  // A valid check digit, so it reaches quefondos instead of failing as INVALID_ISIN.
+  assert.throws(() => getAssetValue('nav', 'XX0000000002', 'quefondos', services), {
     code: 'ASSET_NOT_FOUND',
   });
 });
