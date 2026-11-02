@@ -13,6 +13,8 @@ interface Asset {
   ids: string[];
   /** Undefined when the quote API knows the asset but has no price for it. */
   currency?: string;
+  /** Options the quote API has for most assets but not this one. */
+  missing?: Option[];
   /** Ids the quote API doesn't recognize, like tickers and local codes. */
   notFound?: string[];
 }
@@ -73,7 +75,12 @@ const ASSETS: Asset[] = [
     ids: ['IDN000016706', 'F000003YB6'],
     currency: 'IDR',
   },
-  { name: 'Thai mutual fund', ids: ['THA792010003', '0P0001PAL0'] },
+  {
+    name: 'Thai mutual fund',
+    ids: ['THA792010003', '0P0001PAL0'],
+    currency: 'THB',
+    missing: ['change', 'return1d'],
+  },
   {
     name: 'Brazilian mutual fund',
     ids: ['BR018ZCTF006', 'F000013FB3'],
@@ -136,7 +143,7 @@ for (const asset of ASSETS) {
       }
 
       for (const option of OPTIONS) {
-        if (!asset.currency || !QUOTE_OPTIONS.includes(option)) {
+        if (!asset.currency || !QUOTE_OPTIONS.includes(option) || asset.missing?.includes(option)) {
           it(`has no ${option} for ${id}`, () => {
             assert.throws(() => getAssetValue(option, id, 'morningstar', services), {
               code: 'DATA_NOT_AVAILABLE',
