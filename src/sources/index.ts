@@ -11,12 +11,6 @@ const SOURCES = new Map<string, Source>([
 ]);
 
 /**
- * Older versions had one Morningstar source per country, like "morningstar-es".
- * They all map to the same global source now.
- */
-const LEGACY_MORNINGSTAR_SOURCE = /^morningstar-(au|es|de|ie|fr|za|at|be|dk|fi|gb|uk|ch|is|it|pt|no|nl)$/;
-
-/**
  * Returns the source named by the `source` argument, with its canonical name.
  * Blank means the default source.
  */
@@ -25,7 +19,10 @@ export function resolveSource(name: unknown): { name: string; load: Source } {
     .trim()
     .toLowerCase();
 
-  if (key === '' || LEGACY_MORNINGSTAR_SOURCE.test(key)) {
+  // Older versions had one Morningstar source per country, like "morningstar-es",
+  // and users write them in many ways ("Morningstar UK", "morningstar_lu").
+  // They all mean the same global source now.
+  if (key === '' || (!SOURCES.has(key) && key.startsWith('morningstar'))) {
     key = DEFAULT_SOURCE;
   }
 

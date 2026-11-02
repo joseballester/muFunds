@@ -48,7 +48,7 @@ describe('getAssetValue', () => {
   });
 
   it('rejects an unknown source', () => {
-    for (const source of ['unknown_source', 'constructor', 'morningstar-xx']) {
+    for (const source of ['unknown_source', 'constructor', 'morningstr-es']) {
       assert.throws(() => getAssetValue('nav', 'asset_id', source, noRequests()), {
         code: 'UNKNOWN_SOURCE',
       });
@@ -64,8 +64,21 @@ describe('getAssetValue', () => {
     assert.equal(services.requests.length, 1);
   });
 
-  it('uses Morningstar by default and for legacy country-specific names', () => {
-    for (const source of [undefined, null, '', 'morningstar', 'morningstar-es', 'morningstar-uk']) {
+  it('uses Morningstar by default and for any name starting with "morningstar"', () => {
+    for (const source of [
+      undefined,
+      null,
+      '',
+      'morningstar',
+      'morningstar-es',
+      'morningstar-uk',
+      'morningstar-lu',
+      'morningstar-ca',
+      'Morningstar UK',
+      'morningstar_es',
+      'morningstar-xx',
+      'MORNINGSTAR',
+    ]) {
       const services = fakeServices(() => JSON.stringify({ rows: [{ ClosePrice: 10 }] }));
       assert.equal(getAssetValue('nav', 'asset_id', source, services), 10);
       assert.match(services.requests[0]!, /^https:\/\/lt\.morningstar\.com\//);
