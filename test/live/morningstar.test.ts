@@ -33,14 +33,19 @@ const ASSETS: Asset[] = [
     ids: ['0P0001BVGE'],
     currency: 'EUR',
     category: 'Europe ex-UK Equity',
-    unavailable: ['expenses'],
+  },
+  {
+    // Has an ongoing charge but no expense ratio.
+    name: 'French money market fund',
+    ids: ['FR0000447823', '0P00000F24'],
+    currency: 'EUR',
+    category: 'EUR Money Market - Short Term',
   },
   {
     name: 'UK mutual fund',
     ids: ['GB00B7QK1Y37', 'F00000OJRV'],
     currency: 'GBP',
     category: 'US Large-Cap Blend Equity',
-    unavailable: ['expenses'],
   },
   {
     name: 'UK pension fund',
@@ -113,7 +118,6 @@ const ASSETS: Asset[] = [
     ids: ['CL0001523589', 'F00000ZUTU'],
     currency: 'CLP',
     category: 'Moderate Allocation',
-    unavailable: ['expenses'],
   },
   {
     name: 'Mexican mutual fund',

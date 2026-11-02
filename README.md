@@ -36,7 +36,7 @@ Examples:
 | `date`                             | Date of the latest NAV                                     |
 | `change`                           | Daily change, as a fraction (same as `return1d`)           |
 | `currency`                         | Price currency (GBX prices are converted to GBP)           |
-| `expenses`                         | Expense ratio, as a fraction                               |
+| `expenses`                         | Ongoing charges (or expense ratio), as a fraction          |
 | `category`                         | Morningstar category (or the source's equivalent)          |
 | `return1d`, `return1m`, `return3m` | Total return over 1 day, 1 month, 3 months                 |
 | `return1y`, `return3y`, `return5y` | Total return over 1, 3, 5 years (3y and 5y are annualized) |

@@ -64,6 +64,30 @@ describe('Morningstar screener', () => {
     assert.equal(data.currency, 'GBP');
   });
 
+  it('uses the ongoing charge for expenses', () => {
+    const services = fakeServices(() => screener({ SecId: 'X', OngoingCharge: 0.05 }));
+
+    assert.equal(loadFromMorningstar('X', services).expenses, 0.05 / 100);
+  });
+
+  it('prefers the ongoing charge over the expense ratio', () => {
+    const services = fakeServices(() => screener({ SecId: 'X', ExpenseRatio: 1.64, OngoingCharge: 1.63 }));
+
+    assert.equal(loadFromMorningstar('X', services).expenses, 1.63 / 100);
+  });
+
+  it('falls back to the expense ratio when there is no ongoing charge', () => {
+    const services = fakeServices(() => screener({ SecId: 'X', ExpenseRatio: 1.64 }));
+
+    assert.equal(loadFromMorningstar('X', services).expenses, 1.64 / 100);
+  });
+
+  it('has no expenses without an expense ratio or ongoing charge', () => {
+    const services = fakeServices(() => screener({ SecId: 'X', ClosePrice: 10 }));
+
+    assert.equal(loadFromMorningstar('X', services).expenses, undefined);
+  });
+
   it('leaves missing values undefined', () => {
     const services = fakeServices(() => screener({ SecId: 'security_id' }));
 

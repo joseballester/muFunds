@@ -15,6 +15,7 @@ interface ScreenerRow {
   ClosePrice?: number;
   ClosePriceDate?: string;
   ExpenseRatio?: number;
+  OngoingCharge?: number; // EU KIID ongoing charges figure. Preferred over ExpenseRatio when both exist.
   PriceCurrency?: string;
   GBRReturnD1?: number;
   GBRReturnM0?: number; // Year to date
@@ -55,6 +56,7 @@ const DATA_POINTS = [
   'ClosePriceDate',
   'ExpenseRatio',
   'Name',
+  'OngoingCharge',
   'PriceCurrency',
   'GBRReturnD1',
   'GBRReturnM0',
@@ -137,7 +139,7 @@ export function loadFromMorningstar(id: string, services: Services): AssetData {
   return {
     ...toNativeUnits(row.ClosePrice, row.PriceCurrency),
     date: row.ClosePriceDate,
-    expenses: fromPercent(row.ExpenseRatio),
+    expenses: fromPercent(row.OngoingCharge ?? row.ExpenseRatio),
     category: row.CategoryName,
     return1d: fromPercent(row.GBRReturnD1),
     return1m: fromPercent(row.GBRReturnM1),
