@@ -13,8 +13,10 @@ const PENSION_PLAN_URL = 'https://www.quefondos.com/es/planes/ficha/index.html';
  * treated as a Spanish pension plan code (DGS code). Expense ratios aren't available.
  */
 export function loadFromQuefondos(id: string, services: Services): AssetData {
-  const baseUrl = isIsin(id) ? FUND_URL : PENSION_PLAN_URL;
-  const url = `${baseUrl}?isin=${encodeURIComponent(id)}`;
+  // quefondos is case-sensitive: "n5396" gets a 400 where "N5396" works.
+  const code = id.toUpperCase();
+  const baseUrl = isIsin(code) ? FUND_URL : PENSION_PLAN_URL;
+  const url = `${baseUrl}?isin=${encodeURIComponent(code)}`;
   const { status, body } = services.fetch(url);
 
   // quefondos answers 400 when the code isn't a valid plan code or ISIN (e.g. a stock ticker).

@@ -48,6 +48,18 @@ describe('quefondos', () => {
     assert.deepEqual(services.requests, ['https://www.quefondos.com/es/planes/ficha/index.html?isin=N5396']);
   });
 
+  it('uppercases ids, since quefondos is case-sensitive', () => {
+    const services = fakeServices(() => readFixture('quefondos-plan-N5396.html'));
+
+    loadFromQuefondos('n5396', services);
+    loadFromQuefondos('ie00b03hd191', services);
+
+    assert.deepEqual(services.requests, [
+      'https://www.quefondos.com/es/planes/ficha/index.html?isin=N5396',
+      'https://www.quefondos.com/es/fondos/ficha/index.html?isin=IE00B03HD191',
+    ]);
+  });
+
   it('reads prices with thousands separators', () => {
     const html = readFixture('quefondos-fund-IE00B03HD191.html').replace('52,393400 EUR', '1.052,393400 EUR');
     const services = fakeServices(() => html);
