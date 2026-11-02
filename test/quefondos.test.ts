@@ -73,6 +73,16 @@ describe('quefondos', () => {
     assert.equal(services.requests.length, 1);
   });
 
+  it('throws for a 400', () => {
+    // quefondos answers 400 for codes that aren't valid plan codes, like stock tickers.
+    const services = fakeServices(() => ({ status: 400, body: 'Bad request or can not be processed' }));
+
+    assert.throws(() => loadFromQuefondos('BIT:NWL', services), {
+      code: 'ASSET_NOT_FOUND',
+      internalMessage: 'Asset not found: HTTP 400',
+    });
+  });
+
   it('throws an HttpError for a server error', () => {
     const services = fakeServices(() => ({
       status: 500,

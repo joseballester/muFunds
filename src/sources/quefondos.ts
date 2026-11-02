@@ -17,9 +17,10 @@ export function loadFromQuefondos(id: string, services: Services): AssetData {
   const url = `${baseUrl}?isin=${encodeURIComponent(id)}`;
   const { status, body } = services.fetch(url);
 
-  if (status === 404 || (status === 200 && body.length === 0)) {
+  // quefondos answers 400 when the code isn't a valid plan code or ISIN (e.g. a stock ticker).
+  if (status === 400 || status === 404 || (status === 200 && body.length === 0)) {
     throw new MuFundsError('ASSET_NOT_FOUND', {
-      internalMessage: status === 404 ? 'Asset not found: HTTP 404' : 'Asset not found: empty page',
+      internalMessage: status === 200 ? 'Asset not found: empty page' : `Asset not found: HTTP ${status}`,
     });
   }
   if (status !== 200) {
