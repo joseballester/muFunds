@@ -22,6 +22,22 @@ describe('getAssetValue', () => {
     }
   });
 
+  it('rejects a Sheets error value as the id', () => {
+    for (const id of ['#REF!', '#N/A', ' #ERROR! ', '#NAME?', '#VALUE!', '#DIV/0!', '#NUM!', '#NULL!']) {
+      assert.throws(() => getAssetValue('nav', id, 'quefondos', noRequests()), {
+        code: 'ID_IS_ERROR',
+        message: ERRORS.ID_IS_ERROR.message,
+      });
+    }
+  });
+
+  it('still looks up ids that only resemble an error value', () => {
+    const services = fakeServices(() => JSON.stringify({ rows: [{ ClosePrice: 10 }] }));
+    assert.equal(getAssetValue('nav', 'IE00B03HD191', undefined, services), 10);
+    assert.equal(getAssetValue('nav', '#REF', undefined, services), 10);
+    assert.equal(services.requests.length, 2);
+  });
+
   it('rejects an unknown source', () => {
     for (const source of ['unknown_source', 'constructor', 'morningstar-xx']) {
       assert.throws(() => getAssetValue('nav', 'asset_id', source, noRequests()), {
@@ -177,10 +193,12 @@ describe('muFunds', () => {
     assert.throws(() => muFunds('nav', '  ', 'quefondos'), {
       message: ERRORS.EMPTY_ID.message,
     });
+    assert.throws(() => muFunds('nav', '#REF!', 'quefondos'), {
+      message: ERRORS.ID_IS_ERROR.message,
+    });
 
     assert.equal(logged.length, 0);
   });
-
   it('shows unexpected errors as SOURCE_UNAVAILABLE and logs the original at ERROR', () => {
     assert.throws(() => muFunds('nav', 'N5396', 'quefondos'), {
       message: ERRORS.SOURCE_UNAVAILABLE.message,

@@ -19,6 +19,12 @@ export const ERRORS = {
     internalMessage: 'Empty asset ID',
     message: 'Asset identifier is empty.',
   },
+  /** Not logged: the referenced cell already shows the error, and every recalculation would log it again. */
+  ID_IS_ERROR: {
+    severity: 'NONE',
+    internalMessage: 'Asset ID is a spreadsheet error',
+    message: 'The asset identifier cell contains an error. Fix that cell first.',
+  },
   UNKNOWN_SOURCE: {
     severity: 'INFO',
     internalMessage: 'Unknown source',

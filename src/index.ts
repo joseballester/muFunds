@@ -27,6 +27,9 @@ const FIELDS = [
 /** Values accepted for the `option` argument, mapped to the field they return. */
 const OPTIONS = new Map<string, Field>([...FIELDS.map((field) => [field, field] as const), ['change', 'return1d']]);
 
+/** The error values Google Sheets shows in a cell. A formula referencing such a cell gets it as this string. */
+const SHEETS_ERRORS = new Set(['#REF!', '#ERROR!', '#N/A', '#NAME?', '#VALUE!', '#DIV/0!', '#NUM!', '#NULL!']);
+
 /**
  * Returns one value for an asset. Always throws `MuFundsError`: anything
  * unexpected from a source is wrapped as `SOURCE_UNAVAILABLE`.
@@ -40,6 +43,9 @@ export function getAssetValue(option: unknown, id: unknown, source: unknown, ser
   const assetId = String(id ?? '').trim();
   if (!assetId) {
     throw new MuFundsError('EMPTY_ID');
+  }
+  if (SHEETS_ERRORS.has(assetId)) {
+    throw new MuFundsError('ID_IS_ERROR');
   }
 
   const { name, load } = resolveSource(source);
