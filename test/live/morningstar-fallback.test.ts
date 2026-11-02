@@ -126,8 +126,9 @@ for (const asset of ASSETS) {
       if (asset.notFound?.includes(id)) {
         it(`doesn't find ${id}`, () => {
           for (const option of OPTIONS) {
+            // A miss in the fallback reports the source as unavailable, not the asset as missing.
             assert.throws(() => getAssetValue(option, id, 'morningstar', services), {
-              code: 'ASSET_NOT_FOUND',
+              code: 'SOURCE_UNAVAILABLE',
             });
           }
         });

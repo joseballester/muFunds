@@ -154,9 +154,10 @@ function loadFromQuoteApi(id: string, services: Services): AssetData {
 
   const quote = response[id];
   if (!quote) {
-    throw new MuFundsError('ASSET_NOT_FOUND', {
-      internalMessage: 'Asset not found in quote API',
-    });
+    // Not ASSET_NOT_FOUND: the quote API knows far fewer IDs than the screener (no tickers or
+    // local codes), so a miss here doesn't mean the asset doesn't exist. The caller reports it
+    // as SOURCE_UNAVAILABLE, which is also never cached.
+    throw new Error('Asset not found in quote API');
   }
 
   return {

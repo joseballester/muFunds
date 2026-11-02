@@ -1,5 +1,5 @@
 import { appsScriptServices } from './apps-script.ts';
-import { MuFundsError, toMuFundsError } from './errors.ts';
+import { type ErrorCode, MuFundsError, toMuFundsError } from './errors.ts';
 import { isMistypedIsin } from './isin.ts';
 import { resolveSource } from './sources/index.ts';
 import type { AssetData, Cache, Field, Services } from './types.ts';
@@ -7,8 +7,26 @@ import type { AssetData, Cache, Field, Services } from './types.ts';
 /** How long a successful lookup is reused. Prices change once a day, so this cuts requests without going stale for long. */
 const CACHE_SECONDS = 2 * 60 * 60;
 
-/** Part of every cache key. Change it when `AssetData` changes shape, so old entries are ignored. */
-const CACHE_VERSION = 'v1';
+/**
+ * How long a lookup that failed with one of `CACHED_ERRORS` is reused. Sheets recalculate
+ * often, and every option of a row is a separate cell, so without this one missing ID can
+ * fetch dozens of times in minutes and use up the user's daily UrlFetch quota. An hour stops
+ * that, and lets a newly listed fund show up soon.
+ */
+const ERROR_CACHE_SECONDS = 60 * 60;
+
+/**
+ * Errors that say something about the ID, not about the source's health, so asking again
+ * soon gets the same answer. Transient ones like `SOURCE_UNAVAILABLE` and `QUOTA_EXCEEDED`
+ * are never cached.
+ */
+const CACHED_ERRORS: ReadonlySet<ErrorCode> = new Set(['ASSET_NOT_FOUND', 'AMBIGUOUS_ID']);
+
+/** Part of every cache key. Change it when `CacheEntry` or `AssetData` changes shape, so old entries are ignored. */
+const CACHE_VERSION = 'v2';
+
+/** What a cache entry holds: the asset's data, or the error its lookup failed with. */
+type CacheEntry = { data: AssetData } | { error: { code: ErrorCode; internalMessage: string } };
 
 const FIELDS = [
   'nav',
@@ -69,16 +87,32 @@ export function getAssetValue(option: unknown, id: unknown, source: unknown, ser
 
 /**
  * Returns the cached data for `key`, or calls `load` and caches its result.
- * Errors aren't cached, so a failed lookup is tried again next time.
- * One entry holds every field, so cells asking for different options of an asset share it.
+ * Errors in `CACHED_ERRORS` are cached too, and thrown again on a hit with the same code
+ * and internal message. Any other error isn't cached, so that lookup is tried again next time.
+ * One entry holds every field, or the error, so cells asking for different options of an asset share it.
  */
 function loadCached(cache: Cache, key: string, load: () => AssetData): AssetData {
   const cached = cache.get(key);
   if (cached !== null) {
-    return JSON.parse(cached) as AssetData;
+    const entry = JSON.parse(cached) as CacheEntry;
+    if ('error' in entry) {
+      throw new MuFundsError(entry.error.code, { internalMessage: entry.error.internalMessage });
+    }
+    return entry.data;
   }
-  const data = load();
-  cache.put(key, JSON.stringify(data), CACHE_SECONDS);
+
+  let data: AssetData;
+  try {
+    data = load();
+  } catch (error) {
+    if (error instanceof MuFundsError && CACHED_ERRORS.has(error.code)) {
+      const entry: CacheEntry = { error: { code: error.code, internalMessage: error.internalMessage } };
+      cache.put(key, JSON.stringify(entry), ERROR_CACHE_SECONDS);
+    }
+    throw error;
+  }
+  const entry: CacheEntry = { data };
+  cache.put(key, JSON.stringify(entry), CACHE_SECONDS);
   return data;
 }
 

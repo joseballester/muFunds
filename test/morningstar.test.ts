@@ -127,12 +127,19 @@ describe('Morningstar quote API fallback', () => {
     assert.equal(loadFromMorningstar('0P00000WLG', services).nav, 65.67);
   });
 
-  it('throws when the quote API doesn’t know the id', () => {
+  it('reports the source as unavailable when the quote API doesn’t know the id', () => {
     const services = fakeServices((url) => (isScreener(url) ? { status: 500, body: '' } : JSON.stringify({})));
 
-    assert.throws(() => loadFromMorningstar('wrong_id', services), {
-      code: 'ASSET_NOT_FOUND',
-    });
+    // The quote API knows fewer ids than the screener, so a miss there isn't "not found".
+    assert.throws(
+      () => loadFromMorningstar('wrong_id', services),
+      (error: MuFundsError) => {
+        assert.equal(error.code, 'SOURCE_UNAVAILABLE');
+        assert.match(error.internalMessage, /^Screener: HttpError: 500 from https:\/\/lt\./);
+        assert.match(error.internalMessage, /\. Quote API: Error: Asset not found in quote API$/);
+        return true;
+      },
+    );
   });
 
   it('reports both failures when the quote API fails too', () => {

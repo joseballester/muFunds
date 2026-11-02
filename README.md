@@ -46,7 +46,7 @@ Percentages are returned as fractions (`0.012` for 1.2%), so format the cell as 
 
 ### Data sources
 
-- **`morningstar`** (default): uses Morningstar's screener API across funds, ETFs, stocks, UK pension funds, French innovation and local investment funds (FCPI, FIP), Indian closed-end funds and LSE investment trusts. It matches the `id` against ISIN, SecId, PerformanceId, ticker, Valoren, WKN, SEDOL, MEX, DGS code and APIR. If the screener is unavailable, it falls back to Morningstar's quote API, which only has `nav`, `date`, `currency` and `change`. Older country-specific names like `morningstar-es` or `morningstar-uk` are still accepted and behave the same.
+- **`morningstar`** (default): uses Morningstar's screener API across funds, ETFs, stocks, UK pension funds, French innovation and local investment funds (FCPI, FIP), Indian closed-end funds and LSE investment trusts. It matches the `id` against ISIN, SecId, PerformanceId, ticker, Valoren, WKN, SEDOL, MEX, DGS code and APIR. If the screener is unavailable, it falls back to Morningstar's quote API, which only has `nav`, `date`, `currency` and `change`. The quote API recognizes fewer identifiers, so if it doesn't find the `id` either, the error says the source isn't responding rather than that the asset wasn't found. Older country-specific names like `morningstar-es` or `morningstar-uk` are still accepted and behave the same.
 - **`quefondos`**: scrapes [quefondos.com](https://www.quefondos.com) for Spanish funds (by ISIN) and pension plans (by DGS code). Does not support `expenses`.
 
 ### Errors
@@ -91,6 +91,8 @@ appsscript.json          Apps Script manifest (scopes, Cheerio library)
 ```
 
 Each source returns an `AssetData` object with every field it found, and `getAssetValue()` picks the one the user asked for. Sources get network access and HTML parsing through a `Services` object instead of Apps Script globals, so tests can pass in fakes.
+
+`getAssetValue()` caches each lookup in the Apps Script script cache, which all users share, under one key per source and `id`, so every option of an asset comes from a single request. Successful lookups are kept for 2 hours. `ASSET_NOT_FOUND` and `AMBIGUOUS_ID` are kept for 1 hour and thrown again from the cache with the same code and internal message, so a missing `id` doesn't fetch on every recalculation and use up the daily UrlFetch quota. Other errors, like `SOURCE_UNAVAILABLE` and `QUOTA_EXCEEDED`, are never cached. Bump `CACHE_VERSION` in `src/index.ts` when the cached shape changes.
 
 HTML parsing uses the [Cheerio for Apps Script](https://github.com/tani/cheeriogs) library, which the manifest loads as `Cheerio`. Tests use the npm `cheerio` package instead.
 

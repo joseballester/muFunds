@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import { ERRORS } from '../src/errors.ts';
+import { ERRORS, MuFundsError } from '../src/errors.ts';
 import { getAssetValue, muFunds } from '../src/index.ts';
 import { fakeServices } from './helpers.ts';
 
@@ -110,8 +110,8 @@ describe('getAssetValue cache', () => {
     });
 
     assert.equal(services.requests.length, 1);
-    assert.deepEqual([...services.cache.entries.keys()], ['v1:morningstar:asset_id']);
-    assert.equal(services.cache.entries.get('v1:morningstar:asset_id')!.expirationInSeconds, 2 * 60 * 60);
+    assert.deepEqual([...services.cache.entries.keys()], ['v2:morningstar:asset_id']);
+    assert.equal(services.cache.entries.get('v2:morningstar:asset_id')!.expirationInSeconds, 2 * 60 * 60);
   });
 
   it('shares entries between names of the same source', () => {
@@ -126,31 +126,125 @@ describe('getAssetValue cache', () => {
 
   it('keeps assets and sources apart', () => {
     const services = fakeServices(() => '<html></html>');
+    services.cache.put('v2:morningstar:N5396', JSON.stringify({ data: { nav: 1 } }), 60);
+    services.cache.put('v2:quefondos:other_id', JSON.stringify({ data: { nav: 2 } }), 60);
 
     assert.throws(() => getAssetValue('nav', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
-    services.cache.put('v1:morningstar:N5396', JSON.stringify({ nav: 1 }), 60);
-    services.cache.put('v1:quefondos:other_id', JSON.stringify({ nav: 2 }), 60);
-    assert.throws(() => getAssetValue('nav', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
 
-    assert.equal(services.requests.length, 2);
+    assert.equal(services.requests.length, 1);
   });
 
-  it('doesn’t cache errors, so the next lookup asks again', () => {
+  it('ignores entries from older cache versions', () => {
+    const services = fakeServices(() => screenerRow);
+    services.cache.put('v1:morningstar:asset_id', JSON.stringify({ nav: 1 }), 60);
+
+    assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
+    assert.equal(services.requests.length, 1);
+  });
+
+  it('caches a not-found ID for every option, for an hour', () => {
+    const services = fakeServices(() => JSON.stringify({ rows: [] }));
+
+    for (const option of ['nav', 'nav', 'date', 'category']) {
+      assert.throws(() => getAssetValue(option, 'asset_id', undefined, services), {
+        code: 'ASSET_NOT_FOUND',
+        message: ERRORS.ASSET_NOT_FOUND.message,
+      });
+    }
+
+    assert.equal(services.requests.length, 1);
+    assert.equal(services.cache.entries.get('v2:morningstar:asset_id')!.expirationInSeconds, 60 * 60);
+  });
+
+  it('caches an ambiguous ID for every option, for an hour', () => {
+    const services = fakeServices(() => JSON.stringify({ rows: [{ SecId: 'F1' }, { SecId: 'F2' }] }));
+
+    for (const option of ['nav', 'nav', 'return1y']) {
+      assert.throws(() => getAssetValue(option, 'asset_id', undefined, services), {
+        code: 'AMBIGUOUS_ID',
+        message: ERRORS.AMBIGUOUS_ID.message,
+      });
+    }
+
+    assert.equal(services.requests.length, 1);
+    assert.equal(services.cache.entries.get('v2:morningstar:asset_id')!.expirationInSeconds, 60 * 60);
+  });
+
+  it('throws a cached error again with the same code and internal message', () => {
+    const services = fakeServices(() => JSON.stringify({ rows: [{ SecId: 'F1' }, { SecId: 'F2' }] }));
+
+    const errors = [1, 2].map(() => {
+      try {
+        getAssetValue('nav', 'asset_id', undefined, services);
+      } catch (error) {
+        return error as MuFundsError;
+      }
+      return assert.fail('Expected an error');
+    });
+
+    assert.equal(services.requests.length, 1);
+    const [fetched, cached] = errors;
+    assert.ok(cached instanceof MuFundsError);
+    assert.equal(cached.code, 'AMBIGUOUS_ID');
+    assert.equal(cached.internalMessage, '2 screener results, 0 exact: F1, F2');
+    assert.equal(cached.internalMessage, fetched!.internalMessage);
+    assert.equal(cached.message, fetched!.message);
+    assert.equal(cached.severity, fetched!.severity);
+  });
+
+  it('caches a not-found quefondos ID', () => {
+    const services = fakeServices(() => '<html></html>');
+
+    assert.throws(() => getAssetValue('nav', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
+    assert.throws(() => getAssetValue('date', 'N5396', 'quefondos', services), { code: 'ASSET_NOT_FOUND' });
+
+    assert.equal(services.requests.length, 1);
+  });
+
+  it('doesn’t cache a source failure, so the next lookup asks again', () => {
     const responses = [
-      { status: 503, body: '' }, // Screener
-      { status: 503, body: '' }, // Quote API fallback
-      JSON.stringify({ rows: [] }),
+      { status: 500, body: '' }, // Screener
+      { status: 500, body: '' }, // Quote API fallback
       screenerRow,
     ];
     const services = fakeServices(() => responses.shift() ?? assert.fail('Too many requests'));
 
     assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'SOURCE_UNAVAILABLE' });
-    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'ASSET_NOT_FOUND' });
     assert.equal(services.cache.entries.size, 0);
     assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
     assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
 
-    assert.equal(services.requests.length, 4);
+    assert.equal(services.requests.length, 3);
+  });
+
+  it('doesn’t cache a miss in the quote API fallback', () => {
+    const responses = [
+      { status: 500, body: '' }, // Screener
+      JSON.stringify({}), // Quote API fallback doesn't know the id
+      screenerRow,
+    ];
+    const services = fakeServices(() => responses.shift() ?? assert.fail('Too many requests'));
+
+    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'SOURCE_UNAVAILABLE' });
+    assert.equal(services.cache.entries.size, 0);
+    assert.equal(getAssetValue('nav', 'asset_id', undefined, services), 10);
+
+    assert.equal(services.requests.length, 3);
+  });
+
+  it('doesn’t cache the daily quota error', () => {
+    let fetches = 0;
+    const services = fakeServices(() => assert.fail('Replaced below'));
+    services.fetch = () => {
+      fetches++;
+      throw new MuFundsError('QUOTA_EXCEEDED');
+    };
+
+    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'QUOTA_EXCEEDED' });
+    assert.throws(() => getAssetValue('nav', 'asset_id', undefined, services), { code: 'QUOTA_EXCEEDED' });
+
+    assert.equal(fetches, 2);
+    assert.equal(services.cache.entries.size, 0);
   });
 });
 
