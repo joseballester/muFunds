@@ -82,6 +82,10 @@ const UNIVERSES = [
   'SAGBR$$ALL', // UK pension funds
   'FCIND$$ALL', // Indian closed-end funds
   'CEEXG$XLON', // LSE investment trusts
+  'FEEUR$$ALL', // European funds, including share classes missing from FOALL$$ALL
+  'FOBRA$$ALL', // Brazilian funds
+  'FOUSA$$UIT', // US unit investment trusts
+  'CFALL$$ALL', // US collective investment trusts and Canadian pooled funds
 ];
 
 interface ScreenerResponse {
